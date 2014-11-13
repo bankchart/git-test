@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="720dp"
+    android:layout_height="530dp"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/Powerback"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button"
+        android:text="@string/back"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/Power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="60dp"
+        android:shadowColor="#00aaff"
+        android:shadowDx="-0.5"
+        android:shadowDy="0.5"
+        android:shadowRadius="2"
+        android:text="@string/power"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <TableLayout
+        android:id="@+id/tablepower"
+        android:layout_width="wrap_content"
+        android:layout_height="420dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp" >
+
+        <TableRow
+            android:id="@+id/tableRowPower1"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_headLight"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_headLight"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_dim"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_dim"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_highBeam"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_highBeam"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_dashBoardLight"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_dashBoardLight"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowPower2"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_cabinSeatLight"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_cabinSeatLight"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_sideDoorLight"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_sideDoorLight"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_turnSignal"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_turnSignal"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_air"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_air"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowPower3"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_thermometer"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_thermometer"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_horn"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_horn"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_wipe"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_wipe"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_rainSensor"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_rainSensor"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowPower4"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_thirdBrakeLight"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_thirdBrakeLight"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_antiFoggyBack"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_antiFoggyBack"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_antiFoggySide"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_antiFoggySide"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_steeringWheelTest"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_steeringWheelTest"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowPower5"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_steeringWheelSet"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_steeringWheelSet"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_carStereo"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_carStereo"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_electronicWindow"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_electronicWindow"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_sideMirror"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_sideMirror"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowPower6"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_warnDoor"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_warnDoor"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_warnSeatBelt"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_warnSeatBelt"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_warnHandBrake"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_warnHandBrake"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_clock"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_clock"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowPower7"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/power_remoteKey"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_remoteKey"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_centralLock"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_centralLock"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/power_transmissionPosition"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/power_transmissionPosition"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

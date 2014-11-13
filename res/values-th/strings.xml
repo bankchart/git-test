@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, CarCheckListActivity!</string>
+    <string name="app_name">CarCheckList</string>
+    <string name="main_screen">MainScreen</string>
+    <string name="splash_screen">SplashScreen</string>
+    
+	 <string name="back">กลับ</string>
+    
+    <string name="power">ระบบไฟ</string>
+    <string name="power_headLight">ไฟหน้า</string>
+    <string name="power_dim">ไฟหรี่</string>
+    <string name="power_highBeam">ไฟสูง</string>
+    <string name="power_dashBoardLight">ไฟหน้าปัด</string>
+    <string name="power_cabinSeatLight">ไฟห้องโดยสาร</string>
+    <string name="power_sideDoorLight">ไฟประตูข้าง</string>
+    <string name="power_turnSignal">ไฟเลี้ยว</string>
+    <string name="power_air">แอร์</string>
+    <string name="power_thermometer">วัดอุณหภูมิ</string>
+    <string name="power_horn">แตร</string>
+    <string name="power_wipe">ที่ปัดน้ำฝน</string>
+    <string name="power_rainSensor">เซ็นเซอร์ฝน</string>
+    <string name="power_thirdBrakeLight">ไฟเบรกดวงที่ 3</string>
+    <string name="power_antiFoggyBack">ไล่ฝ้าหลัง</string>
+	<string name="power_antiFoggySide">ไล่ฝ้าข้าง</string>
+	<string name="power_steeringWheelTest">ทดสอบหมุนพวงมาลัยจนสุด</string>
+	<string name="power_steeringWheelSet">ปรับพวงมาลัย</string>
+	<string name="power_carStereo">วิทยุ CD</string>
+	<string name="power_electronicWindow">กระจกไฟฟ้า</string>
+	<string name="power_sideMirror">กระจกมองข้าง</string>
+	<string name="power_warnDoor">เตือนเปิดประตู</string>
+	<string name="power_warnSeatBelt">เตือนเข็มขัดนิรภัย</string>
+	<string name="power_warnHandBrake">เตือนเบรกมือ</string>
+	<string name="power_clock">นาฬิกา</string>
+	<string name="power_remoteKey">กุญแจรีโมต</string>
+	<string name="power_centralLock">กระบบล็อกรถ</string>
+	<string name="power_transmissionPosition">ไฟตำแหน่งเกียร์</string>
+
+	<string name="engine">เครื่องยนต์</string>
+	<string name="engine_hood">ฝากระโปรงหน้า</string>
+	<string name="engine_backHood">ฝากระโปรงหลัง</string>
+	<string name="engine_underEngine">ใต้ห้องเครื่อง</string>
+	<string name="engine_brakeOil">น้ำมันเบรก</string>
+	<string name="engine_engineOil">น้ำมันเครื่อง</string>
+	<string name="engine_waterCoolant">น้ำหม้อน้ำ</string>
+	<string name="engine_belt">สายพาน</string>
+	<string name="engine_gear">น้ำมันเกียร์</string>
+	<string name="engine_liquidLevel">ระดับน้ำฉีดกระจก</string>
+	<string name="engine_soundOut">เสียงเครื่องยนต์ภายใน</string>
+	<string name="engine_soundIn">เสียงเครื่องยนต์ภายนอก</string>
+	
+	<string name="exterior">ภายนอก</string>
+	<string name="outside_color">สีรถ</string>
+	<string name="outside_window">กระจกรถ</string>
+	<string name="outside_doorHood">ประตูและฝากระโปรง</string>
+	<string name="outside_jack">แม่แรง</string>
+	<string name="outside_wrench">ประแจ</string>
+	<string name="outside_tires">ยาง</string>
+	<string name="outside_light">ไฟรถ</string>
+	<string name="outside_seal">ซีลยาง</string>
+	<string name="outside_tirePart">ยางอะไหล่</string>
+		
+	<string name="interior">ภายใน</string>
+	<string name="inside_seat">เบาะ</string>
+	<string name="inside_console">คอนโซลลายไม้</string>
+	<string name="inside_steeringWheel">หุ้มหนังพวงมาลัย</string>
+	<string name="inside_transmission">เกียร์</string>
+	<string name="inside_sideDoors">ประตูข้างรถ</string>
+	<string name="inside_dashBoard">หน้าปัด</string>
+	<string name="inside_carpet">พรม</string>
+	<string name="inside_curtain">ผ้าม่าน</string>
+	<string name="inside_seatBelt">เข็มขัดนิรภัย</string>
+	<string name="inside_backDoor">ที่เปิดฝากระโปรงหลัง</string>
+	<string name="inside_lidOil">ที่เปิดฝาน้ำมัน</string>
+	<string name="inside_setSeat">ปรับเบาะ</string>
+	<string name="inside_brakePedal">แป้นเบรก</string>
+	<string name="inside_accelerator">คันเร่ง</string>
+	<string name="inside_handBrake">เบรกมือ</string>
+										
+	<string name="document">เอกสาร</string>
+	<string name="doc_insurance">เอกสารรับประกัน</string>
+	<string name="doc_actTaxLabel">พรบ และ ป้ายเสียภาษี"</string>
+	<string name="doc_bill">ใบเสร็จ</string>
+	<string name="doc_licensePlate">ป้ายทะเบียน</string>
+	<string name="doc_licenseManual">คู่มือป้ายทะเบียน</string>
+	<string name="doc_carPartPaper">เอกสารรับอุปกรณ์รถ</string>
+	<string name="doc_carManual">คู่มือรถ</string>
+	<string name="doc_licenseRegister">เอกสารจดทะเบียน</string>
+	<string name="doc_gift">ของแถม</string>
+	
+	<string name="setting">ตั้งค่า</string>
+	<string name="priority">ระดับความสำคัญ</string>
+	<string name="low">น้อย</string>
+	<string name="high">มาก</string>
+	<string name="textexterior">ภายนอก</string>
+	<string name="textinterior">ภายใน</string>
+	<string name="textpower">ระบบไฟ</string>
+	<string name="textengine">เครื่องยนต์</string>
+	<string name="textdocument">เอกสาร</string>
+	<string name="save">บันทึก</string>
+	<string name="reset">ตั้งค่าใหม่</string>
+	<string name="change_language">เปลี่ยนภาษา</string>
+	
+</resources>
+
+

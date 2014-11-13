@@ -1,0 +1,48 @@
+@font-face {
+	font-family: NP;
+	src: url('font/Circular.ttf');
+}
+
+#page_splash {
+	font-family: NP;
+	font-size: 25px;
+	line-height: 19px;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	margin: 0 auto;
+	width: 850px;
+	height: 700px;
+}
+
+#splash_logo{
+	position: absolute; 
+	background: url("../image/logoxplink.jpg");
+	width: 546px;
+	height: 150px;
+	left:50%;
+	margin-left: -273px;
+	top:280px;
+}
+#splash_link{
+	position: absolute; 
+	background: #ff6505;
+	width: auto;
+	margin-top: 100px;
+	margin-left: 290px;
+	font-size: 25px;
+	padding: 10px 45px 15px 45px;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	box-shadow: 2px 2px 7px -1px #555 ;
+	-webkit-box-shadow: 2px 2px 7px -1px #555 ;
+	-moz-box-shadow: 2px 2px 7px -1px #555 ;
+}
+#splash_link:hover{
+	background: #DDD;
+}
+#splash_logo a{
+	color:#FFF;
+	text-decoration: none;
+}

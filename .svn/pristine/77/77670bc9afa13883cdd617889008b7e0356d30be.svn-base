@@ -1,0 +1,821 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Checking list</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/i18next.js"></script>
+<!--<script type="text/javascript" src="js/jquery.transit.js"></script>-->
+<link rel="stylesheet" type="text/css" href="style/in.css">
+<link rel="stylesheet" type="text/css" href="style/dragdealer.css">
+
+</head>
+<body>
+<form>
+<div id="main-main-main" class="main-main-main">
+<div class="main-of-main">
+<div class="main-body">
+<div class="content-body-top">
+<div class="back-main" id="main-body">
+<div class="pictureMenuOutside" id="pictureMenuOutside"><a
+	href="#" id="outside"><img src="image/body-button.png"
+	style="width: 80px; margin-bottom: 8px; margin-top: 8px;"></a>
+<div id="slideScoreOutside" class="meter orange nostripes"></div>
+<div id="percenScoreOutside"></div>
+</div>
+<div class="pictureMenuInside" id="pictureMenuInside"><a href="#"
+	id="inside"><img src="image/inside-button.png"
+	style="width: 80px; margin-bottom: 8px; margin-top: 8px;"></a>
+<div id="slideScoreInside" class="meter orange nostripes"></div>
+<div id="percenScoreInside"></div>
+</div>
+<div class="pictureMenuPower" id="pictureMenuPower"><a href="#"
+	id="power"><img src="image/battery-button.png"
+	style="width: 80px; margin-bottom: 30px; margin-top: 8px;"></a>
+<div id="slideScorePower" class="meter orange nostripes"></div>
+<div id="percenScorePower"></div>
+</div>
+<div class="pictureMenuEngine" id="pictureMenuEngine"><a href="#"
+	id="engine"><img src="image/engine-button.png"
+	style="width: 80px; margin-bottom: 8px; margin-top: 8px;"></a>
+<div id="slideScoreEngine" class="meter orange nostripes"></div>
+<div id="percenScoreEngine"></div>
+</div>
+<div class="pictureMenuDocument" id="pictureMenuDocument"><a
+	href="#" id="doc"><img src="image/document-button.png"
+	style="width: 80px; margin-bottom: 8px; margin-top: 8px;"></a>
+<div id="slideScoreDocument" class="meter orange nostripes"></div>
+<div id="percenScoreDocument"></div>
+</div>
+<div class="pictureMenuSetting"><a href="#" id="option"><img
+	src="image/gear-button.png"> </a> <span id="rating"
+	class="hideParameter"></span></div>
+<div id="rate">Rating <span id="rating"></span></div>
+<div id="line2picOutside"><canvas id="lineOutside" width="250"
+	height="170" style="border:0px solid #FFFFFF;"></div>
+<div id="line2picInside"><canvas id="lineInside" width="350"
+	height="300" style="border:0px solid #FFFFFF;"></div>
+<div id="line2picPower"><canvas id="linePower" width="200"
+	height="250" style="border:0px solid #FFFFFF;"></div>
+<div id="line2picEngine"><canvas id="lineEngine" width="400"
+	height="300" style="border:0pfx solid #FFFFFF;"></div>
+</div>
+<div class="bgReturn" id="bgReturn"></div>
+<div class="rateDialog"><span class="headRating" id="headRating">Rating
+of the vehicle.&nbsp;&nbsp;<span id="valueOfRating"></span></span>
+<div id="ratingDialog">
+<div id="ratingBar"></div>
+<div id="valueRatingBar"></div>
+</div>
+</div>
+<div class="headContent-bodyOutside">
+<div class="content-bodyOutside">
+<table class="table-contant-outside">
+	<tr>
+		<td>
+		<form action="" name="form-outside" id="form-outside">
+		<table class="table-list-outside">
+			<tr>
+				<td><a href="#" class="backButtonStyle" id="backOutside"><span
+					data-i18n="back"></span></a></td>
+			</tr>
+			<tr>
+				<td class="list-outside"><pre>&nbsp;<span
+					data-i18n="exterior"></span></pre></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<table>
+					<tr>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-color"></span></td>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-tires"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-window"></span></td>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-light"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-doorHood"></span></td>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-seal"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-jack"></span></td>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-tirePart"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkboxOutsideForm"
+							value="two" class="check" onclick=
+	getTotalOutside();
+></td>
+						<td><span data-i18n="outside-wrench"></span></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		</td>
+	</tr>
+</table>
+
+</div>
+</div>
+
+<div class="headContent-bodyInside">
+<div class="content-bodyInside">
+<table class="table-contant-inside">
+	<tr>
+		<td>
+		<form id="form-inside" action="" name="form-inside">
+		<table class="table-list-inside">
+			<tr>
+				<td><a href="#" class="backButtonStyle" id="backInside"><span
+					data-i18n="back"></span></a></td>
+			</tr>
+			<tr>
+				<td class="list-outside"><pre>&nbsp;<span
+					data-i18n="interior"></span></pre></td>
+				<td class="listD"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<table>
+					<tr>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="four" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-seat"></span></td>
+						<td><input type="checkbox" value="two" name="checkInsideForm"
+							class="check" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-console"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="one" name="checkInsideForm"
+							class="check" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-steeringWheel"></span></td>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="one" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-transmission"></span></td>
+
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="one" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-sideDoors"></span></td>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="two" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-dashBoard"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="two" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-carpet"></span></td>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="one" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-curtain"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="two" name="checkInsideForm"
+							class="check" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-seatBelt"></span></td>
+						<td><input type="checkbox" name="checkInsideForm" value="one"
+							class="check" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-backDoor"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="one" name="checkInsideForm"
+							class="check" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-lidOil"></span></td>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="two" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-setSeat"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="two" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-brakePedal"></span></td>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="one" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-accelerator"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkInsideForm"
+							class="check" value="two" onclick=
+	getTotalInside();
+></td>
+						<td><span data-i18n="inside-handBrake"></span></td>
+						<td></td>
+						<td></td>
+					</tr>
+
+				</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		</td>
+	</tr>
+</table>
+</div>
+</div>
+<div class="headContent-bodyPower">
+<div class="content-bodyPower">
+<table class="table-contant-power">
+	<tr>
+		<td>
+		<form id="form-power" action="" name="form-power">
+		<table class="table-list-power">
+			<tr>
+				<td><a href="#" class="backButtonStyle" id="backPower"><span
+					data-i18n="back"></span></a></td>
+			</tr>
+			<tr>
+				<td class="list-outside"><pre>&nbsp;<span
+					data-i18n="power"></span></pre></td>
+				<td class="listD"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<table>
+					<tr>
+						<td><input type="checkbox" value="one" name="checkPowerForm"
+							class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-headLight"></span></td>
+						<td><input type="checkbox" value="one" name="checkPowerForm"
+							class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-dim"></span></td>
+
+						<td><input type="checkbox" value="one" name="checkPowerForm"
+							class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-highBeam"></span></td>
+						<td><input type="checkbox" value="one" name="inner-"
+							class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-dashBoardLight"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-cabinSeatLight"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-sideDoorLight"></span></td>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-turnSignal"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-air"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="one" name="checkPowerForm"
+							class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-thermometer"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-horn"></span></td>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-wipe"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-rainSensor"></span></td>
+					</tr>
+					<tr>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-thirdBrakeLight"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-antiFoggyBack"></span></td>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-antiFoggySide"></span></td>
+						<td><input type="checkbox" value="three"
+							name="checkPowerForm" class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-steeringWheelTest"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="one" name="checkPowerForm"
+							class="check" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-steeringWheelSet"></span></td>
+						<td><input type="checkbox" class="check" value="two"
+							name="checkPowerForm" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-carStereo"></span></td>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-electronicWindow"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-sideMirror"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-warnDoor"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-warnSeatBelt"></span></td>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-warnHandBrake"></span></td>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="one" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-clock"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-remoteKey"></span></td>
+
+						<td><input type="checkbox" name="checkPowerForm"
+							class="check" value="two" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-centralLock"></span></td>
+
+						<td><input type="checkbox" class="check" value="two"
+							name="checkPowerForm" onclick=
+	getTotalPower();
+></td>
+						<td><span data-i18n="power-transmissionPosition"></span></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		</td>
+	</tr>
+</table>
+</div>
+</div>
+<div class="headContent-bodyEngine">
+<div class="content-bodyEngine">
+<table class="table-contant-engine">
+	<tr>
+		<td>
+		<form id="form-engine" action="" name="form-engine">
+		<table class="table-list-engine">
+			<tr>
+				<td><a href="#" class="backButtonStyle" id="backEngine"><span
+					data-i18n="back"></span></a></td>
+			</tr>
+			<tr>
+				<td class="list-outside"><pre>&nbsp;<span
+					data-i18n="engine"><span></pre></td>
+				<td class="listD"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<table>
+					<tr>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="one" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-hood"></span></td>
+
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="two" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-backHood"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="two" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-underEngine"></span></td>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="three" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-waterCoolant"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="three"
+							name="checkEngineForm" class="check" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-brakeOil"></span></td>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="three" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-engineOil"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="three" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-gear"></span></td>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="three" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-belt"></span></td>
+					</tr>
+
+					<tr>
+						<td><input type="checkbox" value="three"
+							name="checkEngineForm" class="check" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-soundOut"></span></td>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="three" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-soundIn"></span></td>
+
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkEngineForm"
+							class="check" value="two" onclick=
+	getTotalEngine();
+></td>
+						<td><span data-i18n="engine-liquidLevel"></span></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		</td>
+	</tr>
+</table>
+</div>
+</div>
+<div class="headContent-bodyDocument" id="headContent-bodyDocument">
+<div class="content-bodyDocument">
+<table class="table-contant-doc">
+	<tr>
+		<td>
+		<form id="form-document" action="" name="form-document">
+		<table class="table-list-document">
+			<tr>
+				<td><a href="#" class="backButtonStyle" id="backDocument"><span
+					data-i18n="back"></span></a></td>
+			</tr>
+			<tr>
+				<td class="list-outside"><pre>&nbsp;<span
+					data-i18n="document"><span></pre></td>
+				<td class="listD"></td>
+			</tr>
+
+			<tr>
+				<td colspan="2">
+				<table>
+					<tr>
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="two" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-insurance"></span></td>
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="two" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-actTaxLabel"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="one" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-bill"></span></td>
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="two" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-licensePlate"></span></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="two" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-licenseManual"></span></td>
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="two" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-carPartPaper"></span></td>
+					</tr>
+					<tr>
+
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="one" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-carManual"></span></td>
+						<td><input type="checkbox" value="two"
+							name="checkDocumentForm" class="check"
+							onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-licenseRegister"></span></td>
+					</tr>
+					<tr>
+
+						<td><input type="checkbox" name="checkDocumentForm"
+							class="check" value="one" onclick=
+	getTotalDocument();
+></td>
+						<td><span data-i18n="doc-gift"></span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		</td>
+	</tr>
+</table>
+</div>
+</div>
+<div class="headContent-bodySetting">
+<div class="content-bodySetting" id="content-bodySetting">
+
+<form id="formRate" name="formRate">
+<table class="table-contant-setting">
+	<tr>
+		<td>
+		<table class="resetTable">
+			<tr>
+				<td>
+				<table class="ratioValueSet" border="0">
+					<tr>
+						<td colspan="6"><span data-i18n="setting"></span></td>
+					</tr>
+					<tr>
+						<td colspan="6"><br><span data-i18n="priority"></span></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="2"><span data-i18n="setting-low"></span></td>
+						<td></td>
+						<td colspan="2"><span data-i18n="setting-high"></span></td>
+					</tr>
+					<tr>
+						<td class="headSheet"></td>
+						<td><span class="veryLowPriority">1</span></td>
+						<td class="borderVisible"><span class="lowPriority">2</span></td>
+						<td><span class="mediumPriority">3</span></td>
+						<td class="borderVisible"><span class="highPriority">4</span></td>
+						<td><span class="veryhighPriority">5</span></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="headSheet"><span data-i18n="exterior"></span></td>
+						<td colspan="5"><input id="slideExterior" type="range"
+							min="1" max="5" value="3" step="1" /></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="headSheet"><span data-i18n="interior"></span></td>
+						<td colspan="5"><input id="slideInterior" type="range"
+							min="1" max="5" value="3" step="1" /></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="headSheet"><span data-i18n="power"></span></td>
+						<td colspan="5"><input id="slidePower" type="range" min="1"
+							max="5" value="3" step="1" /></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="headSheet"><span data-i18n="engine"></span></td>
+						<td colspan="5"><input id="slideEngine" type="range" min="1"
+							max="5" value="3" step="1" /></td>
+					</tr>
+					<tr>
+						<td colspan="1" class="headSheet"><span data-i18n="document"></span></td>
+						<td colspan="5"><input id="slideDocument" type="range"
+							min="1" max="5" value="3" step="1" /></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr>
+				<td><span id="slide_box_sp">
+				<div class="go_l_nav" title="Back"></div>
+				<div class="go_r_nav" title="Next"></div>
+				</span></td>
+			</tr>
+			<tr>
+				<td><span data-i18n="save" class="hideParameter" id="valueSave"></span>
+				<a href="#" id="save" class="backButtonStyle" onclick=
+	saveValue();
+>
+				<span data-i18n="save"></span></a></td>
+			</tr>
+			<tr>
+				<td><a href="#" class="backButtonStyle" id="reset"><span
+					data-i18n="reset"></span></a></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+				<td colspan="6"><a href="selectLanguage.html"
+					class="backButtonStyle"><span data-i18n="changeLanguage"></span></a></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+
+</form>
+</div>
+</div>
+</div>
+
+<input type="text" id="rateShow">
+<div id="scoreOutsideHide"></div>
+<br />
+<div id="scoreInsideHide"></div>
+<br />
+<div id="scorePowerHide"></div>
+<br />
+<div id="scoreEngineHide"></div>
+<br />
+<div id="scoreDocumentHide"></div>
+
+<div id="buttonBackgroundOutsideZone" class="buttonBackground"><a
+	href="#" id="buttonBackgroundOutside"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundInsideZone" class="buttonBackground"><a
+	href="#" id="buttonBackgroundInside"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundPowerZone" class="buttonBackground"><a
+	href="#" id="buttonBackgroundPower"><img src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundEngineZone" class="buttonBackground"><a
+	href="#" id="buttonBackgroundEngine"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundDocumentZone" class="buttonBackground"><a
+	href="#" id="buttonBackgroundDocument"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundSettingZone" class="buttonBackground"><a
+	href="#" id="buttonBackgroundSetting"><img
+	src="image/buttonBackgroundSmall.png" style="width: 50px;"></a></div>
+
+<div id="buttonBackgroundOutsideBack" class="buttonBackgroundBack"><a
+	href="#" id="buttonBackgroundOutsideBack"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundInsideBack" class="buttonBackgroundBack"><a
+	href="#" id="buttonBackgroundInsideBack"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundPowerBack" class="buttonBackgroundBack"><a
+	href="#" id="buttonBackgroundPowerBack"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundEngineBack" class="buttonBackgroundBack"><a
+	href="#" id="buttonBackgroundEngineBack"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundDocumentBack" class="buttonBackgroundBack"><a
+	href="#" id="buttonBackgroundDocumentBack"><img
+	src="image/buttonBack.png"></a></div>
+<div id="buttonBackgroundSettingBack" class="buttonBackgroundBack"><a
+	href="#" id="buttonBackgroundSettingBack"><img
+	src="image/buttonBackgroundSmall.png" style="width: 50px;"></a></div>
+
+<div id="hideOutside"></div>
+<div id="hideInside"></div>
+<div id="hidePower"></div>
+<div id="hideEngine"></div>
+<div id="hideDocument"></div>
+</div>
+<div id="touchClick" class="touchClick"></div>
+
+<script type="text/javascript" src="js/cal.js"></script> <script
+	type="text/javascript" src="js/button.js"></script></div>
+</form>
+
+
+</body>
+</html>

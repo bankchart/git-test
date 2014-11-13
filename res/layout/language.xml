@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+   
+	<HorizontalScrollView 
+    android:id="@+id/horizontalScrollView1"
+    android:layout_width="800dp"
+    android:layout_height="400dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+    
+    <LinearLayout 
+        android:layout_width="800dp"
+        android:layout_height="400dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+            
+    <ImageButton 
+        android:id="@+id/th"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="260dp"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/th_icon"
+        android:background="@android:color/transparent"  />
+    
+    <ImageButton 
+        android:id="@+id/en_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/usa_icon"
+        android:background="@android:color/transparent"  />
+    
+    <ImageButton 
+        android:id="@+id/ch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="260dp"
+        android:src="@drawable/ch_icon"
+        android:background="@android:color/transparent"  />
+		
+    </LinearLayout>
+   </HorizontalScrollView>
+</RelativeLayout>

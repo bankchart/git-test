@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="550dp" >
+
+    <Button
+        android:id="@+id/Interiorback"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button"
+        android:text="@string/back"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/Interior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="60dp"
+        android:shadowColor="#00aaff"
+        android:shadowDx="-0.5"
+        android:shadowDy="0.5"
+        android:shadowRadius="2"
+        android:text="@string/interior"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <TableLayout
+        android:id="@+id/tableinterior"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp" >
+
+        <TableRow
+            android:id="@+id/tableRowInterior1"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_seat"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_seat"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_console"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_console"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior2"
+            android:layout_width="200dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_steeringWheel"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_steeringWheel"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_transmission"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_transmission"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior3"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_sideDoors"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_sideDoors"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_dashBoard"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_dashBoard"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior4"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_carpet"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_carpet"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_curtain"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_curtain"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior5"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_seatBelt"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_seatBelt"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_backDoor"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_backDoor"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior6"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_lidOil"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_lidOil"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_setSeat"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_setSeat"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior7"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_brakePedal"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_brakePedal"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/inside_accelerator"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_accelerator"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowInterior8"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/inside_handBrake"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/inside_handBrake"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
