@@ -11,8 +11,10 @@ public final class R {
     public static final class anim {
         public static final int slide_in_right=0x7f040000;
         public static final int slide_in_up=0x7f040001;
-        public static final int slide_out_left=0x7f040002;
-        public static final int slide_right=0x7f040003;
+        public static final int slide_motion_in=0x7f040002;
+        public static final int slide_motion_out=0x7f040003;
+        public static final int slide_out_left=0x7f040004;
+        public static final int slide_right=0x7f040005;
     }
     public static final class attr {
         /** 
@@ -368,6 +370,10 @@ containing a value of this type.
         public static final int wallet_primary_text_holo_light=0x7f070019;
         public static final int wallet_secondary_text_holo_dark=0x7f07001a;
     }
+    public static final class dimen {
+        public static final int text_size1=0x7f0a0000;
+        public static final int text_size2=0x7f0a0001;
+    }
     public static final class drawable {
         public static final int background=0x7f020000;
         public static final int backgroundimage2=0x7f020001;
@@ -422,45 +428,48 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f020032;
         public static final int progressbar=0x7f020033;
         public static final int ratioprogressbar=0x7f020034;
-        public static final int seekbar=0x7f020035;
-        public static final int shape=0x7f020036;
-        public static final int th_icon=0x7f020037;
-        public static final int thumb=0x7f020038;
-        public static final int usa_icon=0x7f020039;
+        public static final int record_border=0x7f020035;
+        public static final int seekbar=0x7f020036;
+        public static final int shape=0x7f020037;
+        public static final int th_icon=0x7f020038;
+        public static final int thumb=0x7f020039;
+        public static final int usa_icon=0x7f02003a;
     }
     public static final class id {
         public static final int Document=0x7f080015;
         public static final int DocumentProgressbar=0x7f080073;
         public static final int Documentback=0x7f080014;
-        public static final int Documentbar=0x7f0800bd;
+        public static final int Documentbar=0x7f0800c6;
         public static final int Engine=0x7f080026;
         public static final int EngineProgressbar=0x7f080070;
         public static final int Engineback=0x7f080025;
-        public static final int Enginebar=0x7f0800bc;
+        public static final int Enginebar=0x7f0800c5;
         public static final int Exterior=0x7f080039;
         public static final int ExteriorProgressbar=0x7f080071;
         public static final int Exteriorback=0x7f080038;
-        public static final int Exteriorbar=0x7f0800b9;
-        public static final int High=0x7f0800ae;
+        public static final int Exteriorbar=0x7f0800c2;
+        public static final int High=0x7f0800b7;
         public static final int Interior=0x7f08004b;
         public static final int InteriorProgressbar=0x7f080072;
         public static final int Interiorback=0x7f08004a;
-        public static final int Interiorbar=0x7f0800ba;
-        public static final int Low=0x7f0800ad;
+        public static final int Interiorbar=0x7f0800c3;
+        public static final int Low=0x7f0800b6;
         public static final int Power=0x7f080087;
         public static final int PowerProgressbar=0x7f08006f;
         public static final int Powerback=0x7f080086;
-        public static final int Powerbar=0x7f0800bb;
-        public static final int Priority=0x7f0800ac;
-        public static final int Setting=0x7f0800ab;
+        public static final int Powerbar=0x7f0800c4;
+        public static final int Priority=0x7f0800b5;
+        public static final int Setting=0x7f0800b4;
         public static final int admob=0x7f080085;
+        public static final int admobInRecord=0x7f0800b3;
         public static final int battery_button=0x7f08006b;
         public static final int book_now=0x7f080010;
         public static final int buyButton=0x7f08000a;
         public static final int buy_now=0x7f08000f;
         public static final int buy_with_google=0x7f08000e;
+        public static final int cancelRecord=0x7f0800b2;
         public static final int ch=0x7f080067;
-        public static final int change_language=0x7f0800c0;
+        public static final int change_language=0x7f0800c9;
         public static final int classic=0x7f080011;
         public static final int doc_actTaxLabel=0x7f080019;
         public static final int doc_bill=0x7f08001b;
@@ -488,8 +497,8 @@ containing a value of this type.
         public static final int engine_waterCoolant=0x7f08002f;
         public static final int engineborder=0x7f080081;
         public static final int exteriorborder=0x7f080082;
-        public static final int five=0x7f0800b3;
-        public static final int four=0x7f0800b2;
+        public static final int five=0x7f0800bc;
+        public static final int four=0x7f0800bb;
         public static final int grayscale=0x7f080012;
         public static final int headdocument=0x7f080049;
         public static final int headengine=0x7f080078;
@@ -519,11 +528,14 @@ containing a value of this type.
         public static final int inside_steeringWheel=0x7f080051;
         public static final int inside_transmission=0x7f080052;
         public static final int interiorborder=0x7f080083;
+        public static final int list=0x7f0800cb;
         public static final int match_parent=0x7f08000c;
         public static final int monochrome=0x7f080013;
+        public static final int nameRecordEdit=0x7f0800b0;
+        public static final int nameRecordLabel=0x7f0800af;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
-        public static final int one=0x7f0800af;
+        public static final int one=0x7f0800b8;
         public static final int outside_button=0x7f08006c;
         public static final int outside_color=0x7f08003c;
         public static final int outside_doorHood=0x7f08003f;
@@ -570,10 +582,15 @@ containing a value of this type.
         public static final int production=0x7f080007;
         public static final int ratio=0x7f080074;
         public static final int ratiotext=0x7f080075;
-        public static final int reset=0x7f0800bf;
+        public static final int record=0x7f0800ca;
+        public static final int recordLayout=0x7f0800ac;
+        public static final int recordMainLayout=0x7f0800ab;
+        public static final int reset=0x7f0800c8;
         public static final int sandbox=0x7f080008;
         public static final int satellite=0x7f080002;
-        public static final int save=0x7f0800be;
+        public static final int save=0x7f0800c7;
+        public static final int saveForm=0x7f0800ad;
+        public static final int saveRecord=0x7f0800b1;
         public static final int selectionDetails=0x7f08000b;
         public static final int setting_button=0x7f080069;
         public static final int strict_sandbox=0x7f080009;
@@ -613,14 +630,15 @@ containing a value of this type.
         public static final int tableinterior=0x7f08004c;
         public static final int tablepower=0x7f080088;
         public static final int terrain=0x7f080003;
-        public static final int textdocument=0x7f0800b8;
-        public static final int textengine=0x7f0800b7;
-        public static final int textexterior=0x7f0800b4;
-        public static final int textinterior=0x7f0800b5;
-        public static final int textpower=0x7f0800b6;
+        public static final int textdocument=0x7f0800c1;
+        public static final int textengine=0x7f0800c0;
+        public static final int textexterior=0x7f0800bd;
+        public static final int textinterior=0x7f0800be;
+        public static final int textpower=0x7f0800bf;
         public static final int th=0x7f080065;
-        public static final int three=0x7f0800b1;
-        public static final int two=0x7f0800b0;
+        public static final int three=0x7f0800ba;
+        public static final int titleRecordLabel=0x7f0800ae;
+        public static final int two=0x7f0800b9;
         public static final int wrap_content=0x7f08000d;
     }
     public static final class integer {
@@ -636,8 +654,9 @@ containing a value of this type.
         public static final int language=0x7f030006;
         public static final int main=0x7f030007;
         public static final int powerdialoglayout=0x7f030008;
-        public static final int settingdialoglayout=0x7f030009;
-        public static final int splash=0x7f03000a;
+        public static final int record_activity=0x7f030009;
+        public static final int settingdialoglayout=0x7f03000a;
+        public static final int splash=0x7f03000b;
     }
     public static final class string {
         public static final int accept=0x7f060002;

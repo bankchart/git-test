@@ -22,6 +22,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -100,282 +103,309 @@ import android.widget.ViewFlipper;
 import com.google.ads.*;
 
 @SuppressWarnings("unused")
-@SuppressLint({ "SetJavaScriptEnabled", "CutPasteId", "CommitPrefEdits", "DrawAllocation" })
-public class CarCheckListActivity extends Activity implements AnimationListener  {
-	
+@SuppressLint({ "SetJavaScriptEnabled", "CutPasteId", "CommitPrefEdits",
+		"DrawAllocation" })
+public class CarCheckListActivity extends Activity implements AnimationListener {
+
 	private static final int Integer = 0;
-	int CheckDocumentTotal, CheckPowerTotal, CheckEngineTotal, CheckExteriorTotal, CheckInteriorTotal, 
-		PercenDocument, PercenPower, PercenEngine, PercenExterior, PercenInterior, PercenRatio, Checknum,
-		powerseekbarValue, engineseekbarValue, exteriorseekbarValue, interiorseekbarValue, documentseekbarValue,
-		sumPriority, PowerPriority, EnginePriority, ExteriorPriority, InteriorPriority, DocumentPriority,
-		documentprogressValue;     
+	int CheckDocumentTotal, CheckPowerTotal, CheckEngineTotal,
+			CheckExteriorTotal, CheckInteriorTotal, PercenDocument,
+			PercenPower, PercenEngine, PercenExterior, PercenInterior,
+			PercenRatio, Checknum, powerseekbarValue, engineseekbarValue,
+			exteriorseekbarValue, interiorseekbarValue, documentseekbarValue,
+			sumPriority, PowerPriority, EnginePriority, ExteriorPriority,
+			InteriorPriority, DocumentPriority, documentprogressValue;
 	int width, height, screenwidth, screenheight;
 	Animation testanimation;
-	ImageView image, headdocument, headpower, headengine, headexterior, headinterior, headsetting;
+	ImageView image, headdocument, headpower, headengine, headexterior,
+			headinterior, headsetting;
 	WebView browser;
 	private AdView adView;
-	//String admonId = "a151ef84c7b0a98";
+	// String admonId = "a151ef84c7b0a98";
 	String admonId = "ca-app-pub-9957173043484675/3220197247";
-	ImageButton btnPower, btnEngine, btnExterior, btnInterior, btnDocument, btnSetting;
+	ImageButton btnPower, btnEngine, btnExterior, btnInterior, btnDocument,
+			btnSetting;
 	Button button;
-	ProgressBar PowerProgress, EngineProgress, ExteriorProgress, InteriorProgress,DocumentProgress, 
-				RatioProgress;
-	TextView percenpower, percenengine, percenexterior, perceninterior, percendocument, Ratiotext;
+	ProgressBar PowerProgress, EngineProgress, ExteriorProgress,
+			InteriorProgress, DocumentProgress, RatioProgress;
+	TextView percenpower, percenengine, percenexterior, perceninterior,
+			percendocument, Ratiotext;
 	SeekBar seekbar;
 	private float from;
 	private float to;
 	Typeface type;
 	CheckBox chkgift;
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main); 	 
-				
-		 DisplayMetrics metrics=new DisplayMetrics();
-		    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		setContentView(R.layout.main);
+		
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-		    float height = metrics.heightPixels;
-		    float width = metrics.widthPixels;
-		    
-		    Log.d("height", "" + height);
-		    Log.d("width", "" + width);
-		    
-		int left195 = (int) ((width / 100) * 15.3);  
-		int left200 = (int) ((width / 100) * 16.25);  
+		float height = metrics.heightPixels;
+		float width = metrics.widthPixels;
+
+		Log.d("height", "" + height);
+		Log.d("width", "" + width);
+
+		int left195 = (int) ((width / 100) * 15.3);
+		int left200 = (int) ((width / 100) * 16.25);
 		int leftt200 = (int) ((width / 100) * 17);
-		int left230 = (int) ((width / 100) * 18); 
-		int left475 = (int) ((width / 100) * 37.1); 
-		int left480 = (int) ((width / 100) * 38); 
-		int left495 = (int) ((width / 100) * 38.7); 
-		int left500 = (int) ((width / 100) * 40.5); 
-		int left510 = (int) ((width / 100) * 39.7); 
-		int left530 = (int) ((width / 100) * 41.2); 
-		int left865 = (int) ((width / 100) * 67.6); 
-		int left870 = (int) ((width / 100) * 69.5); 
-		int leftt870 = (int) ((width / 100) * 68); 
-		int leftt900 = (int) ((width / 100) * 70); 
+		int left230 = (int) ((width / 100) * 18);
+		int left475 = (int) ((width / 100) * 37.1);
+		int left480 = (int) ((width / 100) * 38);
+		int left495 = (int) ((width / 100) * 38.7);
+		int left500 = (int) ((width / 100) * 40.5);
+		int left510 = (int) ((width / 100) * 39.7);
+		int left530 = (int) ((width / 100) * 41.2);
+		int left865 = (int) ((width / 100) * 67.6);
+		int left870 = (int) ((width / 100) * 69.5);
+		int leftt870 = (int) ((width / 100) * 68);
+		int leftt900 = (int) ((width / 100) * 70);
 		int left950 = (int) ((width / 100) * 75);
-		int left1150 = (int) ((width / 100) * 93); 
+		int left1150 = (int) ((width / 100) * 93);
 		int left1180 = (int) ((width / 100) * 92);
 
-		int top10 = (int) ((height / 100) * 3); 
-		int top20 = (int) ((height / 100) * 6.5); 
+		int top10 = (int) ((height / 100) * 3);
+		int top20 = (int) ((height / 100) * 6.5);
 		int top40 = (int) ((height / 100) * 5);
 		int top95 = (int) ((height / 100) * 12);
 		int top100 = (int) ((height / 100) * 12.5);
-		int top110 = (int) ((height / 100) * 16.5); 
-		int top130 = (int) ((height / 100) * 19); 
-		int top135 = (int) ((height / 100) * 17.5); 
-		int top225 = (int) ((height / 100) * 28.8); 
-		int top390 = (int) ((height / 100) * 53); 
-		int top410 = (int) ((height / 100) * 51.5); 
-		int top480 = (int) ((height / 100) * 64.5); 
+		int top110 = (int) ((height / 100) * 16.5);
+		int top130 = (int) ((height / 100) * 19);
+		int top135 = (int) ((height / 100) * 17.5);
+		int top225 = (int) ((height / 100) * 28.8);
+		int top390 = (int) ((height / 100) * 53);
+		int top410 = (int) ((height / 100) * 51.5);
+		int top480 = (int) ((height / 100) * 64.5);
 		int top500 = (int) ((height / 100) * 63);
 		int top505 = (int) ((height / 100) * 63.8);
 		int top595 = (int) ((height / 100) * 75);
-		int top610 = (int) ((height / 100) * 76); 
-		
+		int top610 = (int) ((height / 100) * 76);
+
 		Intent intent = getIntent();
 		PercenPower = intent.getIntExtra("power", PercenPower);
 		PercenEngine = intent.getIntExtra("engine", PercenEngine);
 		PercenExterior = intent.getIntExtra("exterior", PercenExterior);
 		PercenInterior = intent.getIntExtra("interior", PercenInterior);
 		PercenDocument = intent.getIntExtra("document", PercenDocument);
-		
+
 		CheckPowerTotal = intent.getIntExtra("numpower", CheckPowerTotal);
 		CheckEngineTotal = intent.getIntExtra("numengine", CheckEngineTotal);
-		CheckExteriorTotal = intent.getIntExtra("numexterior", CheckExteriorTotal);
-		CheckInteriorTotal = intent.getIntExtra("numinterior", CheckInteriorTotal);
-		CheckDocumentTotal = intent.getIntExtra("numdocument", CheckDocumentTotal);
-		
-		Log.d("percen","" + PercenPower);
-		
-	    
-		type = Typeface.createFromAsset(getAssets(),"Circular.ttf");
-		
-		 MyCustomPanel view = new MyCustomPanel(this);
-	        
-	       ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(1200,800);
-	       params.width = 1200; params.height = 800;
-	       
-	       addContentView(view, params);	
-	         
-		
-		RelativeLayout.LayoutParams imgpower= new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		CheckExteriorTotal = intent.getIntExtra("numexterior",
+				CheckExteriorTotal);
+		CheckInteriorTotal = intent.getIntExtra("numinterior",
+				CheckInteriorTotal);
+		CheckDocumentTotal = intent.getIntExtra("numdocument",
+				CheckDocumentTotal);
+
+		Log.d("percen", "" + PercenPower);
+
+		type = Typeface.createFromAsset(getAssets(), "Circular.ttf");
+
+		MyCustomPanel view = new MyCustomPanel(this);
+
+		ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(1200, 800);
+		params.width = 1200;
+		params.height = 800;
+
+		addContentView(view, params);
+
+		RelativeLayout.LayoutParams imgpower = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		imgpower.setMargins(left480, top20, 0, 0);
-		RelativeLayout.LayoutParams bdpower= new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-	    bdpower.setMargins(left475, top40, 0, 0);
-	    RelativeLayout.LayoutParams txtpower= new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-	    txtpower.setMargins(left510, top135, 0, 0);
-	    
-	    ImageView borderpower = (ImageView) findViewById(R.id.powerborder);
-		borderpower.setLayoutParams(bdpower); 
-		percenpower = (TextView)findViewById(R.id.percenpower);
+		RelativeLayout.LayoutParams bdpower = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		bdpower.setMargins(left475, top40, 0, 0);
+		RelativeLayout.LayoutParams txtpower = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		txtpower.setMargins(left510, top135, 0, 0);
+
+		ImageView borderpower = (ImageView) findViewById(R.id.powerborder);
+		borderpower.setLayoutParams(bdpower);
+		percenpower = (TextView) findViewById(R.id.percenpower);
 		percenpower.setLayoutParams(txtpower);
 		percenpower.setTypeface(type);
 		percenpower.setText("" + PercenPower + "%");
-	    PowerProgress = (ProgressBar)findViewById(R.id.PowerProgressbar);
-	    PowerProgress.setMax(100);  
-	    PowerProgress.setProgress(PercenPower);
-	    headpower = (ImageView) findViewById(R.id.headpower);
-    	btnPower = (ImageButton) findViewById(R.id.battery_button);
-    	btnPower.setLayoutParams(imgpower);
+		PowerProgress = (ProgressBar) findViewById(R.id.PowerProgressbar);
+		PowerProgress.setMax(100);
+		PowerProgress.setProgress(PercenPower);
+		headpower = (ImageView) findViewById(R.id.headpower);
+		btnPower = (ImageButton) findViewById(R.id.battery_button);
+		btnPower.setLayoutParams(imgpower);
 		btnPower.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 
 				// startAnimation
-				SlidePowerLayout();	
+				SlidePowerLayout();
 			}
 		});
-		
-		RelativeLayout.LayoutParams imgengine= new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-	    imgengine.setMargins(left200, top110, 0, 0);
-	    RelativeLayout.LayoutParams bdengine= new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-	    bdengine.setMargins(left195, top110, 0, 0);
-	    RelativeLayout.LayoutParams txtengine= new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-	    txtengine.setMargins(left230, top225, 0, 0);
-	     
-	    ImageView borderengine = (ImageView) findViewById(R.id.engineborder);
-		borderengine.setLayoutParams(bdengine); 
-		percenengine = (TextView)findViewById(R.id.percenengine);
+
+		RelativeLayout.LayoutParams imgengine = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		imgengine.setMargins(left200, top110, 0, 0);
+		RelativeLayout.LayoutParams bdengine = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		bdengine.setMargins(left195, top110, 0, 0);
+		RelativeLayout.LayoutParams txtengine = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		txtengine.setMargins(left230, top225, 0, 0);
+
+		ImageView borderengine = (ImageView) findViewById(R.id.engineborder);
+		borderengine.setLayoutParams(bdengine);
+		percenengine = (TextView) findViewById(R.id.percenengine);
 		percenengine.setLayoutParams(txtengine);
 		percenengine.setTypeface(type);
 		percenengine.setText("" + PercenEngine + "%");
-		EngineProgress = (ProgressBar)findViewById(R.id.EngineProgressbar);
-	    EngineProgress.setMax(100);
-	    EngineProgress.setProgress(PercenEngine);
+		EngineProgress = (ProgressBar) findViewById(R.id.EngineProgressbar);
+		EngineProgress.setMax(100);
+		EngineProgress.setProgress(PercenEngine);
 		headengine = (ImageView) findViewById(R.id.headengine);
 		btnEngine = (ImageButton) findViewById(R.id.engine_button);
 		btnEngine.setLayoutParams(imgengine);
 		btnEngine.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 
 				// startAnimation
-				SlideEngineLayout();	
+				SlideEngineLayout();
 			}
 		});
 
-		RelativeLayout.LayoutParams imgexterior = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams imgexterior = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		imgexterior.setMargins(leftt200, top390, 0, 0);
-		RelativeLayout.LayoutParams bdexterior = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams bdexterior = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		bdexterior.setMargins(left195, top410, 0, 0);
-		RelativeLayout.LayoutParams txtexterior = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams txtexterior = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		txtexterior.setMargins(left230, top505, 0, 0);
-		
+
 		ImageView borderexterior = (ImageView) findViewById(R.id.exteriorborder);
 		borderexterior.setLayoutParams(bdexterior);
-		percenexterior = (TextView)findViewById(R.id.percenexterior);
+		percenexterior = (TextView) findViewById(R.id.percenexterior);
 		percenexterior.setLayoutParams(txtexterior);
 		percenexterior.setTypeface(type);
 		percenexterior.setText("" + PercenExterior + "%");
-		ExteriorProgress =(ProgressBar)findViewById(R.id.ExteriorProgressbar);
-	    ExteriorProgress.setMax(100);  
-	    ExteriorProgress.setProgress(PercenExterior);
+		ExteriorProgress = (ProgressBar) findViewById(R.id.ExteriorProgressbar);
+		ExteriorProgress.setMax(100);
+		ExteriorProgress.setProgress(PercenExterior);
 		headexterior = (ImageView) findViewById(R.id.headexterior);
 		btnExterior = (ImageButton) findViewById(R.id.outside_button);
 		btnExterior.setLayoutParams(imgexterior);
 		btnExterior.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				// startAnimation
-				SlideExteriorLayout();	
+				SlideExteriorLayout();
 			}
 		});
-		
-		RelativeLayout.LayoutParams imginterior = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+		RelativeLayout.LayoutParams imginterior = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		imginterior.setMargins(left500, top480, 0, 0);
-		RelativeLayout.LayoutParams bdinterior = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams bdinterior = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		bdinterior.setMargins(left495, top500, 0, 0);
-		RelativeLayout.LayoutParams txtinterior = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams txtinterior = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		txtinterior.setMargins(left530, top595, 0, 0);
-		
+
 		ImageView borderinterior = (ImageView) findViewById(R.id.interiorborder);
 		borderinterior.setLayoutParams(bdinterior);
-		perceninterior = (TextView)findViewById(R.id.perceninterior);
+		perceninterior = (TextView) findViewById(R.id.perceninterior);
 		perceninterior.setLayoutParams(txtinterior);
 		perceninterior.setTypeface(type);
 		perceninterior.setText("" + PercenInterior + "%");
-		InteriorProgress =(ProgressBar)findViewById(R.id.InteriorProgressbar);
-	    InteriorProgress.setMax(100);  
-	    InteriorProgress.setProgress(PercenInterior);
+		InteriorProgress = (ProgressBar) findViewById(R.id.InteriorProgressbar);
+		InteriorProgress.setMax(100);
+		InteriorProgress.setProgress(PercenInterior);
 		headinterior = (ImageView) findViewById(R.id.headinterior);
 		btnInterior = (ImageButton) findViewById(R.id.inside_button);
 		btnInterior.setLayoutParams(imginterior);
 		btnInterior.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				// startAnimation
-				SlideInteriorLayout();	
+				SlideInteriorLayout();
 			}
 		});
-		
-		RelativeLayout.LayoutParams imgdocument = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+		RelativeLayout.LayoutParams imgdocument = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		imgdocument.setMargins(left870, top480, 0, 0);
-		RelativeLayout.LayoutParams bddocument = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams bddocument = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		bddocument.setMargins(left865, top500, 0, 0);
-		RelativeLayout.LayoutParams txtdocument = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams txtdocument = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		txtdocument.setMargins(leftt900, top595, 0, 0);
-		RelativeLayout.LayoutParams progdocument = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams progdocument = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		progdocument.setMargins(leftt870, top610, 0, 0);
 
 		ImageView borderdocument = (ImageView) findViewById(R.id.documentborder);
 		borderdocument.setLayoutParams(bddocument);
-		percendocument = (TextView)findViewById(R.id.percendocument);
+		percendocument = (TextView) findViewById(R.id.percendocument);
 		percendocument.setLayoutParams(txtdocument);
 		percendocument.setTypeface(type);
 		percendocument.setText("" + PercenDocument + "%");
 		DocumentProgress = (ProgressBar) findViewById(R.id.DocumentProgressbar);
-		DocumentProgress.setMax(100);  
-	    DocumentProgress.setProgress(PercenDocument);
+		DocumentProgress.setMax(100);
+		DocumentProgress.setProgress(PercenDocument);
 		headdocument = (ImageView) findViewById(R.id.headdocument);
 		btnDocument = (ImageButton) findViewById(R.id.document_button);
 		btnDocument.setLayoutParams(imgdocument);
 		btnDocument.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				SlideDocumentLayout();	
-				
+
+				SlideDocumentLayout();
+
 			}
 		});
-	    
-		RelativeLayout.LayoutParams imgsetting = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+		RelativeLayout.LayoutParams imgsetting = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		imgsetting.setMargins(left1180, top10, 0, 0);
-		RelativeLayout.LayoutParams txtratio = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams txtratio = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		txtratio.setMargins(left950, top95, 0, 0);
-		RelativeLayout.LayoutParams ratioprog = new RelativeLayout.LayoutParams
-	    		 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams ratioprog = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		ratioprog.setMargins(left1150, top100, 0, 0);
-		
-		Ratiotext = (TextView)findViewById(R.id.ratiotext);
+
+		Ratiotext = (TextView) findViewById(R.id.ratiotext);
 		Ratiotext.setLayoutParams(txtratio);
 		RatioProgress = (ProgressBar) findViewById(R.id.ratio);
 		RatioProgress.setLayoutParams(ratioprog);
@@ -384,15 +414,15 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		btnSetting = (ImageButton) findViewById(R.id.setting_button);
 		btnSetting.setLayoutParams(imgsetting);
 		btnSetting.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				SlideSettingLayout();	
-				
+
+				SlideSettingLayout();
+
 			}
 		});
-		
+
 		// addMob
 		LinearLayout layout = (LinearLayout) findViewById(R.id.admob);
 		adView = new AdView(getApplicationContext());
@@ -404,60 +434,90 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 
 		adView.loadAd(adRequestBuilder.build());
-		
+		 //adView.loadAd(new AdRequest.Builder().build());
+
 	}
 
 	private void SlidePowerLayout() {
-		
-		 DisplayMetrics metrics=new DisplayMetrics();
-		    getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-		    float height = metrics.heightPixels;
-		    float width = metrics.widthPixels;
-		    
-		int left500 = (int) ((width / 100) * 39);  
-		int top200 = (int) ((width / 100) * 15.7);  
-		
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		float height = metrics.heightPixels;
+		float width = metrics.widthPixels;
+
+		int left500 = (int) ((width / 100) * 39);
+		int top200 = (int) ((width / 100) * 15.7);
+
 		final SharedPreferences settings = getSharedPreferences("mysettings", 0);
 		final SharedPreferences.Editor editor = settings.edit();
-		final Dialog powerdialog = new Dialog(CarCheckListActivity.this, R.style.backgrounddialog);
+		final Dialog powerdialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
 		powerdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		powerdialog.setContentView(R.layout.powerdialoglayout);
 		powerdialog.getWindow().getAttributes().windowAnimations = R.style.PowerDialogAnimation;
-		powerdialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		// make everything around Dialog brightness than default  
+		powerdialog.getWindow().setBackgroundDrawable(
+				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		// make everything around Dialog brightness than default
 		WindowManager.LayoutParams lp = powerdialog.getWindow().getAttributes();
 		lp.dimAmount = 0f;
-		
-		final CheckBox chkpower_headLight = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_headLight);
-		final CheckBox chkpower_dim = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_dim);
-		final CheckBox chkpower_highBeam = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_highBeam);
-		final CheckBox chkpower_dashBoardLight = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_dashBoardLight);
-		final CheckBox chkpower_cabinSeatLight = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_cabinSeatLight);
-		final CheckBox chkpower_sideDoorLight = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_sideDoorLight);
-		final CheckBox chkpower_turnSignal = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_turnSignal);
-		final CheckBox chkpower_air = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_air);
-		final CheckBox chkpower_thermometer = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_thermometer);
-		final CheckBox chkpower_horn = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_horn);
-		final CheckBox chkpower_wipe = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_wipe);
-		final CheckBox chkpower_rainSensor = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_rainSensor);
-		final CheckBox chkpower_thirdBrakeLight = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_thirdBrakeLight);
-		final CheckBox chkpower_antiFoggyBack = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_antiFoggyBack);
-		final CheckBox chkpower_antiFoggySide = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_antiFoggySide);
-		final CheckBox chkpower_steeringWheelTest = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_steeringWheelTest);
-		final CheckBox chkpower_steeringWheelSet = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_steeringWheelSet);
-		final CheckBox chkpower_carStereo = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_carStereo);
-		final CheckBox chkpower_electronicWindow = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_electronicWindow);
-		final CheckBox chkpower_sideMirror = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_sideMirror);
-		final CheckBox chkpower_warnDoor = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_warnDoor);
-		final CheckBox chkpower_warnSeatBelt = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_warnSeatBelt);
-		final CheckBox chkpower_warnHandBrake = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_warnHandBrake);
-		final CheckBox chkpower_clock = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_clock);
-		final CheckBox chkpower_remoteKey = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_remoteKey);
-		final CheckBox chkpower_centralLock = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_centralLock);
-		final CheckBox chkpower_transmissionPosition = (CheckBox) powerdialog.getWindow().findViewById(R.id.power_transmissionPosition);
 
-		//change font
+		final CheckBox chkpower_headLight = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_headLight);
+		final CheckBox chkpower_dim = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_dim);
+		final CheckBox chkpower_highBeam = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_highBeam);
+		final CheckBox chkpower_dashBoardLight = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_dashBoardLight);
+		final CheckBox chkpower_cabinSeatLight = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_cabinSeatLight);
+		final CheckBox chkpower_sideDoorLight = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_sideDoorLight);
+		final CheckBox chkpower_turnSignal = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_turnSignal);
+		final CheckBox chkpower_air = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_air);
+		final CheckBox chkpower_thermometer = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_thermometer);
+		final CheckBox chkpower_horn = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_horn);
+		final CheckBox chkpower_wipe = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_wipe);
+		final CheckBox chkpower_rainSensor = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_rainSensor);
+		final CheckBox chkpower_thirdBrakeLight = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_thirdBrakeLight);
+		final CheckBox chkpower_antiFoggyBack = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_antiFoggyBack);
+		final CheckBox chkpower_antiFoggySide = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_antiFoggySide);
+		final CheckBox chkpower_steeringWheelTest = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_steeringWheelTest);
+		final CheckBox chkpower_steeringWheelSet = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_steeringWheelSet);
+		final CheckBox chkpower_carStereo = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_carStereo);
+		final CheckBox chkpower_electronicWindow = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_electronicWindow);
+		final CheckBox chkpower_sideMirror = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_sideMirror);
+		final CheckBox chkpower_warnDoor = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_warnDoor);
+		final CheckBox chkpower_warnSeatBelt = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_warnSeatBelt);
+		final CheckBox chkpower_warnHandBrake = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_warnHandBrake);
+		final CheckBox chkpower_clock = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_clock);
+		final CheckBox chkpower_remoteKey = (CheckBox) powerdialog.getWindow()
+				.findViewById(R.id.power_remoteKey);
+		final CheckBox chkpower_centralLock = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_centralLock);
+		final CheckBox chkpower_transmissionPosition = (CheckBox) powerdialog
+				.getWindow().findViewById(R.id.power_transmissionPosition);
+
+		// change font
 		chkpower_headLight.setTypeface(type);
 		chkpower_dim.setTypeface(type);
 		chkpower_highBeam.setTypeface(type);
@@ -485,105 +545,129 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkpower_remoteKey.setTypeface(type);
 		chkpower_centralLock.setTypeface(type);
 		chkpower_transmissionPosition.setTypeface(type);
-		
+
 		powerdialog.setCanceledOnTouchOutside(true);
-		powerdialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-		{
-		    @Override
-		    public void onCancel(DialogInterface dialog)
-		    {
-		    	headpower.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadpower = new TranslateAnimation(0, 0, 200,800 );   
-			    slideoutheadpower.setDuration(500);   
-			    slideoutheadpower.setFillAfter(true);  
-				headpower.startAnimation(slideoutheadpower); 
-				
-				 Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-					mp.put("power_headLight",chkpower_headLight.isChecked());
-					mp.put("power_dim",chkpower_dim.isChecked());
-					mp.put("power_highBeam",chkpower_highBeam.isChecked());
-					mp.put("power_dashBoardLight",chkpower_dashBoardLight.isChecked());
-					mp.put("power_cabinSeatLight",chkpower_cabinSeatLight.isChecked());
-					mp.put("power_sideDoorLight",chkpower_sideDoorLight.isChecked());
-					mp.put("power_turnSignal",chkpower_turnSignal.isChecked());
-					mp.put("power_air",chkpower_air.isChecked());
-					mp.put("power_thermometer",chkpower_thermometer.isChecked());
-					mp.put("power_horn",chkpower_horn.isChecked());
-					mp.put("power_wipe",chkpower_wipe.isChecked());
-					mp.put("power_rainSensor",chkpower_rainSensor.isChecked());
-					mp.put("power_thirdBrakeLight",chkpower_thirdBrakeLight.isChecked());
-					mp.put("power_antiFoggyBack",chkpower_antiFoggyBack.isChecked());
-					mp.put("power_antiFoggySide",chkpower_antiFoggySide.isChecked());
-					mp.put("power_steeringWheelTest",chkpower_steeringWheelTest.isChecked());
-					mp.put("power_steeringWheelSet",chkpower_steeringWheelSet.isChecked());
-					mp.put("power_carStereo",chkpower_carStereo.isChecked());
-					mp.put("power_electronicWindow",chkpower_electronicWindow.isChecked());
-					mp.put("power_sideMirror",chkpower_sideMirror.isChecked());
-					mp.put("power_warnDoor",chkpower_warnDoor.isChecked());
-					mp.put("power_warnSeatBelt",chkpower_warnSeatBelt.isChecked());
-					mp.put("power_warnHandBrake",chkpower_warnHandBrake.isChecked());
-					mp.put("power_clock",chkpower_clock.isChecked());
-					mp.put("power_remoteKey",chkpower_remoteKey.isChecked());
-					mp.put("power_centralLock",chkpower_centralLock.isChecked());
-					mp.put("power_transmissionPosition",chkpower_transmissionPosition.isChecked());
-					
-					save(mp);
-					
-		    }
+		powerdialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				headpower.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheadpower = new TranslateAnimation(
+						0, 0, 200, 800);
+				slideoutheadpower.setDuration(500);
+				slideoutheadpower.setFillAfter(true);
+				headpower.startAnimation(slideoutheadpower);
+
+				Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+				mp.put("power_headLight", chkpower_headLight.isChecked());
+				mp.put("power_dim", chkpower_dim.isChecked());
+				mp.put("power_highBeam", chkpower_highBeam.isChecked());
+				mp.put("power_dashBoardLight",
+						chkpower_dashBoardLight.isChecked());
+				mp.put("power_cabinSeatLight",
+						chkpower_cabinSeatLight.isChecked());
+				mp.put("power_sideDoorLight",
+						chkpower_sideDoorLight.isChecked());
+				mp.put("power_turnSignal", chkpower_turnSignal.isChecked());
+				mp.put("power_air", chkpower_air.isChecked());
+				mp.put("power_thermometer", chkpower_thermometer.isChecked());
+				mp.put("power_horn", chkpower_horn.isChecked());
+				mp.put("power_wipe", chkpower_wipe.isChecked());
+				mp.put("power_rainSensor", chkpower_rainSensor.isChecked());
+				mp.put("power_thirdBrakeLight",
+						chkpower_thirdBrakeLight.isChecked());
+				mp.put("power_antiFoggyBack",
+						chkpower_antiFoggyBack.isChecked());
+				mp.put("power_antiFoggySide",
+						chkpower_antiFoggySide.isChecked());
+				mp.put("power_steeringWheelTest",
+						chkpower_steeringWheelTest.isChecked());
+				mp.put("power_steeringWheelSet",
+						chkpower_steeringWheelSet.isChecked());
+				mp.put("power_carStereo", chkpower_carStereo.isChecked());
+				mp.put("power_electronicWindow",
+						chkpower_electronicWindow.isChecked());
+				mp.put("power_sideMirror", chkpower_sideMirror.isChecked());
+				mp.put("power_warnDoor", chkpower_warnDoor.isChecked());
+				mp.put("power_warnSeatBelt", chkpower_warnSeatBelt.isChecked());
+				mp.put("power_warnHandBrake",
+						chkpower_warnHandBrake.isChecked());
+				mp.put("power_clock", chkpower_clock.isChecked());
+				mp.put("power_remoteKey", chkpower_remoteKey.isChecked());
+				mp.put("power_centralLock", chkpower_centralLock.isChecked());
+				mp.put("power_transmissionPosition",
+						chkpower_transmissionPosition.isChecked());
+
+				save(mp);
+
+			}
 		});
-		
-		TextView power = (TextView) powerdialog.getWindow().findViewById(R.id.Power);
+
+		TextView power = (TextView) powerdialog.getWindow().findViewById(
+				R.id.Power);
 		power.setTypeface(type);
-		Button powerback = (Button) powerdialog.getWindow().findViewById(R.id.Powerback);
+		Button powerback = (Button) powerdialog.getWindow().findViewById(
+				R.id.Powerback);
 		powerback.setTypeface(type);
 		powerback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				powerdialog.dismiss();	
-			
-				headpower.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadpower = new TranslateAnimation(0, 0, 200,800 );   
-			    slideoutheadpower.setDuration(500);   
-			    slideoutheadpower.setFillAfter(true);  
-				headpower.startAnimation(slideoutheadpower); 
 
-				 Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-					mp.put("power_headLight",chkpower_headLight.isChecked());
-					mp.put("power_dim",chkpower_dim.isChecked());
-					mp.put("power_highBeam",chkpower_highBeam.isChecked());
-					mp.put("power_dashBoardLight",chkpower_dashBoardLight.isChecked());
-					mp.put("power_cabinSeatLight",chkpower_cabinSeatLight.isChecked());
-					mp.put("power_sideDoorLight",chkpower_sideDoorLight.isChecked());
-					mp.put("power_turnSignal",chkpower_turnSignal.isChecked());
-					mp.put("power_air",chkpower_air.isChecked());
-					mp.put("power_thermometer",chkpower_thermometer.isChecked());
-					mp.put("power_horn",chkpower_horn.isChecked());
-					mp.put("power_wipe",chkpower_wipe.isChecked());
-					mp.put("power_rainSensor",chkpower_rainSensor.isChecked());
-					mp.put("power_thirdBrakeLight",chkpower_thirdBrakeLight.isChecked());
-					mp.put("power_antiFoggyBack",chkpower_antiFoggyBack.isChecked());
-					mp.put("power_antiFoggySide",chkpower_antiFoggySide.isChecked());
-					mp.put("power_steeringWheelTest",chkpower_steeringWheelTest.isChecked());
-					mp.put("power_steeringWheelSet",chkpower_steeringWheelSet.isChecked());
-					mp.put("power_carStereo",chkpower_carStereo.isChecked());
-					mp.put("power_electronicWindow",chkpower_electronicWindow.isChecked());
-					mp.put("power_sideMirror",chkpower_sideMirror.isChecked());
-					mp.put("power_warnDoor",chkpower_warnDoor.isChecked());
-					mp.put("power_warnSeatBelt",chkpower_warnSeatBelt.isChecked());
-					mp.put("power_warnHandBrake",chkpower_warnHandBrake.isChecked());
-					mp.put("power_clock",chkpower_clock.isChecked());
-					mp.put("power_remoteKey",chkpower_remoteKey.isChecked());
-					mp.put("power_centralLock",chkpower_centralLock.isChecked());
-					mp.put("power_transmissionPosition",chkpower_transmissionPosition.isChecked());
-					
-					save(mp);
-				
+				powerdialog.dismiss();
+
+				headpower.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheadpower = new TranslateAnimation(
+						0, 0, 200, 800);
+				slideoutheadpower.setDuration(500);
+				slideoutheadpower.setFillAfter(true);
+				headpower.startAnimation(slideoutheadpower);
+
+				Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+				mp.put("power_headLight", chkpower_headLight.isChecked());
+				mp.put("power_dim", chkpower_dim.isChecked());
+				mp.put("power_highBeam", chkpower_highBeam.isChecked());
+				mp.put("power_dashBoardLight",
+						chkpower_dashBoardLight.isChecked());
+				mp.put("power_cabinSeatLight",
+						chkpower_cabinSeatLight.isChecked());
+				mp.put("power_sideDoorLight",
+						chkpower_sideDoorLight.isChecked());
+				mp.put("power_turnSignal", chkpower_turnSignal.isChecked());
+				mp.put("power_air", chkpower_air.isChecked());
+				mp.put("power_thermometer", chkpower_thermometer.isChecked());
+				mp.put("power_horn", chkpower_horn.isChecked());
+				mp.put("power_wipe", chkpower_wipe.isChecked());
+				mp.put("power_rainSensor", chkpower_rainSensor.isChecked());
+				mp.put("power_thirdBrakeLight",
+						chkpower_thirdBrakeLight.isChecked());
+				mp.put("power_antiFoggyBack",
+						chkpower_antiFoggyBack.isChecked());
+				mp.put("power_antiFoggySide",
+						chkpower_antiFoggySide.isChecked());
+				mp.put("power_steeringWheelTest",
+						chkpower_steeringWheelTest.isChecked());
+				mp.put("power_steeringWheelSet",
+						chkpower_steeringWheelSet.isChecked());
+				mp.put("power_carStereo", chkpower_carStereo.isChecked());
+				mp.put("power_electronicWindow",
+						chkpower_electronicWindow.isChecked());
+				mp.put("power_sideMirror", chkpower_sideMirror.isChecked());
+				mp.put("power_warnDoor", chkpower_warnDoor.isChecked());
+				mp.put("power_warnSeatBelt", chkpower_warnSeatBelt.isChecked());
+				mp.put("power_warnHandBrake",
+						chkpower_warnHandBrake.isChecked());
+				mp.put("power_clock", chkpower_clock.isChecked());
+				mp.put("power_remoteKey", chkpower_remoteKey.isChecked());
+				mp.put("power_centralLock", chkpower_centralLock.isChecked());
+				mp.put("power_transmissionPosition",
+						chkpower_transmissionPosition.isChecked());
+
+				save(mp);
+
 			}
 		});
-		
+
 		chkpower_headLight.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -591,18 +675,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_dim.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -610,18 +695,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_highBeam.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -629,18 +715,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_dashBoardLight.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -648,18 +735,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_cabinSeatLight.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -667,18 +755,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_sideDoorLight.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -686,18 +775,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_turnSignal.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -705,18 +795,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_air.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -724,18 +815,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_thermometer.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -743,18 +835,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_horn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -762,18 +855,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_wipe.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -781,18 +875,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_rainSensor.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -800,18 +895,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_thirdBrakeLight.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -819,18 +915,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_antiFoggyBack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -838,18 +935,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_antiFoggySide.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -857,18 +955,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_steeringWheelTest.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -876,18 +975,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_steeringWheelSet.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -895,18 +995,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_carStereo.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -914,18 +1015,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_electronicWindow.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -933,18 +1035,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_sideMirror.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -952,18 +1055,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_warnDoor.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -971,18 +1075,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_warnSeatBelt.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -990,18 +1095,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_warnHandBrake.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1009,18 +1115,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_clock.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1028,18 +1135,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_remoteKey.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1047,18 +1155,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_centralLock.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1066,18 +1175,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkpower_transmissionPosition.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1085,30 +1195,34 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalPower(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalPower(increment);
 				}
 				PowerProgress.setProgress(PercenPower);
 				percenpower.setText("" + PercenPower + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
-		headpower.setVisibility(ImageView.VISIBLE);  
-	    TranslateAnimation slideheadpower = new TranslateAnimation(0, 0, 800,200 );   
-	    slideheadpower.setDuration(300);   
-	    slideheadpower.setFillAfter(true);  
-		headpower.startAnimation(slideheadpower); 
-		
-		powerdialog.show();		
-		WindowManager.LayoutParams params = powerdialog.getWindow().getAttributes();
-		params.y = top200; params.x = left500;
-		params.gravity = Gravity.TOP | Gravity.LEFT;       
-		powerdialog.getWindow().setAttributes(params); 
-		
+
+		headpower.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideheadpower = new TranslateAnimation(0, 0, 800,
+				200);
+		slideheadpower.setDuration(300);
+		slideheadpower.setFillAfter(true);
+		headpower.startAnimation(slideheadpower);
+
+		powerdialog.show();
+		WindowManager.LayoutParams params = powerdialog.getWindow()
+				.getAttributes();
+		params.y = top200;
+		params.x = left500;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
+		powerdialog.getWindow().setAttributes(params);
+
 		chkpower_headLight.setChecked(load("power_headLight"));
 		chkpower_dim.setChecked(load("power_dim"));
 		chkpower_highBeam.setChecked(load("power_highBeam"));
@@ -1135,44 +1249,59 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkpower_clock.setChecked(load("power_clock"));
 		chkpower_remoteKey.setChecked(load("power_remoteKey"));
 		chkpower_centralLock.setChecked(load("power_centralLock"));
-		chkpower_transmissionPosition.setChecked(load("power_transmissionPosition"));
-		
-	}
-	
-	private void SlideEngineLayout() {
-		
-		 DisplayMetrics metrics=new DisplayMetrics();
-		    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		chkpower_transmissionPosition
+				.setChecked(load("power_transmissionPosition"));
 
-		    float height = metrics.heightPixels;
-		    float width = metrics.widthPixels;
-		    
-		int left840 = (int) ((width / 100) * 65.625);  
-		
+	}
+
+	private void SlideEngineLayout() {
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		float height = metrics.heightPixels;
+		float width = metrics.widthPixels;
+
+		int left840 = (int) ((width / 100) * 65.625);
+
 		final SharedPreferences settings = getSharedPreferences("mysettings", 0);
 		final SharedPreferences.Editor editor = settings.edit();
-		final Dialog enginedialog = new Dialog(CarCheckListActivity.this, R.style.backgrounddialog);
+		final Dialog enginedialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
 		enginedialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		enginedialog.setContentView(R.layout.enginedialoglayout);
 		enginedialog.getWindow().getAttributes().windowAnimations = R.style.EngineDialogAnimation;
-		enginedialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		// make everything around Dialog brightness than default  
-		WindowManager.LayoutParams lp = enginedialog.getWindow().getAttributes();
+		enginedialog.getWindow().setBackgroundDrawable(
+				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		// make everything around Dialog brightness than default
+		WindowManager.LayoutParams lp = enginedialog.getWindow()
+				.getAttributes();
 		lp.dimAmount = 0f;
-		
-		final CheckBox chkengine_hood = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_hood);
-		final CheckBox chkengine_backHood = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_backHood);
-		final CheckBox chkengine_underEngine = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_underEngine);
-		final CheckBox chkengine_brakeOil = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_brakeOil);
-		final CheckBox chkengine_engineOil = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_engineOil);
-		final CheckBox chkengine_waterCoolant = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_waterCoolant);
-		final CheckBox chkengine_belt = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_belt);
-		final CheckBox chkengine_gear = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_gear);
-		final CheckBox chkengine_liquidLevel = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_liquidLevel);
-		final CheckBox chkengine_soundOut = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_soundOut);
-		final CheckBox chkengine_soundIn = (CheckBox) enginedialog.getWindow().findViewById(R.id.engine_soundIn);
 
-		//Change font
+		final CheckBox chkengine_hood = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_hood);
+		final CheckBox chkengine_backHood = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_backHood);
+		final CheckBox chkengine_underEngine = (CheckBox) enginedialog
+				.getWindow().findViewById(R.id.engine_underEngine);
+		final CheckBox chkengine_brakeOil = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_brakeOil);
+		final CheckBox chkengine_engineOil = (CheckBox) enginedialog
+				.getWindow().findViewById(R.id.engine_engineOil);
+		final CheckBox chkengine_waterCoolant = (CheckBox) enginedialog
+				.getWindow().findViewById(R.id.engine_waterCoolant);
+		final CheckBox chkengine_belt = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_belt);
+		final CheckBox chkengine_gear = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_gear);
+		final CheckBox chkengine_liquidLevel = (CheckBox) enginedialog
+				.getWindow().findViewById(R.id.engine_liquidLevel);
+		final CheckBox chkengine_soundOut = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_soundOut);
+		final CheckBox chkengine_soundIn = (CheckBox) enginedialog.getWindow()
+				.findViewById(R.id.engine_soundIn);
+
+		// Change font
 		chkengine_hood.setTypeface(type);
 		chkengine_backHood.setTypeface(type);
 		chkengine_underEngine.setTypeface(type);
@@ -1184,73 +1313,84 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkengine_liquidLevel.setTypeface(type);
 		chkengine_soundOut.setTypeface(type);
 		chkengine_soundIn.setTypeface(type);
-	
+
 		enginedialog.setCanceledOnTouchOutside(true);
-		enginedialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-		{
-		    @Override
-		    public void onCancel(DialogInterface dialog)
-		    {
-		    	headengine.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadengine = new TranslateAnimation(0, 0, 490 ,-500 );   
-			    slideoutheadengine.setDuration(300);   
-			    slideoutheadengine.setFillAfter(true);   
-			    headengine.startAnimation(slideoutheadengine); 
-			    
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-				mp.put("engine_hood",chkengine_hood.isChecked());
-				mp.put("engine_backHood",chkengine_backHood.isChecked());
-				mp.put("engine_underEngine",chkengine_underEngine.isChecked());
-				mp.put("engine_brakeOil",chkengine_brakeOil.isChecked());
-				mp.put("engine_engineOil",chkengine_engineOil.isChecked());
-				mp.put("engine_waterCoolant",chkengine_waterCoolant.isChecked());
-				mp.put("engine_belt",chkengine_belt.isChecked());
-				mp.put("engine_gear",chkengine_gear.isChecked());
-				mp.put("engine_liquidLevel",chkengine_liquidLevel.isChecked());
-				mp.put("engine_soundOut",chkengine_soundOut.isChecked());
-				mp.put("engine_soundIn",chkengine_soundIn.isChecked());
-				
-				save(mp);
-				
-		    }
-		});
-		
-		TextView engine = (TextView) enginedialog.getWindow().findViewById(R.id.Engine);
+		enginedialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						headengine.setVisibility(ImageView.VISIBLE);
+						TranslateAnimation slideoutheadengine = new TranslateAnimation(
+								0, 0, 490, -500);
+						slideoutheadengine.setDuration(300);
+						slideoutheadengine.setFillAfter(true);
+						headengine.startAnimation(slideoutheadengine);
+
+						Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+						mp.put("engine_hood", chkengine_hood.isChecked());
+						mp.put("engine_backHood",
+								chkengine_backHood.isChecked());
+						mp.put("engine_underEngine",
+								chkengine_underEngine.isChecked());
+						mp.put("engine_brakeOil",
+								chkengine_brakeOil.isChecked());
+						mp.put("engine_engineOil",
+								chkengine_engineOil.isChecked());
+						mp.put("engine_waterCoolant",
+								chkengine_waterCoolant.isChecked());
+						mp.put("engine_belt", chkengine_belt.isChecked());
+						mp.put("engine_gear", chkengine_gear.isChecked());
+						mp.put("engine_liquidLevel",
+								chkengine_liquidLevel.isChecked());
+						mp.put("engine_soundOut",
+								chkengine_soundOut.isChecked());
+						mp.put("engine_soundIn", chkengine_soundIn.isChecked());
+
+						save(mp);
+
+					}
+				});
+
+		TextView engine = (TextView) enginedialog.getWindow().findViewById(
+				R.id.Engine);
 		engine.setTypeface(type);
-		Button engineback = (Button) enginedialog.getWindow().findViewById(R.id.Engineback);
+		Button engineback = (Button) enginedialog.getWindow().findViewById(
+				R.id.Engineback);
 		engineback.setTypeface(type);
 		engineback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				enginedialog.dismiss();		
-				
-				headengine.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadengine = new TranslateAnimation(0, 0, 490 ,-500 );   
-			    slideoutheadengine.setDuration(300);   
-			    slideoutheadengine.setFillAfter(true);   
-			    headengine.startAnimation(slideoutheadengine); 
 
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-				mp.put("engine_hood",chkengine_hood.isChecked());
-				mp.put("engine_backHood",chkengine_backHood.isChecked());
-				mp.put("engine_underEngine",chkengine_underEngine.isChecked());
-				mp.put("engine_brakeOil",chkengine_brakeOil.isChecked());
-				mp.put("engine_engineOil",chkengine_engineOil.isChecked());
-				mp.put("engine_waterCoolant",chkengine_waterCoolant.isChecked());
-				mp.put("engine_belt",chkengine_belt.isChecked());
-				mp.put("engine_gear",chkengine_gear.isChecked());
-				mp.put("engine_liquidLevel",chkengine_liquidLevel.isChecked());
-				mp.put("engine_soundOut",chkengine_soundOut.isChecked());
-				mp.put("engine_soundIn",chkengine_soundIn.isChecked());
-				
+				enginedialog.dismiss();
+
+				headengine.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheadengine = new TranslateAnimation(
+						0, 0, 490, -500);
+				slideoutheadengine.setDuration(300);
+				slideoutheadengine.setFillAfter(true);
+				headengine.startAnimation(slideoutheadengine);
+
+				Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+				mp.put("engine_hood", chkengine_hood.isChecked());
+				mp.put("engine_backHood", chkengine_backHood.isChecked());
+				mp.put("engine_underEngine", chkengine_underEngine.isChecked());
+				mp.put("engine_brakeOil", chkengine_brakeOil.isChecked());
+				mp.put("engine_engineOil", chkengine_engineOil.isChecked());
+				mp.put("engine_waterCoolant",
+						chkengine_waterCoolant.isChecked());
+				mp.put("engine_belt", chkengine_belt.isChecked());
+				mp.put("engine_gear", chkengine_gear.isChecked());
+				mp.put("engine_liquidLevel", chkengine_liquidLevel.isChecked());
+				mp.put("engine_soundOut", chkengine_soundOut.isChecked());
+				mp.put("engine_soundIn", chkengine_soundIn.isChecked());
+
 				save(mp);
-			    
+
 			}
 		});
-		
+
 		chkengine_hood.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1258,18 +1398,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_backHood.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1277,18 +1418,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_underEngine.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1296,18 +1438,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_brakeOil.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1315,18 +1458,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_engineOil.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1334,18 +1478,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_waterCoolant.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1353,18 +1498,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_belt.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1372,18 +1518,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_gear.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1391,18 +1538,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_liquidLevel.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1410,18 +1558,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_soundOut.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1429,18 +1578,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkengine_soundIn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1448,31 +1598,35 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalEngine(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalEngine(increment);
 				}
 				EngineProgress.setProgress(PercenEngine);
 				percenengine.setText("" + PercenEngine + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
-		headengine.setVisibility(ImageView.VISIBLE);  
-	    TranslateAnimation slideheadengine = new TranslateAnimation(0, 0, 0,490 );   
-	    slideheadengine.setDuration(300);   
-	    slideheadengine.setFillAfter(true);   
-	    headengine.startAnimation(slideheadengine);
+
+		headengine.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideheadengine = new TranslateAnimation(0, 0, 0,
+				490);
+		slideheadengine.setDuration(300);
+		slideheadengine.setFillAfter(true);
+		headengine.startAnimation(slideheadengine);
 
 		enginedialog.show();
-		
-		WindowManager.LayoutParams params = enginedialog.getWindow().getAttributes();
-		params.y = 1; params.x = left840;
-		params.gravity = Gravity.TOP | Gravity.LEFT;       
-		enginedialog.getWindow().setAttributes(params); 
-		
+
+		WindowManager.LayoutParams params = enginedialog.getWindow()
+				.getAttributes();
+		params.y = 1;
+		params.x = left840;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
+		enginedialog.getWindow().setAttributes(params);
+
 		chkengine_hood.setChecked(load("engine_hood"));
 		chkengine_backHood.setChecked(load("engine_backHood"));
 		chkengine_underEngine.setChecked(load("engine_underEngine"));
@@ -1484,32 +1638,44 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkengine_liquidLevel.setChecked(load("engine_liquidLevel"));
 		chkengine_soundOut.setChecked(load("engine_soundOut"));
 		chkengine_soundIn.setChecked(load("engine_soundIn"));
-		
+
 	}
 
 	private void SlideExteriorLayout() {
 		final SharedPreferences settings = getSharedPreferences("mysettings", 0);
 		final SharedPreferences.Editor editor = settings.edit();
-		final Dialog exteriordialog = new Dialog(CarCheckListActivity.this, R.style.backgrounddialog);
+		final Dialog exteriordialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
 		exteriordialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		exteriordialog.setContentView(R.layout.exteriordialoglayout);
 		exteriordialog.getWindow().getAttributes().windowAnimations = R.style.ExteriorDialogAnimation;
-		exteriordialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		// make everything around Dialog brightness than default  
-		WindowManager.LayoutParams lp = exteriordialog.getWindow().getAttributes();
+		exteriordialog.getWindow().setBackgroundDrawable(
+				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		// make everything around Dialog brightness than default
+		WindowManager.LayoutParams lp = exteriordialog.getWindow()
+				.getAttributes();
 		lp.dimAmount = 0f;
-		
-		final CheckBox chkoutside_color = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_color);
-		final CheckBox chkoutside_window = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_window);
-		final CheckBox chkoutside_doorHood = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_doorHood);
-		final CheckBox chkoutside_jack = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_jack);
-		final CheckBox chkoutside_wrench = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_wrench);
-		final CheckBox chkoutside_tires = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_tires);
-		final CheckBox chkoutside_light = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_light);
-		final CheckBox chkoutside_seal = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_seal);
-		final CheckBox chkoutside_tirePart = (CheckBox) exteriordialog.getWindow().findViewById(R.id.outside_tirePart);
-		
-		//Change font
+
+		final CheckBox chkoutside_color = (CheckBox) exteriordialog.getWindow()
+				.findViewById(R.id.outside_color);
+		final CheckBox chkoutside_window = (CheckBox) exteriordialog
+				.getWindow().findViewById(R.id.outside_window);
+		final CheckBox chkoutside_doorHood = (CheckBox) exteriordialog
+				.getWindow().findViewById(R.id.outside_doorHood);
+		final CheckBox chkoutside_jack = (CheckBox) exteriordialog.getWindow()
+				.findViewById(R.id.outside_jack);
+		final CheckBox chkoutside_wrench = (CheckBox) exteriordialog
+				.getWindow().findViewById(R.id.outside_wrench);
+		final CheckBox chkoutside_tires = (CheckBox) exteriordialog.getWindow()
+				.findViewById(R.id.outside_tires);
+		final CheckBox chkoutside_light = (CheckBox) exteriordialog.getWindow()
+				.findViewById(R.id.outside_light);
+		final CheckBox chkoutside_seal = (CheckBox) exteriordialog.getWindow()
+				.findViewById(R.id.outside_seal);
+		final CheckBox chkoutside_tirePart = (CheckBox) exteriordialog
+				.getWindow().findViewById(R.id.outside_tirePart);
+
+		// Change font
 		chkoutside_color.setTypeface(type);
 		chkoutside_window.setTypeface(type);
 		chkoutside_doorHood.setTypeface(type);
@@ -1519,69 +1685,74 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkoutside_light.setTypeface(type);
 		chkoutside_seal.setTypeface(type);
 		chkoutside_tirePart.setTypeface(type);
-		
+
 		exteriordialog.setCanceledOnTouchOutside(true);
-		exteriordialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-		{
-		    @Override
-		    public void onCancel(DialogInterface dialog)
-		    {
-		    	headexterior.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadexterior = new TranslateAnimation(0, 0, 380,-400 );   
-			    slideoutheadexterior.setDuration(500);   
-			    slideoutheadexterior.setFillAfter(true);   
-			    headexterior.startAnimation(slideoutheadexterior); 
-			    
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-				mp.put("outside_color",chkoutside_color.isChecked());
-				mp.put("outside_window",chkoutside_window.isChecked());
-				mp.put("outside_doorHood",chkoutside_doorHood.isChecked());
-				mp.put("outside_jack",chkoutside_jack.isChecked());
-				mp.put("outside_wrench",chkoutside_wrench.isChecked());
-				mp.put("outside_tires",chkoutside_tires.isChecked());
-				mp.put("outside_light",chkoutside_light.isChecked());
-				mp.put("outside_seal",chkoutside_seal.isChecked());
-				mp.put("outside_tirePart",chkoutside_tirePart.isChecked());
-				
-				save(mp);
-				
-		    }
-		});
-		
-		TextView exterior = (TextView) exteriordialog.getWindow().findViewById(R.id.Exterior);
+		exteriordialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						headexterior.setVisibility(ImageView.VISIBLE);
+						TranslateAnimation slideoutheadexterior = new TranslateAnimation(
+								0, 0, 380, -400);
+						slideoutheadexterior.setDuration(500);
+						slideoutheadexterior.setFillAfter(true);
+						headexterior.startAnimation(slideoutheadexterior);
+
+						Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+						mp.put("outside_color", chkoutside_color.isChecked());
+						mp.put("outside_window", chkoutside_window.isChecked());
+						mp.put("outside_doorHood",
+								chkoutside_doorHood.isChecked());
+						mp.put("outside_jack", chkoutside_jack.isChecked());
+						mp.put("outside_wrench", chkoutside_wrench.isChecked());
+						mp.put("outside_tires", chkoutside_tires.isChecked());
+						mp.put("outside_light", chkoutside_light.isChecked());
+						mp.put("outside_seal", chkoutside_seal.isChecked());
+						mp.put("outside_tirePart",
+								chkoutside_tirePart.isChecked());
+
+						save(mp);
+
+					}
+				});
+
+		TextView exterior = (TextView) exteriordialog.getWindow().findViewById(
+				R.id.Exterior);
 		exterior.setTypeface(type);
-		Button exteriorback = (Button) exteriordialog.getWindow().findViewById(R.id.Exteriorback);
+		Button exteriorback = (Button) exteriordialog.getWindow().findViewById(
+				R.id.Exteriorback);
 		exteriorback.setTypeface(type);
 		exteriorback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				exteriordialog.dismiss();	
-				
-				headexterior.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadexterior = new TranslateAnimation(0, 0, 380,-400 );   
-			    slideoutheadexterior.setDuration(500);   
-			    slideoutheadexterior.setFillAfter(true);   
-			    headexterior.startAnimation(slideoutheadexterior); 
 
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-				mp.put("outside_color",chkoutside_color.isChecked());
-				mp.put("outside_window",chkoutside_window.isChecked());
-				mp.put("outside_doorHood",chkoutside_doorHood.isChecked());
-				mp.put("outside_jack",chkoutside_jack.isChecked());
-				mp.put("outside_wrench",chkoutside_wrench.isChecked());
-				mp.put("outside_tires",chkoutside_tires.isChecked());
-				mp.put("outside_light",chkoutside_light.isChecked());
-				mp.put("outside_seal",chkoutside_seal.isChecked());
-				mp.put("outside_tirePart",chkoutside_tirePart.isChecked());
-				
+				exteriordialog.dismiss();
+
+				headexterior.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheadexterior = new TranslateAnimation(
+						0, 0, 380, -400);
+				slideoutheadexterior.setDuration(500);
+				slideoutheadexterior.setFillAfter(true);
+				headexterior.startAnimation(slideoutheadexterior);
+
+				Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+				mp.put("outside_color", chkoutside_color.isChecked());
+				mp.put("outside_window", chkoutside_window.isChecked());
+				mp.put("outside_doorHood", chkoutside_doorHood.isChecked());
+				mp.put("outside_jack", chkoutside_jack.isChecked());
+				mp.put("outside_wrench", chkoutside_wrench.isChecked());
+				mp.put("outside_tires", chkoutside_tires.isChecked());
+				mp.put("outside_light", chkoutside_light.isChecked());
+				mp.put("outside_seal", chkoutside_seal.isChecked());
+				mp.put("outside_tirePart", chkoutside_tirePart.isChecked());
+
 				save(mp);
-				
+
 			}
 		});
-		
+
 		chkoutside_color.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1589,18 +1760,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_window.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1608,18 +1780,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_doorHood.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1627,18 +1800,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_jack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1646,18 +1820,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_wrench.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1665,18 +1840,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_tires.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1684,18 +1860,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_light.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1703,18 +1880,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_seal.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1722,18 +1900,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkoutside_tirePart.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1741,31 +1920,35 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalExterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalExterior(increment);
 				}
 				ExteriorProgress.setProgress(PercenExterior);
 				percenexterior.setText("" + PercenExterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
 
-		headexterior.setVisibility(ImageView.VISIBLE);  
-	    TranslateAnimation slideheadexterior = new TranslateAnimation(0, 0, 0,380 );   
-	    slideheadexterior.setDuration(500);   
-	    slideheadexterior.setFillAfter(true);   
-	    headexterior.startAnimation(slideheadexterior); 
-	    
+		headexterior.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideheadexterior = new TranslateAnimation(0, 0, 0,
+				380);
+		slideheadexterior.setDuration(500);
+		slideheadexterior.setFillAfter(true);
+		headexterior.startAnimation(slideheadexterior);
+
 		exteriordialog.show();
-		
-		WindowManager.LayoutParams params = exteriordialog.getWindow().getAttributes();
-		params.y = 0; params.x = 60;
-		params.gravity = Gravity.TOP | Gravity.LEFT;       
-		exteriordialog.getWindow().setAttributes(params); 
-		
+
+		WindowManager.LayoutParams params = exteriordialog.getWindow()
+				.getAttributes();
+		params.y = 0;
+		params.x = 60;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
+		exteriordialog.getWindow().setAttributes(params);
+
 		chkoutside_color.setChecked(load("outside_color"));
 		chkoutside_window.setChecked(load("outside_window"));
 		chkoutside_doorHood.setChecked(load("outside_doorHood"));
@@ -1775,38 +1958,56 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkoutside_light.setChecked(load("outside_light"));
 		chkoutside_seal.setChecked(load("outside_seal"));
 		chkoutside_tirePart.setChecked(load("outside_tirePart"));
-		
+
 	}
-	
+
 	private void SlideInteriorLayout() {
 		final SharedPreferences settings = getSharedPreferences("mysettings", 0);
 		final SharedPreferences.Editor editor = settings.edit();
-		final Dialog interiordialog = new Dialog(CarCheckListActivity.this, R.style.backgrounddialog);
-		interiordialog.requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		final Dialog interiordialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
+		interiordialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		interiordialog.setContentView(R.layout.interiordialoglayout);
 		interiordialog.getWindow().getAttributes().windowAnimations = R.style.InteriorDialogAnimation;
-		interiordialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		// make everything around Dialog brightness than default  
-		WindowManager.LayoutParams lp = interiordialog.getWindow().getAttributes();
+		interiordialog.getWindow().setBackgroundDrawable(
+				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		// make everything around Dialog brightness than default
+		WindowManager.LayoutParams lp = interiordialog.getWindow()
+				.getAttributes();
 		lp.dimAmount = 0f;
-		
-		final CheckBox chkinside_seat = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_seat);
-		final CheckBox chkinside_console = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_console);
-		final CheckBox chkinside_steeringWheel = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_steeringWheel);
-		final CheckBox chkinside_transmission = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_transmission);
-		final CheckBox chkinside_sideDoors = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_sideDoors);
-		final CheckBox chkinside_dashBoard = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_dashBoard);
-		final CheckBox chkinside_carpet = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_carpet);
-		final CheckBox chkinside_curtain = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_curtain);
-		final CheckBox chkinside_seatBelt = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_seatBelt);
-		final CheckBox chkinside_backDoor = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_backDoor);
-		final CheckBox chkinside_lidOil = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_lidOil);
-		final CheckBox chkinside_setSeat = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_setSeat);
-		final CheckBox chkinside_brakePedal = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_brakePedal);
-		final CheckBox chkinside_accelerator = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_accelerator);
-		final CheckBox chkinside_handBrake = (CheckBox) interiordialog.getWindow().findViewById(R.id.inside_handBrake);
-		
-		//Change font
+
+		final CheckBox chkinside_seat = (CheckBox) interiordialog.getWindow()
+				.findViewById(R.id.inside_seat);
+		final CheckBox chkinside_console = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_console);
+		final CheckBox chkinside_steeringWheel = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_steeringWheel);
+		final CheckBox chkinside_transmission = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_transmission);
+		final CheckBox chkinside_sideDoors = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_sideDoors);
+		final CheckBox chkinside_dashBoard = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_dashBoard);
+		final CheckBox chkinside_carpet = (CheckBox) interiordialog.getWindow()
+				.findViewById(R.id.inside_carpet);
+		final CheckBox chkinside_curtain = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_curtain);
+		final CheckBox chkinside_seatBelt = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_seatBelt);
+		final CheckBox chkinside_backDoor = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_backDoor);
+		final CheckBox chkinside_lidOil = (CheckBox) interiordialog.getWindow()
+				.findViewById(R.id.inside_lidOil);
+		final CheckBox chkinside_setSeat = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_setSeat);
+		final CheckBox chkinside_brakePedal = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_brakePedal);
+		final CheckBox chkinside_accelerator = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_accelerator);
+		final CheckBox chkinside_handBrake = (CheckBox) interiordialog
+				.getWindow().findViewById(R.id.inside_handBrake);
+
+		// Change font
 		chkinside_seat.setTypeface(type);
 		chkinside_console.setTypeface(type);
 		chkinside_steeringWheel.setTypeface(type);
@@ -1822,79 +2023,93 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkinside_brakePedal.setTypeface(type);
 		chkinside_accelerator.setTypeface(type);
 		chkinside_handBrake.setTypeface(type);
-		
+
 		interiordialog.setCanceledOnTouchOutside(true);
-		interiordialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-		{
-		    @Override
-		    public void onCancel(DialogInterface dialog)
-		    {
-		    	headinterior.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadinterior = new TranslateAnimation(0, 0, 180,800 );   
-			    slideoutheadinterior.setDuration(500);   
-			    slideoutheadinterior.setFillAfter(true);   
-			    headinterior.startAnimation(slideoutheadinterior); 
-			    
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-				mp.put("inside_seat",chkinside_seat.isChecked());
-				mp.put("inside_console",chkinside_console.isChecked());
-				mp.put("inside_steeringWheel",chkinside_steeringWheel.isChecked());
-				mp.put("inside_transmission",chkinside_transmission.isChecked());
-				mp.put("inside_sideDoors",chkinside_sideDoors.isChecked());
-				mp.put("inside_dashBoard",chkinside_dashBoard.isChecked());
-				mp.put("inside_carpet",chkinside_carpet.isChecked());
-				mp.put("inside_curtain",chkinside_curtain.isChecked());
-				mp.put("inside_seatBelt",chkinside_seatBelt.isChecked());
-				mp.put("inside_backDoor",chkinside_backDoor.isChecked());
-				mp.put("inside_lidOil",chkinside_lidOil.isChecked());
-				mp.put("inside_setSeat",chkinside_setSeat.isChecked());
-				mp.put("inside_brakePedal",chkinside_brakePedal.isChecked());
-				mp.put("inside_accelerator",chkinside_accelerator.isChecked());
-				mp.put("inside_handBrake",chkinside_handBrake.isChecked());
-				
-				save(mp);
-		    }
-		});
-		TextView interior = (TextView) interiordialog.getWindow().findViewById(R.id.Interior);
+		interiordialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						headinterior.setVisibility(ImageView.VISIBLE);
+						TranslateAnimation slideoutheadinterior = new TranslateAnimation(
+								0, 0, 180, 800);
+						slideoutheadinterior.setDuration(500);
+						slideoutheadinterior.setFillAfter(true);
+						headinterior.startAnimation(slideoutheadinterior);
+
+						Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+						mp.put("inside_seat", chkinside_seat.isChecked());
+						mp.put("inside_console", chkinside_console.isChecked());
+						mp.put("inside_steeringWheel",
+								chkinside_steeringWheel.isChecked());
+						mp.put("inside_transmission",
+								chkinside_transmission.isChecked());
+						mp.put("inside_sideDoors",
+								chkinside_sideDoors.isChecked());
+						mp.put("inside_dashBoard",
+								chkinside_dashBoard.isChecked());
+						mp.put("inside_carpet", chkinside_carpet.isChecked());
+						mp.put("inside_curtain", chkinside_curtain.isChecked());
+						mp.put("inside_seatBelt",
+								chkinside_seatBelt.isChecked());
+						mp.put("inside_backDoor",
+								chkinside_backDoor.isChecked());
+						mp.put("inside_lidOil", chkinside_lidOil.isChecked());
+						mp.put("inside_setSeat", chkinside_setSeat.isChecked());
+						mp.put("inside_brakePedal",
+								chkinside_brakePedal.isChecked());
+						mp.put("inside_accelerator",
+								chkinside_accelerator.isChecked());
+						mp.put("inside_handBrake",
+								chkinside_handBrake.isChecked());
+
+						save(mp);
+					}
+				});
+		TextView interior = (TextView) interiordialog.getWindow().findViewById(
+				R.id.Interior);
 		interior.setTypeface(type);
-		Button interiorback = (Button) interiordialog.getWindow().findViewById(R.id.Interiorback);
+		Button interiorback = (Button) interiordialog.getWindow().findViewById(
+				R.id.Interiorback);
 		interiorback.setTypeface(type);
 		interiorback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				interiordialog.dismiss();
-				
-				headinterior.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadinterior = new TranslateAnimation(0, 0, 180 ,800 );   
-			    slideoutheadinterior.setDuration(500);   
-			    slideoutheadinterior.setFillAfter(true);   
-			    headinterior.startAnimation(slideoutheadinterior);    
 
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-	               
-				mp.put("inside_seat",chkinside_seat.isChecked());
-				mp.put("inside_console",chkinside_console.isChecked());
-				mp.put("inside_steeringWheel",chkinside_steeringWheel.isChecked());
-				mp.put("inside_transmission",chkinside_transmission.isChecked());
-				mp.put("inside_sideDoors",chkinside_sideDoors.isChecked());
-				mp.put("inside_dashBoard",chkinside_dashBoard.isChecked());
-				mp.put("inside_carpet",chkinside_carpet.isChecked());
-				mp.put("inside_curtain",chkinside_curtain.isChecked());
-				mp.put("inside_seatBelt",chkinside_seatBelt.isChecked());
-				mp.put("inside_backDoor",chkinside_backDoor.isChecked());
-				mp.put("inside_lidOil",chkinside_lidOil.isChecked());
-				mp.put("inside_setSeat",chkinside_setSeat.isChecked());
-				mp.put("inside_brakePedal",chkinside_brakePedal.isChecked());
-				mp.put("inside_accelerator",chkinside_accelerator.isChecked());
-				mp.put("inside_handBrake",chkinside_handBrake.isChecked());
-				
+				interiordialog.dismiss();
+
+				headinterior.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheadinterior = new TranslateAnimation(
+						0, 0, 180, 800);
+				slideoutheadinterior.setDuration(500);
+				slideoutheadinterior.setFillAfter(true);
+				headinterior.startAnimation(slideoutheadinterior);
+
+				Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+				mp.put("inside_seat", chkinside_seat.isChecked());
+				mp.put("inside_console", chkinside_console.isChecked());
+				mp.put("inside_steeringWheel",
+						chkinside_steeringWheel.isChecked());
+				mp.put("inside_transmission",
+						chkinside_transmission.isChecked());
+				mp.put("inside_sideDoors", chkinside_sideDoors.isChecked());
+				mp.put("inside_dashBoard", chkinside_dashBoard.isChecked());
+				mp.put("inside_carpet", chkinside_carpet.isChecked());
+				mp.put("inside_curtain", chkinside_curtain.isChecked());
+				mp.put("inside_seatBelt", chkinside_seatBelt.isChecked());
+				mp.put("inside_backDoor", chkinside_backDoor.isChecked());
+				mp.put("inside_lidOil", chkinside_lidOil.isChecked());
+				mp.put("inside_setSeat", chkinside_setSeat.isChecked());
+				mp.put("inside_brakePedal", chkinside_brakePedal.isChecked());
+				mp.put("inside_accelerator", chkinside_accelerator.isChecked());
+				mp.put("inside_handBrake", chkinside_handBrake.isChecked());
+
 				save(mp);
-				
+
 			}
 		});
-		
+
 		chkinside_seat.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1902,18 +2117,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_console.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1921,18 +2137,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_steeringWheel.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1940,18 +2157,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_transmission.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1959,18 +2177,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_sideDoors.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1978,18 +2197,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_dashBoard.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1997,18 +2217,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_carpet.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2016,18 +2237,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_curtain.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2035,18 +2257,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_seatBelt.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2054,18 +2277,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_backDoor.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2073,18 +2297,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_lidOil.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2092,18 +2317,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_setSeat.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2111,18 +2337,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_brakePedal.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2130,18 +2357,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_accelerator.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2149,18 +2377,19 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkinside_handBrake.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -2168,31 +2397,35 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalInterior(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalInterior(increment);
 				}
 				InteriorProgress.setProgress(PercenInterior);
 				perceninterior.setText("" + PercenInterior + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
-		headinterior.setVisibility(ImageView.VISIBLE);  
-	    TranslateAnimation slideheadinterior = new TranslateAnimation(0, 0, 800,180 );   
-	    slideheadinterior.setDuration(500);   
-	    slideheadinterior.setFillAfter(true); 
-	    headinterior.startAnimation(slideheadinterior); 
+
+		headinterior.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideheadinterior = new TranslateAnimation(0, 0,
+				800, 180);
+		slideheadinterior.setDuration(500);
+		slideheadinterior.setFillAfter(true);
+		headinterior.startAnimation(slideheadinterior);
 
 		interiordialog.show();
-		
-		WindowManager.LayoutParams params = interiordialog.getWindow().getAttributes();
-		params.y = 180; params.x = 60;
-		params.gravity = Gravity.TOP | Gravity.LEFT;       
-		interiordialog.getWindow().setAttributes(params); 
-		
+
+		WindowManager.LayoutParams params = interiordialog.getWindow()
+				.getAttributes();
+		params.y = 180;
+		params.x = 60;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
+		interiordialog.getWindow().setAttributes(params);
+
 		chkinside_seat.setChecked(load("inside_seat"));
 		chkinside_console.setChecked(load("inside_console"));
 		chkinside_steeringWheel.setChecked(load("inside_steeringWheel"));
@@ -2208,32 +2441,44 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkinside_brakePedal.setChecked(load("inside_brakePedal"));
 		chkinside_accelerator.setChecked(load("inside_accelerator"));
 		chkinside_handBrake.setChecked(load("inside_handBrake"));
-	
+
 	}
-	
-	private void SlideDocumentLayout() {	
+
+	private void SlideDocumentLayout() {
 		final SharedPreferences settings = getSharedPreferences("mysettings", 0);
 		final SharedPreferences.Editor editor = settings.edit();
-	    final Dialog documentdialog = new Dialog(CarCheckListActivity.this, R.style.backgrounddialog);
-		documentdialog.requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		final Dialog documentdialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
+		documentdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		documentdialog.setContentView(R.layout.documentdialoglayout);
 		documentdialog.getWindow().getAttributes().windowAnimations = R.style.DocumentDialogAnimation;
-		documentdialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		// make everything around Dialog brightness than default  
-		WindowManager.LayoutParams lp = documentdialog.getWindow().getAttributes();
+		documentdialog.getWindow().setBackgroundDrawable(
+				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		// make everything around Dialog brightness than default
+		WindowManager.LayoutParams lp = documentdialog.getWindow()
+				.getAttributes();
 		lp.dimAmount = 0f;
-		
-		final CheckBox chkinsurance = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_insurance);
-		final CheckBox chkactTaxLabel = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_actTaxLabel);
-		final CheckBox chkbill = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_bill);
-		final CheckBox chklicensePlate = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_licensePlate);
-		final CheckBox chklicenseManual = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_licenseManual);
-		final CheckBox chkcarPartPaper = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_carPartPaper);
-		final CheckBox chkcarManual = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_carManual);
-		final CheckBox chklicenseRegister = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_licenseRegister);
-		final CheckBox chkgift = (CheckBox) documentdialog.getWindow().findViewById(R.id.doc_gift);
-		
-		//Change font
+
+		final CheckBox chkinsurance = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_insurance);
+		final CheckBox chkactTaxLabel = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_actTaxLabel);
+		final CheckBox chkbill = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_bill);
+		final CheckBox chklicensePlate = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_licensePlate);
+		final CheckBox chklicenseManual = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_licenseManual);
+		final CheckBox chkcarPartPaper = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_carPartPaper);
+		final CheckBox chkcarManual = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_carManual);
+		final CheckBox chklicenseRegister = (CheckBox) documentdialog
+				.getWindow().findViewById(R.id.doc_licenseRegister);
+		final CheckBox chkgift = (CheckBox) documentdialog.getWindow()
+				.findViewById(R.id.doc_gift);
+
+		// Change font
 		chkinsurance.setTypeface(type);
 		chkactTaxLabel.setTypeface(type);
 		chkbill.setTypeface(type);
@@ -2243,71 +2488,76 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		chkcarManual.setTypeface(type);
 		chklicenseRegister.setTypeface(type);
 		chkgift.setTypeface(type);
-		
+
 		documentdialog.setCanceledOnTouchOutside(true);
-		documentdialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-			{
-				
-				@Override
-			    public void onCancel(DialogInterface dialog)
-			    {
-			    	
-			    	headdocument.setVisibility(ImageView.VISIBLE);  
-				    TranslateAnimation slideoutheaddocument = new TranslateAnimation(0, 0, 350,800 );   
-				    slideoutheaddocument.setDuration(500);   
-				    slideoutheaddocument.setFillAfter(true);   
-				    headdocument.startAnimation(slideoutheaddocument); 
-					
-			        Map<String,Boolean> mp=new HashMap<String, Boolean>();
-			               
-					mp.put("doc_insurance",chkinsurance.isChecked());
-					mp.put("doc_actTaxLabel",chkactTaxLabel.isChecked());
-					mp.put("doc_bill",chkbill.isChecked());
-					mp.put("doc_licensePlate",chklicensePlate.isChecked());
-					mp.put("doc_licenseManual",chklicenseManual.isChecked());
-					mp.put("doc_carPartPaper",chkcarPartPaper.isChecked());
-					mp.put("doc_carManual",chkcarManual.isChecked());
-					mp.put("doc_licenseRegister",chklicenseRegister.isChecked());
-					mp.put("doc_gift",chkgift.isChecked());
-			       
-					save(mp);
-				            
-			    }
-			});
-		
-		TextView document = (TextView) documentdialog.getWindow().findViewById(R.id.Document);
+		documentdialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+
+						headdocument.setVisibility(ImageView.VISIBLE);
+						TranslateAnimation slideoutheaddocument = new TranslateAnimation(
+								0, 0, 350, 800);
+						slideoutheaddocument.setDuration(500);
+						slideoutheaddocument.setFillAfter(true);
+						headdocument.startAnimation(slideoutheaddocument);
+
+						Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+						mp.put("doc_insurance", chkinsurance.isChecked());
+						mp.put("doc_actTaxLabel", chkactTaxLabel.isChecked());
+						mp.put("doc_bill", chkbill.isChecked());
+						mp.put("doc_licensePlate", chklicensePlate.isChecked());
+						mp.put("doc_licenseManual",
+								chklicenseManual.isChecked());
+						mp.put("doc_carPartPaper", chkcarPartPaper.isChecked());
+						mp.put("doc_carManual", chkcarManual.isChecked());
+						mp.put("doc_licenseRegister",
+								chklicenseRegister.isChecked());
+						mp.put("doc_gift", chkgift.isChecked());
+
+						save(mp);
+
+					}
+				});
+
+		TextView document = (TextView) documentdialog.getWindow().findViewById(
+				R.id.Document);
 		document.setTypeface(type);
-		Button documentback = (Button) documentdialog.getWindow().findViewById(R.id.Documentback);
+		Button documentback = (Button) documentdialog.getWindow().findViewById(
+				R.id.Documentback);
 		documentback.setTypeface(type);
 		documentback.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View v) {	
-				
-				documentdialog.dismiss();
-				
-				headdocument.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheaddocument = new TranslateAnimation(0, 0, 350,800 );   
-			    slideoutheaddocument.setDuration(500);   
-			    slideoutheaddocument.setFillAfter(true);   
-			    headdocument.startAnimation(slideoutheaddocument); 
+			public void onClick(View v) {
 
-			    Map<String,Boolean> mp=new HashMap<String, Boolean>();
-		        
-				mp.put("doc_insurance",chkinsurance.isChecked());
-				mp.put("doc_actTaxLabel",chkactTaxLabel.isChecked());
-				mp.put("doc_bill",chkbill.isChecked());
-				mp.put("doc_licensePlate",chklicensePlate.isChecked());
-				mp.put("doc_licenseManual",chklicenseManual.isChecked());
-				mp.put("doc_carPartPaper",chkcarPartPaper.isChecked());
-				mp.put("doc_carManual",chkcarManual.isChecked());
-				mp.put("doc_licenseRegister",chklicenseRegister.isChecked());
-				mp.put("doc_gift",chkgift.isChecked());
-				
-			    save(mp);	
-				
+				documentdialog.dismiss();
+
+				headdocument.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheaddocument = new TranslateAnimation(
+						0, 0, 350, 800);
+				slideoutheaddocument.setDuration(500);
+				slideoutheaddocument.setFillAfter(true);
+				headdocument.startAnimation(slideoutheaddocument);
+
+				Map<String, Boolean> mp = new HashMap<String, Boolean>();
+
+				mp.put("doc_insurance", chkinsurance.isChecked());
+				mp.put("doc_actTaxLabel", chkactTaxLabel.isChecked());
+				mp.put("doc_bill", chkbill.isChecked());
+				mp.put("doc_licensePlate", chklicensePlate.isChecked());
+				mp.put("doc_licenseManual", chklicenseManual.isChecked());
+				mp.put("doc_carPartPaper", chkcarPartPaper.isChecked());
+				mp.put("doc_carManual", chkcarManual.isChecked());
+				mp.put("doc_licenseRegister", chklicenseRegister.isChecked());
+				mp.put("doc_gift", chkgift.isChecked());
+
+				save(mp);
+
 			}
-			
+
 		});
 
 		chkinsurance.setOnClickListener(new OnClickListener() {
@@ -2317,222 +2567,255 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkactTaxLabel.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkbill.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chklicensePlate.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chklicenseManual.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkcarPartPaper.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkcarManual.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chklicenseRegister.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
+
 		chkgift.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				boolean increment = true;
 				if (((CheckBox) v).isChecked()) {
 					getTotalDocument(increment);
-				} else { 
+				} else {
 					increment = false;
 					getTotalDocument(increment);
 				}
 				DocumentProgress.setProgress(PercenDocument);
 				percendocument.setText("" + PercenDocument + "%");
 				RatioProgress.setProgress(PercenRatio);
-				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
 				CheckRatio();
 			}
 		});
-		
-		headdocument.setVisibility(ImageView.VISIBLE);  
-	    TranslateAnimation slideheaddocument = new TranslateAnimation(0, 0, 800,350 );   
-	    slideheaddocument.setDuration(500);   
-	    slideheaddocument.setFillAfter(true); 
-	    headdocument.startAnimation(slideheaddocument); 
+
+		headdocument.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideheaddocument = new TranslateAnimation(0, 0,
+				800, 350);
+		slideheaddocument.setDuration(500);
+		slideheaddocument.setFillAfter(true);
+		headdocument.startAnimation(slideheaddocument);
 
 		documentdialog.show();
-		
-		WindowManager.LayoutParams params = documentdialog.getWindow().getAttributes();
-		params.y = 350; params.x = 60;
-		params.gravity = Gravity.TOP | Gravity.LEFT;       
+
+		WindowManager.LayoutParams params = documentdialog.getWindow()
+				.getAttributes();
+		params.y = 350;
+		params.x = 60;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
 		documentdialog.getWindow().setAttributes(params);
 
 		chkinsurance.setChecked(load("doc_insurance"));
-	    chkactTaxLabel.setChecked(load("doc_actTaxLabel"));
-	    chkbill.setChecked(load("doc_bill"));
-	    chklicensePlate.setChecked(load("doc_licensePlate"));
-	    chklicenseManual.setChecked(load("doc_licenseManual"));
-	    chkcarPartPaper.setChecked(load("doc_carPartPaper"));
-	    chkcarManual.setChecked(load("doc_carManual"));
-	    chklicenseRegister.setChecked(load("doc_licenseRegister"));
+		chkactTaxLabel.setChecked(load("doc_actTaxLabel"));
+		chkbill.setChecked(load("doc_bill"));
+		chklicensePlate.setChecked(load("doc_licensePlate"));
+		chklicenseManual.setChecked(load("doc_licenseManual"));
+		chkcarPartPaper.setChecked(load("doc_carPartPaper"));
+		chkcarManual.setChecked(load("doc_carManual"));
+		chklicenseRegister.setChecked(load("doc_licenseRegister"));
 		chkgift.setChecked(load("doc_gift"));
 
 	}
-	
+
 	private void SlideSettingLayout() {
-		final SharedPreferences  mSharedPrefs = getSharedPreferences("mysettings", 0);
-		final Dialog settingdialog = new Dialog(CarCheckListActivity.this, R.style.backgrounddialog);
-		settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		final SharedPreferences mSharedPrefs = getSharedPreferences(
+				"mysettings", 0);
+		final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
+		settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		settingdialog.setContentView(R.layout.settingdialoglayout);
-		
-		final SeekBar powerseekbar = (SeekBar) settingdialog.getWindow().findViewById(R.id.Powerbar);
-		final SeekBar engineseekbar = (SeekBar) settingdialog.getWindow().findViewById(R.id.Enginebar);
-		final SeekBar exteriorseekbar = (SeekBar) settingdialog.getWindow().findViewById(R.id.Exteriorbar);
-		final SeekBar interiorseekbar = (SeekBar) settingdialog.getWindow().findViewById(R.id.Interiorbar);
-		final SeekBar documentseekbar = (SeekBar) settingdialog.getWindow().findViewById(R.id.Documentbar);
-		
-		TextView setting = (TextView) settingdialog.getWindow().findViewById(R.id.Setting);
-		TextView priority = (TextView) settingdialog.getWindow().findViewById(R.id.Priority);
-		TextView low = (TextView) settingdialog.getWindow().findViewById(R.id.Low);
-		TextView high = (TextView) settingdialog.getWindow().findViewById(R.id.High);
-		TextView textexterior = (TextView) settingdialog.getWindow().findViewById(R.id.textexterior);
-		TextView textinterior = (TextView) settingdialog.getWindow().findViewById(R.id.textinterior);
-		TextView textpower = (TextView) settingdialog.getWindow().findViewById(R.id.textpower);
-		TextView textengine = (TextView) settingdialog.getWindow().findViewById(R.id.textengine);
-		TextView textdocument = (TextView) settingdialog.getWindow().findViewById(R.id.textdocument);
-		TextView one = (TextView) settingdialog.getWindow().findViewById(R.id.one);
-		TextView two = (TextView) settingdialog.getWindow().findViewById(R.id.two);
-		TextView three = (TextView) settingdialog.getWindow().findViewById(R.id.three);
-		TextView four = (TextView) settingdialog.getWindow().findViewById(R.id.four);
-		TextView five = (TextView) settingdialog.getWindow().findViewById(R.id.five);
-		
+
+		final SeekBar powerseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Powerbar);
+		final SeekBar engineseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Enginebar);
+		final SeekBar exteriorseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Exteriorbar);
+		final SeekBar interiorseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Interiorbar);
+		final SeekBar documentseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Documentbar);
+
+		TextView setting = (TextView) settingdialog.getWindow().findViewById(
+				R.id.Setting);
+		TextView priority = (TextView) settingdialog.getWindow().findViewById(
+				R.id.Priority);
+		TextView low = (TextView) settingdialog.getWindow().findViewById(
+				R.id.Low);
+		TextView high = (TextView) settingdialog.getWindow().findViewById(
+				R.id.High);
+		TextView textexterior = (TextView) settingdialog.getWindow()
+				.findViewById(R.id.textexterior);
+		TextView textinterior = (TextView) settingdialog.getWindow()
+				.findViewById(R.id.textinterior);
+		TextView textpower = (TextView) settingdialog.getWindow().findViewById(
+				R.id.textpower);
+		TextView textengine = (TextView) settingdialog.getWindow()
+				.findViewById(R.id.textengine);
+		TextView textdocument = (TextView) settingdialog.getWindow()
+				.findViewById(R.id.textdocument);
+		TextView one = (TextView) settingdialog.getWindow().findViewById(
+				R.id.one);
+		TextView two = (TextView) settingdialog.getWindow().findViewById(
+				R.id.two);
+		TextView three = (TextView) settingdialog.getWindow().findViewById(
+				R.id.three);
+		TextView four = (TextView) settingdialog.getWindow().findViewById(
+				R.id.four);
+		TextView five = (TextView) settingdialog.getWindow().findViewById(
+				R.id.five);
+
 		setting.setTypeface(type);
 		priority.setTypeface(type);
 		low.setTypeface(type);
@@ -2547,30 +2830,33 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		three.setTypeface(type);
 		four.setTypeface(type);
 		five.setTypeface(type);
-		
+
 		settingdialog.getWindow().getAttributes().windowAnimations = R.style.SettingDialogAnimation;
-		settingdialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		// make everything around Dialog brightness than default  
-		WindowManager.LayoutParams lp = settingdialog.getWindow().getAttributes();
+		settingdialog.getWindow().setBackgroundDrawable(
+				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		// make everything around Dialog brightness than default
+		WindowManager.LayoutParams lp = settingdialog.getWindow()
+				.getAttributes();
 		lp.dimAmount = 0f;
 		settingdialog.setCanceledOnTouchOutside(true);
-		settingdialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-			{
-				
-				@Override
-			    public void onCancel(DialogInterface dialog)
-			    {
-			    	
-			    	headsetting.setVisibility(ImageView.VISIBLE);  
-				    TranslateAnimation slideoutheadsetting = new TranslateAnimation(0, 0, 0,-430 );   
-				    slideoutheadsetting.setDuration(500);   
-				    slideoutheadsetting.setFillAfter(true);   
-				    headsetting.startAnimation(slideoutheadsetting); 
-				            
-			    }
-			});
-		
-		Button btnsave = (Button) settingdialog.getWindow().findViewById(R.id.save);
+		settingdialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+
+						headsetting.setVisibility(ImageView.VISIBLE);
+						TranslateAnimation slideoutheadsetting = new TranslateAnimation(
+								0, 0, 0, -468);
+						slideoutheadsetting.setDuration(500);
+						slideoutheadsetting.setFillAfter(true);
+						headsetting.startAnimation(slideoutheadsetting);
+
+					}
+				});
+
+		Button btnsave = (Button) settingdialog.getWindow().findViewById(
+				R.id.save);
 		btnsave.setTypeface(type);
 		btnsave.setOnClickListener(new OnClickListener() {
 
@@ -2578,79 +2864,87 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			public void onClick(View v) {
 
 				settingdialog.dismiss();
-				
-				headsetting.setVisibility(ImageView.VISIBLE);  
-			    TranslateAnimation slideoutheadsetting = new TranslateAnimation(0, 0, 0,-430 );   
-			    slideoutheadsetting.setDuration(500);   
-			    slideoutheadsetting.setFillAfter(true);   
-			    headsetting.startAnimation(slideoutheadsetting); 
-			    
-			    powerseekbarValue = powerseekbar.getProgress();
+
+				headsetting.setVisibility(ImageView.VISIBLE);
+				TranslateAnimation slideoutheadsetting = new TranslateAnimation(
+						0, 0, 0, -468);
+				slideoutheadsetting.setDuration(500);
+				slideoutheadsetting.setFillAfter(true);
+				headsetting.startAnimation(slideoutheadsetting);
+
+				powerseekbarValue = powerseekbar.getProgress();
 				engineseekbarValue = engineseekbar.getProgress();
 				exteriorseekbarValue = exteriorseekbar.getProgress();
 				interiorseekbarValue = interiorseekbar.getProgress();
 				documentseekbarValue = documentseekbar.getProgress();
-				
+
 				Priority();
-								
-					Editor seekbar = mSharedPrefs.edit();
-					seekbar.putInt("Powerbar",powerseekbarValue).commit();
-					seekbar.putInt("Enginebar",engineseekbarValue).commit();
-					seekbar.putInt("Exteriorbar",exteriorseekbarValue).commit();
-					seekbar.putInt("Interiorbar",interiorseekbarValue).commit();
-					seekbar.putInt("Documentbar",documentseekbarValue).commit();	
-					
-					RatioProgress.setProgress(PercenRatio);
-					Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
-					CheckRatio();
+
+				Editor seekbar = mSharedPrefs.edit();
+				seekbar.putInt("Powerbar", powerseekbarValue).commit();
+				seekbar.putInt("Enginebar", engineseekbarValue).commit();
+				seekbar.putInt("Exteriorbar", exteriorseekbarValue).commit();
+				seekbar.putInt("Interiorbar", interiorseekbarValue).commit();
+				seekbar.putInt("Documentbar", documentseekbarValue).commit();
+
+				RatioProgress.setProgress(PercenRatio);
+				Ratiotext.setText("Rating of the Vehicle.   " + PercenRatio
+						+ "  %");
+				CheckRatio();
 			}
-	});
-		
-		Button btnreset = (Button) settingdialog.getWindow().findViewById(R.id.reset);
+		});
+
+		Button btnreset = (Button) settingdialog.getWindow().findViewById(
+				R.id.reset);
 		btnreset.setTypeface(type);
 		btnreset.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				
-				AlertDialog alertDialog = new AlertDialog.Builder(CarCheckListActivity.this)
-			    .setTitle("Reset")
-				.setMessage("Do you really want to clear data?")
-				    .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				            // do nothing
-				        }
-				     })
-				    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				        	 Intent intent = getIntent();
-				        	 SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-				         	 sharedPreferences.edit().clear().commit();
-				         	 getIntent().removeExtra("power"); 
-				         	 getIntent().removeExtra("engine"); 
-				         	 getIntent().removeExtra("exterior");
-				         	 getIntent().removeExtra("interior"); 
-				         	 getIntent().removeExtra("document"); 
-				         	 
-				             startActivity(intent);
-				             finish();
 
-				        }
-				     })
-				     .show();
+				AlertDialog alertDialog = new AlertDialog.Builder(
+						CarCheckListActivity.this)
+						.setTitle("Reset")
+						.setMessage("Do you really want to clear data?")
+						.setPositiveButton("Cancel",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// do nothing
+									}
+								})
+						.setNegativeButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										Intent intent = getIntent();
+										SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+										sharedPreferences.edit().clear()
+												.commit();
+										getIntent().removeExtra("power");
+										getIntent().removeExtra("engine");
+										getIntent().removeExtra("exterior");
+										getIntent().removeExtra("interior");
+										getIntent().removeExtra("document");
+										finish();
+										startActivity(intent);
+									}
+								}).show();
 			}
-			});
-		
-		Button btnChangeLanguage = (Button) settingdialog.getWindow().findViewById(R.id.change_language);
+		});
+
+		Button btnChangeLanguage = (Button) settingdialog.getWindow()
+				.findViewById(R.id.change_language);
 		btnChangeLanguage.setTypeface(type);
 		btnChangeLanguage.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-					
-				Intent myIntent = new Intent(CarCheckListActivity.this, ChangeLanguage.class);
-				
-				//th
+
+				Intent myIntent = new Intent(CarCheckListActivity.this,
+						ChangeLanguage.class);
+
+				// th
 				myIntent.putExtra("power", PercenPower);
 				myIntent.putExtra("engine", PercenEngine);
 				myIntent.putExtra("exterior", PercenExterior);
@@ -2661,372 +2955,439 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				myIntent.putExtra("numexterior", CheckExteriorTotal);
 				myIntent.putExtra("numinterior", CheckInteriorTotal);
 				myIntent.putExtra("numdocument", CheckDocumentTotal);
-				
+
 				CarCheckListActivity.this.startActivity(myIntent);
 				finish();
 			}
-			});
+		});
+
+		Button btnRecord = (Button) settingdialog.getWindow()
+				.findViewById(R.id.record);
+		btnRecord.setTypeface(type);
 		
-		headsetting.setVisibility(ImageView.VISIBLE);  
-	    TranslateAnimation slideheadsetting = new TranslateAnimation(0, 0, -420,0 );   
-	    slideheadsetting.setDuration(500);   
-	    slideheadsetting.setFillAfter(true); 
-	    headsetting.startAnimation(slideheadsetting); 
+		btnRecord.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				//Log.d("btnRecord", "record onClick");
+				Intent i = new Intent(getApplicationContext(), RecordActivity.class);
+				CarCheckListActivity.this.startActivity(i);
+				finish();				
+			}
+		});
+		
+		Button btnList = (Button) settingdialog.getWindow()
+				.findViewById(R.id.list);
+		btnList.setTypeface(type);	
+		
+		btnList.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				
+			}
+		});
+		
+		headsetting.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideheadsetting = new TranslateAnimation(0, 0,
+				-468, 0);
+		slideheadsetting.setDuration(500);
+		slideheadsetting.setFillAfter(true);
+		headsetting.startAnimation(slideheadsetting);
 
 		settingdialog.show();
-		
-		WindowManager.LayoutParams params = settingdialog.getWindow().getAttributes();
-		params.y = 0; params.x = 60;
-		params.gravity = Gravity.TOP | Gravity.LEFT;       
+
+		WindowManager.LayoutParams params = settingdialog.getWindow()
+				.getAttributes();
+		params.y = 0;
+		params.x = 60;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
 		settingdialog.getWindow().setAttributes(params);
-		
+
 		powerseekbar.setProgress(powerseekbarValue);
 		engineseekbar.setProgress(engineseekbarValue);
 		exteriorseekbar.setProgress(exteriorseekbarValue);
 		interiorseekbar.setProgress(interiorseekbarValue);
 		documentseekbar.setProgress(documentseekbarValue);
-		
+
 	}
-	
-	
+
 	private void save(Map<String, Boolean> mp) {
-	    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-	    SharedPreferences.Editor editor = sharedPreferences.edit();
-	    for (Map.Entry<String, Boolean> entry : mp.entrySet()) {
-	    editor.putBoolean(entry.getKey(), entry.getValue());
-	    
-//	    Log.d("Key", "" + entry.getKey());
+		SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		for (Map.Entry<String, Boolean> entry : mp.entrySet()) {
+			editor.putBoolean(entry.getKey(), entry.getValue());
 
-	    editor.commit();
-	    
-	    }
-	}
-	
-	private boolean load(String checkboxName) { 
-	    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-	    return sharedPreferences.getBoolean(checkboxName, false);	   	
-	}
-		 	
-	private void DisplayToast(String msg) {
-		    Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
-		  }
-	 
-	 public void getTotalDocument(boolean increment) {
+			// Log.d("Key", "" + entry.getKey());
 
-		 if (increment)
-			 CheckDocumentTotal = CheckDocumentTotal+1;
-		 
-		 else
-			 CheckDocumentTotal = CheckDocumentTotal-1;
-		 
-		 Log.d("check total = ","" + CheckDocumentTotal);		 
-		   
-		 PercenDocument();
-		 Checknumcheckbox();
-		 
-		 }
-	  
-		public void PercenDocument() {
-			PercenDocument = (CheckDocumentTotal * 100)/9;
-			Log.d("check persen = ","" + PercenDocument);
-			Priority();
+			editor.commit();
+
 		}
-		
-	 public void getTotalInterior(boolean increment) {
+	}
 
-			 if (increment)
-				 CheckInteriorTotal = CheckInteriorTotal+1;
-			 
-			 else
-				 CheckInteriorTotal = CheckInteriorTotal-1;
-			 
-			 Log.d("check total = ","" + CheckInteriorTotal);		 
-			   
-			 PercenInterior();
-			 Checknumcheckbox();
-			 
-			 }
-		  
-		public void PercenInterior() {
-				PercenInterior = (CheckInteriorTotal * 100)/15;
-				Log.d("check persen = ","" + PercenInterior);
-				Priority();
-			}
-		
-	 public void getTotalExterior(boolean increment) {
+	private boolean load(String checkboxName) {
+		SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+		return sharedPreferences.getBoolean(checkboxName, false);
+	}
 
-			 if (increment)
-				 CheckExteriorTotal = CheckExteriorTotal+1;
-			 
-			 else
-				 CheckExteriorTotal = CheckExteriorTotal-1;
-			 
-			 Log.d("check total = ","" + CheckExteriorTotal);		 
-			   
-			 PercenExterior();
-			 Checknumcheckbox();
-			 
-			 }
-		 
-	 	public void PercenExterior() {
-				PercenExterior = (CheckExteriorTotal * 100)/9;
-				Log.d("check persen = ","" + PercenExterior);
-				Priority();
-			}
+	private void DisplayToast(String msg) {
+		Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
+	}
 
-	 public void getTotalEngine(boolean increment) {
+	public void getTotalDocument(boolean increment) {
 
-			 if (increment)
-				 CheckEngineTotal = CheckEngineTotal+1;
-			 
-			 else
-				 CheckEngineTotal = CheckEngineTotal-1;
-			 
-			 Log.d("check total = ","" + CheckEngineTotal);		 
-			   
-			 PercenEngine();
-			 Checknumcheckbox();
-			 
-			 }
-		 
-	 	public void PercenEngine() {
-				PercenEngine = (CheckEngineTotal * 100)/11;
-				Log.d("check persen = ","" + PercenEngine);
-				Priority();
-			}
-		 
-	 public void getTotalPower(boolean increment) {
+		if (increment)
+			CheckDocumentTotal = CheckDocumentTotal + 1;
 
-			 if (increment)
-				 CheckPowerTotal = CheckPowerTotal+1;
-			 
-			 else
-				 CheckPowerTotal = CheckPowerTotal-1;
-			 
-//			 Log.d("check total = ","" + CheckPowerTotal);		 
-			   
-			 PercenPower();
-			 Checknumcheckbox();
-			 
-			 }
-		 
-	 	public void PercenPower() {
-	 			PercenPower = (CheckPowerTotal * 100)/27;
-//				Log.d("check percen = ","" + PercenPower);
-	 			Priority();
-			}
-	 	
-	 	public void Checknumcheckbox() {
-	 		Checknum = CheckPowerTotal + CheckEngineTotal + CheckExteriorTotal + CheckInteriorTotal + CheckDocumentTotal;
-	 	}
-	 	
-	 	public void Priority() {
-	 		int sumpower = powerseekbarValue + 1;
-	 		int sumengine = engineseekbarValue + 1;
-	 		int sumexterior = exteriorseekbarValue + 1;
-	 		int suminterior = interiorseekbarValue + 1;
-	 		int sumdocument = documentseekbarValue + 1;
-	 		
-	 		sumPriority = sumpower + sumengine + sumexterior + suminterior + sumdocument;
-	 		
-	 		PowerPriority = sumpower*PercenPower;
-	 		EnginePriority = sumengine*PercenEngine;
-	 		ExteriorPriority = sumexterior*PercenExterior;
-	 		InteriorPriority = suminterior*PercenInterior;
-	 		DocumentPriority = sumdocument*PercenDocument;
-	 		
-	 		PercenRatio();
-	 		
-	 	}
-	 	public void PercenRatio() {
-	 		
-	 		PercenRatio = (PowerPriority + EnginePriority + ExteriorPriority + InteriorPriority + DocumentPriority)/sumPriority;
-	 		
-	 		Log.d("persenRatio","" + PercenRatio);
-	 		
-	 	}	 		
+		else
+			CheckDocumentTotal = CheckDocumentTotal - 1;
 
-	 	public void CheckRatio() {
-	 		if (Checknum > 0) {
-	 			Ratiotext.setVisibility(TextView.VISIBLE);
-	 			RatioProgress.setVisibility(ProgressBar.VISIBLE);
-			} else { 
-				Ratiotext.setVisibility(TextView.INVISIBLE);
-				RatioProgress.setVisibility(ProgressBar.INVISIBLE);
-			}
-	 	}
-	 	
-	 	public void getprogressValue() {
-	 		DocumentProgress.setProgress(documentprogressValue);
-	 	}
+		Log.d("check total = ", "" + CheckDocumentTotal);
 
-		
-//		// addMob
-//		LinearLayout layout = (LinearLayout) findViewById(R.id.admob);
-//		AdView adView = new AdView(this, AdSize.BANNER, admonId);
-//		// Add the adView to it
-//		layout.addView(adView);
-//		// Initiate a generic request to load it with an ad
-//		AdRequest request = new AdRequest();
-//		adView.loadAd(request);
-//	    
-//		DisplayMetrics displayMetrics = new DisplayMetrics();
-//		WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE); // the results will be higher than using the activity context object or the getWindowManager() shortcut
-//		wm.getDefaultDisplay().getMetrics(displayMetrics);
-//		int screenWidth = displayMetrics.widthPixels;
-//		int screenHeight = displayMetrics.heightPixels;
-//		
-//		Log.d("screenWidth", "" + screenWidth); // 1280
-//		Log.d("screenHeight", "" + screenHeight); // 800
-//
-//		browser = (WebView) findViewById(R.id.webkit);
-//
-//		WebSettings webSettings = browser.getSettings();
-//		webSettings.setJavaScriptEnabled(true);
-		
-		
-//		browser.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-		
-//		CookieManager.setAcceptFileSchemeCookies(true); 
-//
-//		CookieManager cookieManager = CookieManager.getInstance(); 
-//		cookieManager.setAcceptCookie(true); cookieManager.acceptCookie();
-//		
-//		browser.setWebViewClient(new WebViewClient() {
-//
-//			public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//				super.onPageStarted(view, url, favicon);
-//				// check if you are on the right URL and parse it
-//			}
-//
-//		});
-//		
-//		if (screenWidth >= 1024 && screenHeight >= 600) {
-//			browser.setInitialScale(100);
-//
-//		} else {
-//			browser.setInitialScale(80);
-//		}
-//
-//		browser.loadUrl("file:///android_asset/splashPage.html");
+		PercenDocument();
+		Checknumcheckbox();
 
-		// AdView adView = new AdView(this, AdSize.BANNER,
-		// getString(R.string.admob));
-		// // Add the adView to it
-		// layout.addView(adView);
-		// // Initiate a generic request to load it with an ad
-		// AdRequest request = new AdRequest();
-		// adView.loadAd(request);
+	}
 
-//}
-		 
-	
+	public void PercenDocument() {
+		PercenDocument = (CheckDocumentTotal * 100) / 9;
+		Log.d("check persen = ", "" + PercenDocument);
+		Priority();
+	}
+
+	public void getTotalInterior(boolean increment) {
+
+		if (increment)
+			CheckInteriorTotal = CheckInteriorTotal + 1;
+
+		else
+			CheckInteriorTotal = CheckInteriorTotal - 1;
+
+		Log.d("check total = ", "" + CheckInteriorTotal);
+
+		PercenInterior();
+		Checknumcheckbox();
+
+	}
+
+	public void PercenInterior() {
+		PercenInterior = (CheckInteriorTotal * 100) / 15;
+		Log.d("check persen = ", "" + PercenInterior);
+		Priority();
+	}
+
+	public void getTotalExterior(boolean increment) {
+
+		if (increment)
+			CheckExteriorTotal = CheckExteriorTotal + 1;
+
+		else
+			CheckExteriorTotal = CheckExteriorTotal - 1;
+
+		Log.d("check total = ", "" + CheckExteriorTotal);
+
+		PercenExterior();
+		Checknumcheckbox();
+
+	}
+
+	public void PercenExterior() {
+		PercenExterior = (CheckExteriorTotal * 100) / 9;
+		Log.d("check persen = ", "" + PercenExterior);
+		Priority();
+	}
+
+	public void getTotalEngine(boolean increment) {
+
+		if (increment)
+			CheckEngineTotal = CheckEngineTotal + 1;
+
+		else
+			CheckEngineTotal = CheckEngineTotal - 1;
+
+		Log.d("check total = ", "" + CheckEngineTotal);
+
+		PercenEngine();
+		Checknumcheckbox();
+
+	}
+
+	public void PercenEngine() {
+		PercenEngine = (CheckEngineTotal * 100) / 11;
+		Log.d("check persen = ", "" + PercenEngine);
+		Priority();
+	}
+
+	public void getTotalPower(boolean increment) {
+
+		if (increment)
+			CheckPowerTotal = CheckPowerTotal + 1;
+
+		else
+			CheckPowerTotal = CheckPowerTotal - 1;
+
+		// Log.d("check total = ","" + CheckPowerTotal);
+
+		PercenPower();
+		Checknumcheckbox();
+
+	}
+
+	public void PercenPower() {
+		PercenPower = (CheckPowerTotal * 100) / 27;
+		// Log.d("check percen = ","" + PercenPower);
+		Priority();
+	}
+
+	public void Checknumcheckbox() {
+		Checknum = CheckPowerTotal + CheckEngineTotal + CheckExteriorTotal
+				+ CheckInteriorTotal + CheckDocumentTotal;
+	}
+
+	public void Priority() {
+		int sumpower = powerseekbarValue + 1;
+		int sumengine = engineseekbarValue + 1;
+		int sumexterior = exteriorseekbarValue + 1;
+		int suminterior = interiorseekbarValue + 1;
+		int sumdocument = documentseekbarValue + 1;
+
+		sumPriority = sumpower + sumengine + sumexterior + suminterior
+				+ sumdocument;
+
+		PowerPriority = sumpower * PercenPower;
+		EnginePriority = sumengine * PercenEngine;
+		ExteriorPriority = sumexterior * PercenExterior;
+		InteriorPriority = suminterior * PercenInterior;
+		DocumentPriority = sumdocument * PercenDocument;
+
+		PercenRatio();
+
+	}
+
+	public void PercenRatio() {
+
+		PercenRatio = (PowerPriority + EnginePriority + ExteriorPriority
+				+ InteriorPriority + DocumentPriority)
+				/ sumPriority;
+
+		Log.d("persenRatio", "" + PercenRatio);
+
+	}
+
+	public void CheckRatio() {
+		if (Checknum > 0) {
+			Ratiotext.setVisibility(TextView.VISIBLE);
+			RatioProgress.setVisibility(ProgressBar.VISIBLE);
+		} else {
+			Ratiotext.setVisibility(TextView.INVISIBLE);
+			RatioProgress.setVisibility(ProgressBar.INVISIBLE);
+		}
+	}
+
+	public void getprogressValue() {
+		DocumentProgress.setProgress(documentprogressValue);
+	}
+
+	// // addMob
+	// LinearLayout layout = (LinearLayout) findViewById(R.id.admob);
+	// AdView adView = new AdView(this, AdSize.BANNER, admonId);
+	// // Add the adView to it
+	// layout.addView(adView);
+	// // Initiate a generic request to load it with an ad
+	// AdRequest request = new AdRequest();
+	// adView.loadAd(request);
+	//
+	// DisplayMetrics displayMetrics = new DisplayMetrics();
+	// WindowManager wm = (WindowManager)
+	// getApplicationContext().getSystemService(Context.WINDOW_SERVICE); // the
+	// results will be higher than using the activity context object or the
+	// getWindowManager() shortcut
+	// wm.getDefaultDisplay().getMetrics(displayMetrics);
+	// int screenWidth = displayMetrics.widthPixels;
+	// int screenHeight = displayMetrics.heightPixels;
+	//
+	// Log.d("screenWidth", "" + screenWidth); // 1280
+	// Log.d("screenHeight", "" + screenHeight); // 800
+	//
+	// browser = (WebView) findViewById(R.id.webkit);
+	//
+	// WebSettings webSettings = browser.getSettings();
+	// webSettings.setJavaScriptEnabled(true);
+
+	// browser.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+	// CookieManager.setAcceptFileSchemeCookies(true);
+	//
+	// CookieManager cookieManager = CookieManager.getInstance();
+	// cookieManager.setAcceptCookie(true); cookieManager.acceptCookie();
+	//
+	// browser.setWebViewClient(new WebViewClient() {
+	//
+	// public void onPageStarted(WebView view, String url, Bitmap favicon) {
+	// super.onPageStarted(view, url, favicon);
+	// // check if you are on the right URL and parse it
+	// }
+	//
+	// });
+	//
+	// if (screenWidth >= 1024 && screenHeight >= 600) {
+	// browser.setInitialScale(100);
+	//
+	// } else {
+	// browser.setInitialScale(80);
+	// }
+	//
+	// browser.loadUrl("file:///android_asset/splashPage.html");
+
+	// AdView adView = new AdView(this, AdSize.BANNER,
+	// getString(R.string.admob));
+	// // Add the adView to it
+	// layout.addView(adView);
+	// // Initiate a generic request to load it with an ad
+	// AdRequest request = new AdRequest();
+	// adView.loadAd(request);
+
+	// }
+
 	private CharSequence Double() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void onAnimationEnd(Animation animation) {
+	}
+
+	public void onAnimationRepeat(Animation animation) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void onAnimationStart(Animation animation) {
+		// TODO Auto-generated method stub
+
+	}
 	
-    public void onAnimationEnd(Animation animation) {
-    }
+	public void menuToggle(int motionin, int motionout, int fragment) {
+		
+		/*final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
+		settingdialog.dismiss();*/
 
-    public void onAnimationRepeat(Animation animation) {
-        // TODO Auto-generated method stub
- 
-    }
- 
-    public void onAnimationStart(Animation animation) {
-        // TODO Auto-generated method stub
- 
-    } 
-    
-    private class MyCustomPanel extends View {
+		new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog).dismiss();
+		
+		headsetting.setVisibility(ImageView.VISIBLE);
+		TranslateAnimation slideoutheadsetting = new TranslateAnimation(
+				0, 0, 0, -468);
+		slideoutheadsetting.setDuration(500);
+		slideoutheadsetting.setFillAfter(true);
+		headsetting.startAnimation(slideoutheadsetting);
+		
+		int prefer = getPreferences(MODE_PRIVATE).getInt("already", 1);
+		if (prefer == 1) {
+			getPreferences(MODE_PRIVATE).edit().putInt("already", 0).commit();
 
-        public MyCustomPanel(Context context) {
-            super(context);
-        }
-        public void draw(Canvas canvas) {
-        	
-        	DisplayMetrics metrics=new DisplayMetrics();
-		    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+			FragmentTransaction ft = getFragmentManager().beginTransaction()
+					.setCustomAnimations(motionin, motionout);
+			FragmentManager fm = getFragmentManager();
+			Fragment fmTarget = fm.findFragmentById(fragment);
+			ft.show(fmTarget);
+			ft.commit();
+		} else {
+			getPreferences(MODE_PRIVATE).edit().putInt("already", 1).commit();
+			FragmentTransaction ft = getFragmentManager().beginTransaction()
+					.setCustomAnimations(motionin, motionout);
+			FragmentManager fm = getFragmentManager();
+			final Fragment fmTarget = fm.findFragmentById(fragment);
+			ft.hide(fmTarget);
+			ft.commit();
+		}
+	}
 
-		    float height = metrics.heightPixels;
-		    float width = metrics.widthPixels;
-		    
-		    int left305 = (int) ((width / 100) * 23.8);  
-		    int left380 = (int) ((width / 100) * 29.6);
-		    int left480 = (int) ((width / 100) * 37.5); 
-		    int left580 = (int) ((width / 100) * 45.3);  
-		    int left585 = (int) ((width / 100) * 45.7);  
-		    int left605 = (int) ((width / 100) * 47.2);  
-		    int left650 = (int) ((width / 100) * 50.7);
-		    int left700 = (int) ((width / 100) * 54.6);  
-		    int left800 = (int) ((width / 100) * 62.5);
-		    int left850 = (int) ((width / 100) * 66.4);  
-		    
-		    int top110 = (int) ((height / 100) * 13.75); 
-		    int top200 = (int) ((height / 100) * 25);
-		    int top210 = (int) ((height / 100) * 26.25);
-		    int top330 = (int) ((height / 100) * 41.25);
-		    int top370 = (int) ((height / 100) * 46.25);
-		    int top410 = (int) ((height / 100) * 51.25);
-		    int top480 = (int) ((height / 100) * 60);
-		    int top570 = (int) ((height / 100) * 71.25);
-            
-            Paint paint = new Paint();
-            paint.setStrokeWidth(1);
-            
-            paint.setColor(Color.rgb(255, 155, 0));
-            canvas.drawLine(left585, top110, left650, top110,paint);
-            canvas.drawLine(left650, top110, left800, top210,paint);
-            
-            paint.setColor(Color.GRAY);
-            canvas.drawLine(left305, top200, left380, top200,paint);
-            canvas.drawLine(left380, top200, left480, top330,paint);
-            
-            paint.setColor(Color.rgb(0, 125, 255));
-            canvas.drawLine(left305, top480, left580, top480,paint);
-            canvas.drawLine(left580, top480, left650, top410,paint);
-            
-            paint.setColor(Color.RED);
-            canvas.drawLine(left605, top570, left700, top570,paint);
-            canvas.drawLine(left700, top570, left850, top370,paint);
-            
-        }
-    }
-	
-    public void onBackPressed() {
-  
-    	SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-    	sharedPreferences.edit().clear().commit();
-    	super.onBackPressed(); 
-    	finish();
-    }
-    
-    @Override
-    public void onResume() {
-        super.onResume();
+	private class MyCustomPanel extends View {
 
-        // Resume the AdView.
-        adView.resume();
-    }
+		public MyCustomPanel(Context context) {
+			super(context);
+		}
 
-    @Override
-    public void onPause() {
-        // Pause the AdView.
-        adView.pause();
+		public void draw(Canvas canvas) {
 
-        super.onPause();
-    }
+			DisplayMetrics metrics = new DisplayMetrics();
+			getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-    @Override
-    public void onDestroy() {
-        // Destroy the AdView.
-        adView.destroy();
+			float height = metrics.heightPixels;
+			float width = metrics.widthPixels;
 
-        super.onDestroy();
-    }
+			int left305 = (int) ((width / 100) * 23.8);
+			int left380 = (int) ((width / 100) * 29.6);
+			int left480 = (int) ((width / 100) * 37.5);
+			int left580 = (int) ((width / 100) * 45.3);
+			int left585 = (int) ((width / 100) * 45.7);
+			int left605 = (int) ((width / 100) * 47.2);
+			int left650 = (int) ((width / 100) * 50.7);
+			int left700 = (int) ((width / 100) * 54.6);
+			int left800 = (int) ((width / 100) * 62.5);
+			int left850 = (int) ((width / 100) * 66.4);
 
+			int top110 = (int) ((height / 100) * 13.75);
+			int top200 = (int) ((height / 100) * 25);
+			int top210 = (int) ((height / 100) * 26.25);
+			int top330 = (int) ((height / 100) * 41.25);
+			int top370 = (int) ((height / 100) * 46.25);
+			int top410 = (int) ((height / 100) * 51.25);
+			int top480 = (int) ((height / 100) * 60);
+			int top570 = (int) ((height / 100) * 71.25);
+
+			Paint paint = new Paint();
+			paint.setStrokeWidth(1);
+
+			paint.setColor(Color.rgb(255, 155, 0));
+			canvas.drawLine(left585, top110, left650, top110, paint);
+			canvas.drawLine(left650, top110, left800, top210, paint);
+
+			paint.setColor(Color.GRAY);
+			canvas.drawLine(left305, top200, left380, top200, paint);
+			canvas.drawLine(left380, top200, left480, top330, paint);
+
+			paint.setColor(Color.rgb(0, 125, 255));
+			canvas.drawLine(left305, top480, left580, top480, paint);
+			canvas.drawLine(left580, top480, left650, top410, paint);
+
+			paint.setColor(Color.RED);
+			canvas.drawLine(left605, top570, left700, top570, paint);
+			canvas.drawLine(left700, top570, left850, top370, paint);
+
+		}
+	}
+
+	public void onBackPressed() {
+
+		SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+		sharedPreferences.edit().clear().commit();
+		super.onBackPressed();
+		finish();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		// Resume the AdView.
+		adView.resume();
+	}
+
+	@Override
+	public void onPause() {
+		// Pause the AdView.
+		adView.pause();
+
+		super.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+		// Destroy the AdView.
+		adView.destroy();
+
+		super.onDestroy();
+	}
 	
 }
-
-
