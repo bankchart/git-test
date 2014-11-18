@@ -1,6 +1,6 @@
 package com.xplink.android.carchecklist;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;   
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,11 +26,13 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -107,6 +109,7 @@ import com.google.ads.*;
 		"DrawAllocation" })
 public class CarCheckListActivity extends Activity implements AnimationListener {
 
+	private int powerWeight, engineWeight, exteriorWeight, interiorWeight, documentWeight;
 	private static final int Integer = 0;
 	int CheckDocumentTotal, CheckPowerTotal, CheckEngineTotal,
 			CheckExteriorTotal, CheckInteriorTotal, PercenDocument,
@@ -136,12 +139,47 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 	Typeface type;
 	CheckBox chkgift;
 
+	private DBCarCheckList db;
+
+	private SQLiteDatabase sqliteDB;
+	
+	private Intent intent;
+	private Bundle store;
+	
+	private void deleteAllData(){
+		sqliteDB = db.getWritableDatabase();
+		String deleteSql = "delete from " + db.TABLE_NAME;
+		sqliteDB.execSQL(deleteSql);
+		
+		sqliteDB = db.getReadableDatabase();
+		String querySql = "select * from " + db.TABLE_NAME;
+		int count = sqliteDB.rawQuery(querySql, null).getCount();
+		
+		Log.i("count", "after clear : " + count);
+		
+		sqliteDB.close();
+		db.close();
+	}
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+		
+		
+		store = new Bundle();
+		db = new DBCarCheckList(this);
+		
+		intent = new Intent(getBaseContext(), RecordActivity.class);
+		
+		//deleteAllData();
+		
+		//getSettingShared();
+		
+		Log.i("dbcarchecklist", "create object DBCarCheckList");
+				
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -597,7 +635,8 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				mp.put("power_centralLock", chkpower_centralLock.isChecked());
 				mp.put("power_transmissionPosition",
 						chkpower_transmissionPosition.isChecked());
-
+				
+				filterStore("power", mp);
 				save(mp);
 
 			}
@@ -662,7 +701,8 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				mp.put("power_centralLock", chkpower_centralLock.isChecked());
 				mp.put("power_transmissionPosition",
 						chkpower_transmissionPosition.isChecked());
-
+				
+				filterStore("power", mp);
 				save(mp);
 
 			}
@@ -1346,7 +1386,8 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 						mp.put("engine_soundOut",
 								chkengine_soundOut.isChecked());
 						mp.put("engine_soundIn", chkengine_soundIn.isChecked());
-
+						
+						filterStore("engine", mp);
 						save(mp);
 
 					}
@@ -1386,6 +1427,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				mp.put("engine_soundOut", chkengine_soundOut.isChecked());
 				mp.put("engine_soundIn", chkengine_soundIn.isChecked());
 
+				filterStore("engine", mp);
 				save(mp);
 
 			}
@@ -1712,6 +1754,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 						mp.put("outside_tirePart",
 								chkoutside_tirePart.isChecked());
 
+						filterStore("exterior", mp);
 						save(mp);
 
 					}
@@ -1748,6 +1791,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				mp.put("outside_seal", chkoutside_seal.isChecked());
 				mp.put("outside_tirePart", chkoutside_tirePart.isChecked());
 
+				filterStore("exterior", mp);
 				save(mp);
 
 			}
@@ -2063,6 +2107,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 						mp.put("inside_handBrake",
 								chkinside_handBrake.isChecked());
 
+						filterStore("interior", mp);
 						save(mp);
 					}
 				});
@@ -2105,6 +2150,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				mp.put("inside_accelerator", chkinside_accelerator.isChecked());
 				mp.put("inside_handBrake", chkinside_handBrake.isChecked());
 
+				filterStore("interior", mp);
 				save(mp);
 
 			}
@@ -2517,6 +2563,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 								chklicenseRegister.isChecked());
 						mp.put("doc_gift", chkgift.isChecked());
 
+						filterStore("document", mp);
 						save(mp);
 
 					}
@@ -2554,6 +2601,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				mp.put("doc_licenseRegister", chklicenseRegister.isChecked());
 				mp.put("doc_gift", chkgift.isChecked());
 
+				filterStore("document", mp);
 				save(mp);
 
 			}
@@ -2771,22 +2819,31 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 	private void SlideSettingLayout() {
 		final SharedPreferences mSharedPrefs = getSharedPreferences(
 				"mysettings", 0);
+		Bundle seek = getIntent().getExtras();
 		final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
 				R.style.backgrounddialog);
 		settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		settingdialog.setContentView(R.layout.settingdialoglayout);
-
+		
 		final SeekBar powerseekbar = (SeekBar) settingdialog.getWindow()
 				.findViewById(R.id.Powerbar);
 		final SeekBar engineseekbar = (SeekBar) settingdialog.getWindow()
 				.findViewById(R.id.Enginebar);
 		final SeekBar exteriorseekbar = (SeekBar) settingdialog.getWindow()
 				.findViewById(R.id.Exteriorbar);
+		exteriorseekbar.setIndeterminate(false);
 		final SeekBar interiorseekbar = (SeekBar) settingdialog.getWindow()
 				.findViewById(R.id.Interiorbar);
 		final SeekBar documentseekbar = (SeekBar) settingdialog.getWindow()
 				.findViewById(R.id.Documentbar);
-
+		//seekbar.putInt("Powerbar", powerseekbarValue).commit();
+		//if(seek != null){
+			powerseekbar.setProgress(mSharedPrefs.getInt("Powerbar", 0));
+			engineseekbar.setProgress(mSharedPrefs.getInt("Enginebar", 0));
+			exteriorseekbar.setProgress(mSharedPrefs.getInt("Exteriorbar", 0));
+			interiorseekbar.setProgress(mSharedPrefs.getInt("Interiorbar", 0));
+			documentseekbar.setProgress(mSharedPrefs.getInt("Documentbar", 0));
+		//}
 		TextView setting = (TextView) settingdialog.getWindow().findViewById(
 				R.id.Setting);
 		TextView priority = (TextView) settingdialog.getWindow().findViewById(
@@ -2918,7 +2975,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 									public void onClick(DialogInterface dialog,
 											int which) {
 										Intent intent = getIntent();
-										SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+										SharedPreferences sharedPreferences = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
 										sharedPreferences.edit().clear()
 												.commit();
 										getIntent().removeExtra("power");
@@ -2943,7 +3000,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 				Intent myIntent = new Intent(CarCheckListActivity.this,
 						ChangeLanguage.class);
-
+				
 				// th
 				myIntent.putExtra("power", PercenPower);
 				myIntent.putExtra("engine", PercenEngine);
@@ -2956,6 +3013,25 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				myIntent.putExtra("numinterior", CheckInteriorTotal);
 				myIntent.putExtra("numdocument", CheckDocumentTotal);
 
+				SharedPreferences mSharedPrefs = getSharedPreferences("mysettings", MODE_PRIVATE);
+				final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
+						R.style.backgrounddialog);
+				settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				settingdialog.setContentView(R.layout.settingdialoglayout);
+				final SeekBar powerseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Powerbar);
+				final SeekBar engineseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Enginebar);
+				final SeekBar exteriorseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Exteriorbar);
+				final SeekBar interiorseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Interiorbar);
+				final SeekBar documentseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Documentbar);
+				
+				Editor edit = mSharedPrefs.edit();
+				edit.putInt("Exteriorbar", exteriorseekbar.getProgress());
+				edit.commit();
 				CarCheckListActivity.this.startActivity(myIntent);
 				finish();
 			}
@@ -2968,10 +3044,26 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		btnRecord.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v){
-				//Log.d("btnRecord", "record onClick");
-				Intent i = new Intent(getApplicationContext(), RecordActivity.class);
-				CarCheckListActivity.this.startActivity(i);
-				finish();				
+				Log.i("record", "record onClick");
+				final AlertDialog.Builder adb = new AlertDialog.Builder(getApplicationContext());
+				adb.setTitle("Warning Dialog");
+				adb.setMessage("you must select more than one checklist.");
+				adb.setPositiveButton("Ok", null);
+				
+				SharedPreferences shared = getSharedPreferences("mysettings", MODE_PRIVATE);
+				
+				powerWeight = shared.getInt("Powerbar", 0);
+				engineWeight = shared.getInt("Enginebar", 0);
+				exteriorWeight = shared.getInt("Exteriorbar", 0);
+				interiorWeight = shared.getInt("Interiorbar", 0);
+				documentWeight = shared.getInt("Documentbar", 0);
+				
+				String display = "before record activity >> " + powerWeight + "|" + engineWeight + "|"
+						 + exteriorWeight + "|" + interiorWeight + "|" + documentWeight;
+				Log.i("display", display);
+				
+				CarCheckListActivity.this.startActivity(intent);
+				finish();
 			}
 		});
 		
@@ -2982,7 +3074,28 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		btnList.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v){
+				final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
+						R.style.backgrounddialog);
+				settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				settingdialog.setContentView(R.layout.settingdialoglayout);
+				final SeekBar powerseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Powerbar);
+				final SeekBar engineseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Enginebar);
+				SeekBar exteriorseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Exteriorbar);
+				final SeekBar interiorseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Interiorbar);
+				final SeekBar documentseekbar = (SeekBar) settingdialog.getWindow()
+						.findViewById(R.id.Documentbar);
 				
+				final ProgressBar exteriorTest = (ProgressBar) settingdialog.getWindow()
+						.findViewById(R.id.exteriorProgress);
+				
+				SeekBar test = (SeekBar) settingdialog.findViewById(R.id.Exteriorbar);
+				test.setProgress(4);
+				
+				Log.i("onClick", "onClick-List");
 			}
 		});
 		
@@ -3011,7 +3124,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 	}
 
 	private void save(Map<String, Boolean> mp) {
-		SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences sharedPreferences = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		for (Map.Entry<String, Boolean> entry : mp.entrySet()) {
 			editor.putBoolean(entry.getKey(), entry.getValue());
@@ -3024,7 +3137,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 	}
 
 	private boolean load(String checkboxName) {
-		SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences sharedPreferences = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
 		return sharedPreferences.getBoolean(checkboxName, false);
 	}
 
@@ -3281,9 +3394,9 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		slideoutheadsetting.setFillAfter(true);
 		headsetting.startAnimation(slideoutheadsetting);
 		
-		int prefer = getPreferences(MODE_PRIVATE).getInt("already", 1);
+		int prefer = getSharedPreferences("mysettings", MODE_PRIVATE).getInt("already", 1);
 		if (prefer == 1) {
-			getPreferences(MODE_PRIVATE).edit().putInt("already", 0).commit();
+			getSharedPreferences("mysettings", MODE_PRIVATE).edit().putInt("already", 0).commit();
 
 			FragmentTransaction ft = getFragmentManager().beginTransaction()
 					.setCustomAnimations(motionin, motionout);
@@ -3292,7 +3405,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			ft.show(fmTarget);
 			ft.commit();
 		} else {
-			getPreferences(MODE_PRIVATE).edit().putInt("already", 1).commit();
+			getSharedPreferences("mysettings", MODE_PRIVATE).edit().putInt("already", 1).commit();
 			FragmentTransaction ft = getFragmentManager().beginTransaction()
 					.setCustomAnimations(motionin, motionout);
 			FragmentManager fm = getFragmentManager();
@@ -3357,16 +3470,91 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 		}
 	}
+	
+	public void filterStore(String menuName, Map<String, Boolean> mp){
+		SharedPreferences sharedPreferences = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		String tmp = "";
+		Log.i("filter", "infileter : " + menuName);
+		for (Map.Entry<String, Boolean> entry : mp.entrySet()) {
+			editor.putBoolean(entry.getKey(), entry.getValue());
 
+			// Log.d("Key", "" + entry.getKey());
+
+			editor.commit();
+			String result = (entry.getValue()) ? "t" : "f";
+			tmp += entry.getKey() + "-" + result + ",";
+		}
+		final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
+		settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		settingdialog.setContentView(R.layout.settingdialoglayout);
+
+		final SeekBar powerSeekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Powerbar);
+		final SeekBar engineSeekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Enginebar);
+		final SeekBar exteriorSeekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Exteriorbar);
+		final SeekBar interiorSeekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Interiorbar);
+		final SeekBar documentSeekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Documentbar);
+		tmp = tmp.substring(0, tmp.length() - 1);
+	
+		//Log.i("store", menuName + " : " + tmp);
+		editor.putString(menuName, tmp);
+		intent.putExtra(menuName, tmp);
+		editor.commit();
+		String checklistInMem = sharedPreferences.getString(menuName, "");
+		Log.i("inmem", "*** " + checklistInMem);
+	}
+	@Override
 	public void onBackPressed() {
-
-		SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-		sharedPreferences.edit().clear().commit();
-		super.onBackPressed();
+		
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		
+		String tmp1 = shared.getString("power", "");
+		String tmp2 = shared.getString("engine", "");
+		String tmp3 = shared.getString("exterior", "");
+		String tmp4 = shared.getString("interior", "");
+		String tmp5 = shared.getString("document", "");
+		
+		String tmp = tmp1 + "|" + tmp2 + "|" + tmp3 + "|" + tmp4 + "|" + tmp5;
+		Log.i("alldata", "alldata >> " + tmp);
+		
+		Editor editor = shared.edit();
+		editor.clear();
+		editor.commit();
 		finish();
 	}
+	
+	public void getSettingShared(){
+		SharedPreferences mSharedPrefs = getSharedPreferences("mysettings", MODE_PRIVATE);
+		final Dialog settingdialog = new Dialog(CarCheckListActivity.this,
+				R.style.backgrounddialog);
+		settingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		settingdialog.setContentView(R.layout.settingdialoglayout);
+		final SeekBar powerseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Powerbar);
+		final SeekBar engineseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Enginebar);
+		final SeekBar exteriorseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Exteriorbar);
+		final SeekBar interiorseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Interiorbar);
+		final SeekBar documentseekbar = (SeekBar) settingdialog.getWindow()
+				.findViewById(R.id.Documentbar);
+		//seekbar.putInt("Powerbar", powerseekbarValue).commit();
+		powerseekbar.setProgress(4);
+		Log.i("seek", "setProgress(4)");
+		engineseekbar.setProgress(mSharedPrefs.getInt("Enginebar", 0));
+		exteriorseekbar.setProgress(mSharedPrefs.getInt("Exteriorbar", 0));
+		interiorseekbar.setProgress(mSharedPrefs.getInt("Interiorbar", 0));
+		documentseekbar.setProgress(mSharedPrefs.getInt("Documentbar", 0));
+	}
 
-	@Override
+/*	@Override
 	public void onResume() {
 		super.onResume();
 
@@ -3388,6 +3576,6 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		adView.destroy();
 
 		super.onDestroy();
-	}
+	}*/
 	
 }

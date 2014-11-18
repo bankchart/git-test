@@ -200,6 +200,7 @@
         android:textSize="24sp" />
 
     <ProgressBar
+        android:id="@+id/exteriorProgress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="140dp"
         android:layout_height="4dp"
@@ -207,6 +208,7 @@
         android:layout_marginTop="150dp" />
 
     <ProgressBar
+        android:id="@+id/interiorProgress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="140dp"
         android:layout_height="4dp"
@@ -214,6 +216,7 @@
         android:layout_marginTop="180dp" />
 
     <ProgressBar
+        android:id="@+id/powerProgress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="140dp"
         android:layout_height="4dp"
@@ -221,6 +224,7 @@
         android:layout_marginTop="210dp" />
 
     <ProgressBar
+        android:id="@+id/engineProgress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="140dp"
         android:layout_height="4dp"
@@ -228,6 +232,7 @@
         android:layout_marginTop="240dp" />
 
     <ProgressBar
+        android:id="@+id/documentProgress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="140dp"
         android:layout_height="4dp"

@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ public class ChangeLanguage extends Activity {
 		final int numexterior = getIntent().getExtras().getInt("numexterior");
 		final int numinterior = getIntent().getExtras().getInt("numinterior");
 		final int numdocument = getIntent().getExtras().getInt("numdocument");
+		
 		
 	
 		    Log.d("progress","" + power);
@@ -309,6 +312,8 @@ public class ChangeLanguage extends Activity {
 
 		});
 		
+		
+		
 }
 
 
@@ -348,5 +353,18 @@ public class ChangeLanguage extends Activity {
 
     }
 
+	private void clearShared(){
+		SharedPreferences shared = getSharedPreferences("mysettings", MODE_PRIVATE);
+		Editor editor = shared.edit();
+		editor.clear().commit();
+	}
+	
+	@Override
+	public void onBackPressed(){
+		//clearShared();
+		Intent i = new Intent(getApplicationContext(), CarCheckListActivity.class);
+		startActivity(i);
+		finish();
+	}
 
 }

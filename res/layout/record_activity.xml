@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_span="2"
-                    android:text="Remember Car check list"
+                    android:text="Save your checklist"
                     android:textColor="#000"
                     android:textSize="@dimen/text_size2" />
             </TableRow>
@@ -42,7 +42,7 @@
                     android:id="@+id/nameRecordLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter your name"
+                    android:text="Enter Checklist name"
                     android:textColor="#000"
                     android:textSize="@dimen/text_size2" />
 
