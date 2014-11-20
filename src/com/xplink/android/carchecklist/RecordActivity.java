@@ -1,6 +1,6 @@
 package com.xplink.android.carchecklist;
 
-import java.sql.PreparedStatement; 
+import java.sql.PreparedStatement;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -45,27 +45,28 @@ public class RecordActivity extends Activity {
 	private DBCarCheckList db;
 	private SQLiteDatabase sqliteDB;
 
-	public boolean isDuplicate(){
-		
-		//sqliteDB = openOrCreateDatabase("history", MODE_PRIVATE, null);
+	public boolean isDuplicate() {
+
+		// sqliteDB = openOrCreateDatabase("history", MODE_PRIVATE, null);
 		String username = nameRecordEdit.getText().toString();
 		username = username.trim();
-		String sql = "select * from " + db.TABLE_NAME + " where " + db.COL_USERNAME + " = '" + username + "'";
+		String sql = "select * from " + db.TABLE_NAME + " where "
+				+ db.COL_USERNAME + " = '" + username + "'";
 		Cursor next = sqliteDB.rawQuery(sql, null);
 		next.moveToFirst();
 		int countRow = next.getCount();
-		if(countRow == 0)
+		if (countRow == 0)
 			return false;
 		return true;
 	}
-	
-	public String[] getKeyChecklist(){
-		
+
+	public String[] getKeyChecklist() {
+
 		return null;
 	}
-	
+
 	public void save() {
-		
+
 		final AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		final AlertDialog.Builder subAdb = new AlertDialog.Builder(this);
 		adb.setTitle("Confirm dialog");
@@ -73,8 +74,9 @@ public class RecordActivity extends Activity {
 		adb.setNegativeButton("Cancel", null);
 		adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
 			public void onClick(DialogInterface dialog, int arg1) {
-				SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-				
+				SharedPreferences shared = getSharedPreferences("mysettings",
+						Context.MODE_PRIVATE);
+
 				// ok wait serialize checklist data
 				sqliteDB = db.getWritableDatabase();
 				String username = nameRecordEdit.getText().toString();
@@ -82,29 +84,68 @@ public class RecordActivity extends Activity {
 				// INSERT
 				String powerWeight = "power-" + shared.getInt("Powerbar", 0);
 				String engineWeight = "engine-" + shared.getInt("Enginebar", 0);
-				String exteriorWeight = "exterior-" + shared.getInt("Exteriorbar", 0);
-				String interiorWeight = "interior-" + shared.getInt("Interiorbar", 0);
-				String documentWeight = "document-" + shared.getInt("Documentbar", 0);
-				
-				String allWeight = powerWeight + "|" + engineWeight + "|" + exteriorWeight + 
-						"|" + interiorWeight + "|" + documentWeight + "|";
+				String exteriorWeight = "exterior-"
+						+ shared.getInt("Exteriorbar", 0);
+				String interiorWeight = "interior-"
+						+ shared.getInt("Interiorbar", 0);
+				String documentWeight = "document-"
+						+ shared.getInt("Documentbar", 0);
+
+				String allWeight = powerWeight + "|" + engineWeight + "|"
+						+ exteriorWeight + "|" + interiorWeight + "|"
+						+ documentWeight + "|";
 				Bundle intent = getIntent().getExtras();
-				
-				String powerChecklist = intent.getString("power");
-				String engineChecklist = intent.getString("engine");
-				String exteriorChecklist = intent.getString("exterior");
-				String interiorChecklist = intent.getString("interior");
-				String documentChecklist = intent.getString("document");
-				
-				String allChecklist = powerChecklist + "|" + engineChecklist + "|" + exteriorChecklist + "|" +
-									interiorChecklist + "|" + documentChecklist;
-				
+
+				Log.i("checkList",
+						"power >>>>>>>>>>> "
+								+ shared.getString("power", "empty"));
+
+				String powerChecklist = "null";
+				String engineChecklist = "null";
+				String exteriorChecklist = "null";
+				String interiorChecklist = "null";
+				String documentChecklist = "null";
+
+				// power checklist
+				try {
+					powerChecklist = intent.getString("power");
+				} catch (Exception ex) {
+				}
+
+				// engine checklist
+				try {
+					engineChecklist = intent.getString("engine");
+				} catch (Exception ex) {
+				}
+
+				// exterior checklist
+				try {
+					exteriorChecklist = intent.getString("exterior");
+				} catch (Exception ex) {
+				}
+
+				// interior checklist
+				try {
+					interiorChecklist = intent.getString("interior");
+				} catch (Exception ex) {
+				}
+
+				// document checklist
+				try {
+					documentChecklist = intent.getString("document");
+				} catch (Exception ex) {
+				}
+				String allChecklist = powerChecklist + "|" + engineChecklist
+						+ "|" + exteriorChecklist + "|" + interiorChecklist
+						+ "|" + documentChecklist;
+
 				String all = allChecklist + "**" + allWeight;
 				Log.i("display_inserted", "inserted : " + all);
-				
-				String insertSql = "insert into " + db.TABLE_NAME + "(" + db.COL_USERNAME + ", " + 
-				db.COL_CHECKLIST + ") VALUES ( '" + username + "', '" + all + "')";
-				sqliteDB.execSQL(insertSql);		
+
+				String insertSql = "insert into " + db.TABLE_NAME + "("
+						+ db.COL_USERNAME + ", " + db.COL_CHECKLIST
+						+ ") VALUES ( '" + username + "', '" + all + "')";
+				sqliteDB.execSQL(insertSql);
 				Log.i("writable", "completed.");
 				sqliteDB.close();
 				db.close();
@@ -112,22 +153,23 @@ public class RecordActivity extends Activity {
 				String querySql = "select * from " + db.TABLE_NAME;
 				Cursor x = sqliteDB.rawQuery(querySql, null);
 				x.moveToFirst();
-				Log.i("cnt_table", "count of table : " + x.getCount());		
-				
-				while(x != null){
+				Log.i("cnt_table", "count of table : " + x.getCount());
+
+				while (x != null) {
 					String id = x.getString(0);
 					String username2 = x.getString(1);
 					String data = x.getString(2);
-					String display = "id : " + id + ", username : " + username2 + ", data : " + data;
+					String display = "id : " + id + ", username : " + username2
+							+ ", data : " + data;
 					Log.i("result", display);
-					if(x.isLast())
+					if (x.isLast())
 						break;
 					x.moveToNext();
 				}
 				x.close();
 				sqliteDB.close();
 				db.close();
-				
+
 				backToCheckList();
 			}
 		});
@@ -146,7 +188,7 @@ public class RecordActivity extends Activity {
 		nameRecordLabel = (TextView) findViewById(R.id.nameRecordLabel);
 
 		nameRecordEdit = (EditText) findViewById(R.id.nameRecordEdit);
-		
+
 		titleRecordLabel.setTypeface(type);
 		nameRecordLabel.setTypeface(type);
 
@@ -230,15 +272,18 @@ public class RecordActivity extends Activity {
 		Intent i = new Intent(getApplicationContext(),
 				CarCheckListActivity.class);
 		finish();
-		SharedPreferences shared = getSharedPreferences("mysettings", MODE_PRIVATE);
+		SharedPreferences shared = getSharedPreferences("mysettings",
+				MODE_PRIVATE);
 		Editor editor = shared.edit();
 		editor.clear();
 		editor.commit();
 		startActivity(i);
 	}
+
 	@Override
-	public void onBackPressed(){
-		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+	public void onBackPressed() {
+		SharedPreferences shared = getSharedPreferences("mysettings",
+				Context.MODE_PRIVATE);
 		Editor editor = shared.edit();
 		editor.clear();
 		editor.commit();
