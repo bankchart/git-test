@@ -139,7 +139,7 @@ public class RecordActivity extends Activity {
 						+ "|" + exteriorChecklist + "|" + interiorChecklist
 						+ "|" + documentChecklist;
 
-				String all = allChecklist + "**" + allWeight;
+				String all = allChecklist + "&" + allWeight;
 				Log.i("display_inserted", "inserted : " + all);
 
 				String insertSql = "insert into " + db.TABLE_NAME + "("
