@@ -3,6 +3,7 @@ package com.xplink.android.carchecklist;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -22,7 +23,12 @@ public class ChangeLanguage extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.language); 	
-
+		// checking
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		//Log.i("xxx", "last checking : " + sharedx.getInt("checknum", 0));
+		int tmp = shared.getInt("checknum", 0);
+		shared.edit().putInt("checknum", tmp).commit();
+		
 		final int power = getIntent().getExtras().getInt("power");
 		final int engine = getIntent().getExtras().getInt("engine");
 		final int exterior = getIntent().getExtras().getInt("exterior");

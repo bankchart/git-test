@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ListSaveActivity extends Activity {
@@ -31,11 +33,19 @@ public class ListSaveActivity extends Activity {
 	private String[] list;
 	private DBCarCheckList db;
 	private SQLiteDatabase sqliteDB;
-
+	
+	//store
+	private int checkNumPowerTotal;
+	private int checkNumEngineTotal;
+	private int checkNumExteriorTotal;
+	private int checkNumInteriorTotal;
+	private int checkNumDocumentTotal;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listsave_activity);
+		checkBug("begin onCreate");
 		list = getUsernames();
 		ArrayAdapter adapter = new ArrayAdapter(this,
 				R.layout.text_for_listview, list);
@@ -52,6 +62,12 @@ public class ListSaveActivity extends Activity {
 				Editor edit = shared.edit();
 				edit.putBoolean("stateGetList", true);
 				edit.putInt("indexList", position);
+				
+				edit.putInt("CheckPowerTotal", checkNumPowerTotal);
+				edit.putInt("CheckEngineTotal", checkNumEngineTotal);
+				edit.putInt("CheckExteriorTotal", checkNumExteriorTotal);
+				edit.putInt("CheckInteriorTotal", checkNumInteriorTotal);
+				edit.putInt("CheckDocumentTotal", checkNumDocumentTotal);
 				edit.commit();
 				
 				Log.i("stateGetList", "stateGetList >>> " + shared.getBoolean("stateGetList", false));
@@ -103,6 +119,8 @@ public class ListSaveActivity extends Activity {
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 
 		adView.loadAd(adRequestBuilder.build());
+		
+		checkBug("last onCreate");
 	}
 
 	private String[] getUsernames() {
@@ -138,4 +156,26 @@ public class ListSaveActivity extends Activity {
 		db.close();
 		return list;
 	}
+	private void checkBug(String pointerName){
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		int tmp1 = shared.getInt("CheckPowerTotal", 0);
+		checkNumPowerTotal = tmp1;
+		int tmp2 = shared.getInt("CheckEngineTotal", 0);
+		checkNumEngineTotal = tmp2;
+		int tmp3 = shared.getInt("CheckExteriorTotal", 0);
+		checkNumExteriorTotal = tmp3;
+		int tmp4 = shared.getInt("CheckInteriorTotal", 0);
+		checkNumInteriorTotal = tmp4;
+		int tmp5 = shared.getInt("CheckDocumentTotal", 0);
+		checkNumDocumentTotal = tmp5;
+		println(pointerName + " - CheckPowerTotal : " + tmp1);
+		println("CheckEngineTotal : " + tmp2);
+		println("CheckExteriorTotal : " + tmp3);
+		println("CheckInteriorTotal : " + tmp4);
+		println("CheckDocumentTotal : " + tmp5);
+	}	
+	private void println(String str){
+		Log.i("CheckNumTotal", str);
+	}
+	
 }

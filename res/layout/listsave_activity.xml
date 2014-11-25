@@ -7,16 +7,6 @@
     android:layout_centerHorizontal="true"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/listsaveLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="20dp"
-        android:text="Select your checklist"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <RelativeLayout
         android:id="@+id/listSaveLayout"
         android:layout_width="wrap_content"
@@ -75,5 +65,16 @@
         android:layout_marginTop="760dp"
         android:orientation="vertical" >
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/listViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listSaveLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Select your checklist"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFF" />
 
 </RelativeLayout>
