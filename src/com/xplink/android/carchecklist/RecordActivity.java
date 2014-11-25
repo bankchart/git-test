@@ -265,7 +265,8 @@ public class RecordActivity extends Activity {
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-		adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
+		adRequestBuilder.addTestDevice("C17E5F3A146EC7E805175C72634D8098");
+		//adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 
 	}

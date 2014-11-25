@@ -575,12 +575,14 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		LinearLayout layout = (LinearLayout) findViewById(R.id.admob);
 		adView = new AdView(getApplicationContext());
 		adView.setAdSize(AdSize.LEADERBOARD);
-		adView.setAdUnitId(admonId);
+		//adView.setAdUnitId(admonId);
+		adView.setAdUnitId("C17E5F3A146EC7E805175C72634D8098");
 		// Add the adView to it
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-		adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
+		adRequestBuilder.addTestDevice("C17E5F3A146EC7E805175C72634D8098");
+		//adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 		// adView.loadAd(new AdRequest.Builder().build());
 		SharedPreferences shared = getSharedPreferences("mysettings",

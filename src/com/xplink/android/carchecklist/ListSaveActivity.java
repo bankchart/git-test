@@ -1,11 +1,13 @@
 package com.xplink.android.carchecklist;
 
-import com.google.android.gms.ads.AdRequest; 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -34,14 +36,14 @@ public class ListSaveActivity extends Activity {
 	private String[] list;
 	private DBCarCheckList db;
 	private SQLiteDatabase sqliteDB;
-	
-	//store
+
+	// store
 	private int checkNumPowerTotal;
 	private int checkNumEngineTotal;
 	private int checkNumExteriorTotal;
 	private int checkNumInteriorTotal;
 	private int checkNumDocumentTotal;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,45 +54,72 @@ public class ListSaveActivity extends Activity {
 				R.layout.text_for_listview, list);
 		ListView listView = (ListView) findViewById(R.id.list);
 		listView.setAdapter(adapter);
-		
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-			    // When clicked, show a toast with the TextView text
+				// When clicked, show a toast with the TextView text
 				// position will return index of listview
-				//Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show(); 
-				SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+				// Toast.makeText(getApplicationContext(), "" + position,
+				// Toast.LENGTH_SHORT).show();
+				SharedPreferences shared = getSharedPreferences("mysettings",
+						Context.MODE_PRIVATE);
 				Editor edit = shared.edit();
 				edit.putBoolean("stateGetList", true);
 				edit.putInt("indexList", position);
-				
+
 				edit.putInt("CheckPowerTotal", checkNumPowerTotal);
 				edit.putInt("CheckEngineTotal", checkNumEngineTotal);
 				edit.putInt("CheckExteriorTotal", checkNumExteriorTotal);
 				edit.putInt("CheckInteriorTotal", checkNumInteriorTotal);
 				edit.putInt("CheckDocumentTotal", checkNumDocumentTotal);
 				edit.commit();
-				
-				Log.i("stateGetList", "stateGetList >>> " + shared.getBoolean("stateGetList", false));
-				Log.i("indexList", "indexList >>> " + shared.getInt("indexList", -1));
-				Intent i = new Intent(getApplicationContext(), CarCheckListActivity.class);
+
+				Log.i("stateGetList",
+						"stateGetList >>> "
+								+ shared.getBoolean("stateGetList", false));
+				Log.i("indexList",
+						"indexList >>> " + shared.getInt("indexList", -1));
+				Intent i = new Intent(getApplicationContext(),
+						CarCheckListActivity.class);
 				startActivity(i);
 				finish();
 			}
 		});
-		
+
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
-				return false;
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+			
+				
+				
+				AlertDialog.Builder delete = new AlertDialog.Builder(ListSaveActivity.this);
+				delete.setTitle("Delete");
+				delete.setMessage("Do you want to delete data ?");
+				delete.setPositiveButton("Cancel",new AlertDialog.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int arg1){
+						
+					}
+				});
+				delete.setNegativeButton("Ok",new AlertDialog.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int arg1){
+						
+					}
+				});
+				delete.show();
+				return true;
 			}
 		});
-
+		
 		Button btnBack = (Button) findViewById(R.id.btnBack);
 		btnBack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-		
-				Intent i = new Intent(getApplicationContext(), CarCheckListActivity.class);
+
+				Intent i = new Intent(getApplicationContext(),
+						CarCheckListActivity.class);
 				startActivity(i);
 				finish();
 			}
@@ -101,8 +130,9 @@ public class ListSaveActivity extends Activity {
 		listMainLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				Intent i = new Intent(getApplicationContext(), CarCheckListActivity.class);
+
+				Intent i = new Intent(getApplicationContext(),
+						CarCheckListActivity.class);
 				startActivity(i);
 				finish();
 			}
@@ -113,7 +143,6 @@ public class ListSaveActivity extends Activity {
 
 			}
 		});
-		
 
 		// addMob
 		LinearLayout layout = (LinearLayout) findViewById(R.id.admobInRecord);
@@ -124,9 +153,10 @@ public class ListSaveActivity extends Activity {
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-		adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
+		adRequestBuilder.addTestDevice("C17E5F3A146EC7E805175C72634D8098");
+		//adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
-		
+
 		checkBug("last onCreate");
 	}
 
@@ -163,8 +193,10 @@ public class ListSaveActivity extends Activity {
 		db.close();
 		return list;
 	}
-	private void checkBug(String pointerName){
-		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+
+	private void checkBug(String pointerName) {
+		SharedPreferences shared = getSharedPreferences("mysettings",
+				Context.MODE_PRIVATE);
 		int tmp1 = shared.getInt("CheckPowerTotal", 0);
 		checkNumPowerTotal = tmp1;
 		int tmp2 = shared.getInt("CheckEngineTotal", 0);
@@ -180,9 +212,10 @@ public class ListSaveActivity extends Activity {
 		println("CheckExteriorTotal : " + tmp3);
 		println("CheckInteriorTotal : " + tmp4);
 		println("CheckDocumentTotal : " + tmp5);
-	}	
-	private void println(String str){
+	}
+
+	private void println(String str) {
 		Log.i("CheckNumTotal", str);
 	}
-	
+
 }
