@@ -17,7 +17,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 
 public class ChangeLanguage extends Activity {
-
+	int power, engine, exterior, interior, document;
+	int numpower, numengine, numexterior, numinterior, numdocument;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,17 +30,20 @@ public class ChangeLanguage extends Activity {
 		int tmp = shared.getInt("checknum", 0);
 		shared.edit().putInt("checknum", tmp).commit();
 		
-		final int power = getIntent().getExtras().getInt("power");
-		final int engine = getIntent().getExtras().getInt("engine");
-		final int exterior = getIntent().getExtras().getInt("exterior");
-		final int interior = getIntent().getExtras().getInt("interior");
-		final int document = getIntent().getExtras().getInt("document");
+		Editor editor = shared.edit();
+		editor.putBoolean("visitedRecordLayout", true);
 		
-		final int numpower = getIntent().getExtras().getInt("numpower");
-		final int numengine = getIntent().getExtras().getInt("numengine");
-		final int numexterior = getIntent().getExtras().getInt("numexterior");
-		final int numinterior = getIntent().getExtras().getInt("numinterior");
-		final int numdocument = getIntent().getExtras().getInt("numdocument");
+		power = getIntent().getExtras().getInt("power");
+		engine = getIntent().getExtras().getInt("engine");
+		exterior = getIntent().getExtras().getInt("exterior");
+		interior = getIntent().getExtras().getInt("interior");
+		document = getIntent().getExtras().getInt("document");
+		
+		numpower = getIntent().getExtras().getInt("numpower");
+		numengine = getIntent().getExtras().getInt("numengine");
+		numexterior = getIntent().getExtras().getInt("numexterior");
+		numinterior = getIntent().getExtras().getInt("numinterior");
+		numdocument = getIntent().getExtras().getInt("numdocument");
 		
 		
 	
@@ -369,6 +373,17 @@ public class ChangeLanguage extends Activity {
 	public void onBackPressed(){
 		//clearShared();
 		Intent i = new Intent(getApplicationContext(), CarCheckListActivity.class);
+		 i.putExtra("power", power);
+		 i.putExtra("engine", engine);
+		 i.putExtra("exterior", exterior);
+		 i.putExtra("interior", interior);
+		 i.putExtra("document", document);
+		 
+		 i.putExtra("numpower", numpower);
+		 i.putExtra("numengine", numengine);
+		 i.putExtra("numexterior", numexterior);
+		 i.putExtra("numinterior", numinterior);
+		 i.putExtra("numdocument", numdocument);
 		startActivity(i);
 		finish();
 	}

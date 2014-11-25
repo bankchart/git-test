@@ -275,7 +275,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		store = new Bundle();
 		db = new DBCarCheckList(this);
 
-		intent = new Intent(getBaseContext(), RecordActivity.class);
+		intent = new Intent(getApplicationContext(), RecordActivity.class);
 
 		// getSettingShared();
 
@@ -325,12 +325,20 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		int top595 = (int) ((height / 100) * 75);
 		int top610 = (int) ((height / 100) * 76);
 
-		Intent intent = getIntent();
+		Intent intent = getIntent();		
 		PercenPower = intent.getIntExtra("power", PercenPower);
 		PercenEngine = intent.getIntExtra("engine", PercenEngine);
 		PercenExterior = intent.getIntExtra("exterior", PercenExterior);
 		PercenInterior = intent.getIntExtra("interior", PercenInterior);
 		PercenDocument = intent.getIntExtra("document", PercenDocument);
+		
+		// follow : get data from shared preferences 
+		/*SharedPreferences memo = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		PercenPower =  memo.getInt("PercenPower", 0);
+		PercenEngine =  memo.getInt("PercenEngine", 0);
+		PercenExterior =  memo.getInt("PercenExterior", 0);
+		PercenInterior =  memo.getInt("PercenInterior", 0);
+		PercenDocument =  memo.getInt("PercenDocument", 0);*/
 
 		CheckPowerTotal = intent.getIntExtra("numpower", CheckPowerTotal);
 		CheckEngineTotal = intent.getIntExtra("numengine", CheckEngineTotal);
@@ -572,7 +580,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-
+		adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 		// adView.loadAd(new AdRequest.Builder().build());
 		SharedPreferences shared = getSharedPreferences("mysettings",
@@ -580,6 +588,9 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		Log.i("checksum",
 				"before call CheckRatio : " + shared.getInt("checknum", 0));
 		CheckRatio();
+		//Log.i("checklist", "checking percenpower : " + shared.getInt("PercenPower", -1));
+		
+		//restoreProgressCheckList();
 	}
 
 	private List<Map> restoreCheckList() {
@@ -630,14 +641,14 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			sqliteList.close();
 			dbList.close();
 
-			int[] test = ex.getPercentAllList();
+			int[] expand = ex.getPercentAllList();
 			// IT'S WORK FOR TEST
 			// ****************************************************************
-			PercenPower = test[0];
-			PercenEngine = test[1];
-			PercenExterior = test[2];
-			PercenInterior = test[3];
-			PercenDocument = test[4];
+			PercenPower = expand[0];
+			PercenEngine = expand[1];
+			PercenExterior = expand[2];
+			PercenInterior = expand[3];
+			PercenDocument = expand[4];
 			// IT'S WORK FOR TEST
 			// ****************************************************************
 		} else {
@@ -3256,9 +3267,8 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 										getIntent().removeExtra("exterior");
 										getIntent().removeExtra("interior");
 										getIntent().removeExtra("document");
-										finish();
-										
 										startActivity(intent);
+										finish();
 										
 									}
 								}).show();
@@ -3337,7 +3347,18 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 						+ "|" + engineWeight + "|" + exteriorWeight + "|"
 						+ interiorWeight + "|" + documentWeight;
 				Log.i("display", display);
-
+				
+				Log.i("checklist", "" + PercenPower);
+				Log.i("checklist", "" + PercenEngine);
+				Log.i("checklist", "" + PercenExterior);
+				Log.i("checklist", "" + PercenInterior);
+				Log.i("checklist", "" + PercenDocument);
+				
+				// checking scope
+				isSaveCheckBox();
+				//progressCheckListLog();
+				// checking scope
+				
 				CarCheckListActivity.this.startActivity(intent);
 				finish();
 			}
@@ -3548,7 +3569,16 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		int sumexterior = exteriorseekbarValue + 1;
 		int suminterior = interiorseekbarValue + 1;
 		int sumdocument = documentseekbarValue + 1;
-
+// bank's code
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		Editor editor = shared.edit();
+		editor.putInt("PercenPower", PercenPower);
+		editor.putInt("PercenEngine", PercenEngine);
+		editor.putInt("PercenExterior", PercenExterior);
+		editor.putInt("PercenInterior", PercenInterior);
+		editor.putInt("PercenDocument", PercenDocument);
+		editor.commit();
+// bank's code
 		sumPriority = sumpower + sumengine + sumexterior + suminterior
 				+ sumdocument;
 
@@ -3574,6 +3604,15 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		editor.commit();
 		Log.d("persenRatio", "" + PercenRatio);
 
+		// bank's code
+		editor.putInt("CheckExteriorTotal", CheckExteriorTotal);
+		editor.putInt("CheckInteriorTotal", CheckInteriorTotal);
+		editor.putInt("CheckPowerTotal", CheckPowerTotal);
+		editor.putInt("CheckEngineTotal", CheckEngineTotal);
+		editor.putInt("CheckDocumentTotal", CheckDocumentTotal);
+		editor.commit();
+		// bank's code
+		
 	}
 
 	public void CheckRatio() {
@@ -3582,6 +3621,43 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				Context.MODE_PRIVATE);
 		Checknum = shared.getInt("checknum", 0);
 		PercenRatio = shared.getInt("percenRatio", PercenRatio);
+		
+		PercenPower = shared.getInt("PercenPower", PercenPower);
+		PercenEngine = shared.getInt("PercenEngine", PercenEngine);
+		PercenExterior = shared.getInt("PercenExterior", PercenExterior);
+		PercenInterior = shared.getInt("PercenInterior", PercenInterior);
+		PercenDocument = shared.getInt("PercenDocument", PercenDocument);
+		
+		CheckExteriorTotal = shared.getInt("CheckExteriorTotal", 0);
+		CheckInteriorTotal = shared.getInt("CheckInteriorTotal", 0);
+		CheckPowerTotal = shared.getInt("CheckPowerTotal", 0);
+		CheckEngineTotal = shared.getInt("CheckEngineTotal", 0);
+		CheckDocumentTotal = shared.getInt("CheckDocumentTotal", 0);
+		
+		Checknum = shared.getInt("checknum", 0);
+		
+		// check value
+		Log.i("checklist", "PercenPower : " + PercenPower);
+		Log.i("checklist", "PercenEngine : " + PercenEngine);
+		Log.i("checklist", "PercenExterior : " + PercenExterior);
+		Log.i("checklist", "PercenInterior : " + PercenInterior);
+		Log.i("checklist", "PercenDocument : " + PercenDocument);
+		Log.i("checklist", "PercenRatio : " + PercenRatio);
+		Log.i("checklist", "Checknum : " + Checknum);
+		// check value
+		
+		PowerProgress.setProgress(PercenPower);
+		EngineProgress.setProgress(PercenEngine);
+		ExteriorProgress.setProgress(PercenExterior);
+		InteriorProgress.setProgress(PercenInterior);
+		DocumentProgress.setProgress(PercenDocument);
+		
+		percenpower.setText("" + PercenPower + "%");
+		percenengine.setText("" + PercenEngine + "%");
+		percenexterior.setText("" + PercenExterior + "%");
+		perceninterior.setText("" + PercenInterior + "%");
+		percendocument.setText("" + PercenDocument + "%");
+		
 		Log.i("Checknum", "Checknum in CHECKRATIO : " + Checknum);
 		Log.i("PercenRatio", "PercenRatio >>>> " + PercenRatio);
 		if (Checknum > 0) {
@@ -3594,6 +3670,9 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			Ratiotext.setVisibility(TextView.INVISIBLE);
 			RatioProgress.setVisibility(ProgressBar.INVISIBLE);
 		}
+		
+		
+		
 	}
 
 	public void getprogressValue() {
@@ -3775,8 +3854,44 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 		}
 	}
+	
+	/*private void progressCheckListLog(){
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		Log.i("progressCheckListLog", "percent power : " + shared.getInt("PercenPower", 0));
+		Log.i("progressCheckListLog", "percent engine : " + shared.getInt("PercenEngine", 0));
+		Log.i("progressCheckListLog", "percent exterior : " + shared.getInt("PercenExterior", 0));
+		Log.i("progressCheckListLog", "percent interior : " + shared.getInt("PercenInterior", 0));
+		Log.i("progressCheckListLog", "percent document : " + shared.getInt("PercenDocument", 0));
+	}*/
+
+	/*private void restoreProgressCheckList(){
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		PercenPower = shared.getInt("PercenPower", 0);
+		PercenEngine = shared.getInt("PercenEngine", 0);
+		PercenExterior = shared.getInt("PercenExterior", 0);
+		PercenInterior = shared.getInt("PercenInterior", 0);
+		PercenDocument = shared.getInt("PercenDocument", 0);
+		
+		PowerProgress.setProgress(PercenPower);
+		EngineProgress.setProgress(PercenEngine);
+		ExteriorProgress.setProgress(PercenExterior);
+		InteriorProgress.setProgress(PercenInterior);
+		DocumentProgress.setProgress(PercenDocument);
+	}*/
+	
+	/*private void progressCheckListMemo(){
+		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		Editor editor = shared.edit();
+		editor.putInt("PowerProgressbar", PercenPower);
+		editor.putInt("EngineProgressbar", PercenEngine);
+		editor.putInt("ExteriorProgressbar", PercenExterior);
+		editor.putInt("InteriorProgressbar", PercenInterior);
+		editor.putInt("DocumentProgressbar", PercenDocument);
+		editor.commit();
+	}*/
 
 	public void filterStore(String menuName, Map<String, Boolean> mp) {
+		//progressCheckListMemo();
 		SharedPreferences sharedPreferences = getSharedPreferences(
 				"mysettings", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -3784,8 +3899,6 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		Log.i("filter", "infileter : " + menuName);
 		for (Map.Entry<String, Boolean> entry : mp.entrySet()) {
 			editor.putBoolean(entry.getKey(), entry.getValue());
-
-			// Log.d("Key", "" + entry.getKey());
 
 			editor.commit();
 			String result = (entry.getValue()) ? "t" : "f";
@@ -3822,6 +3935,12 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		// CHECK
 		// ------------------------------------------------------------------------------------
 		// checkBug("ON CANCEL ");
+		editor.putInt("PercenPower", PercenPower);
+		editor.putInt("PercenEngine", PercenEngine);
+		editor.putInt("PercenExterior", PercenExterior);
+		editor.putInt("PercenInterior", PercenInterior);
+		editor.putInt("PercenDocument", PercenDocument);
+		editor.commit();
 	}
 
 	// CHECK

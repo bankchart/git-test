@@ -199,6 +199,8 @@ public class RecordActivity extends Activity {
 		recordLayout = (RelativeLayout) findViewById(R.id.recordLayout);
 		saveForm = (TableLayout) findViewById(R.id.saveForm);
 
+		
+		
 		saveBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -263,7 +265,7 @@ public class RecordActivity extends Activity {
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-
+		adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 
 	}
@@ -272,21 +274,21 @@ public class RecordActivity extends Activity {
 		Intent i = new Intent(getApplicationContext(),
 				CarCheckListActivity.class);
 		finish();
-		SharedPreferences shared = getSharedPreferences("mysettings",
+		/*SharedPreferences shared = getSharedPreferences("mysettings",
 				MODE_PRIVATE);
 		Editor editor = shared.edit();
 		editor.clear();
-		editor.commit();
+		editor.commit();*/
 		startActivity(i);
 	}
 
 	@Override
 	public void onBackPressed() {
-		SharedPreferences shared = getSharedPreferences("mysettings",
+		/*SharedPreferences shared = getSharedPreferences("mysettings",
 				Context.MODE_PRIVATE);
 		Editor editor = shared.edit();
 		editor.clear();
-		editor.commit();
+		editor.commit();*/
 		finish();
 	}
 

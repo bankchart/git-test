@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -77,6 +78,12 @@ public class ListSaveActivity extends Activity {
 				finish();
 			}
 		});
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
+				return false;
+			}
+		});
 
 		Button btnBack = (Button) findViewById(R.id.btnBack);
 		btnBack.setOnClickListener(new OnClickListener() {
@@ -117,7 +124,7 @@ public class ListSaveActivity extends Activity {
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-
+		adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 		
 		checkBug("last onCreate");
