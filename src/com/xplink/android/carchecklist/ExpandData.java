@@ -1,15 +1,22 @@
 package com.xplink.android.carchecklist;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 public class ExpandData {
-
+	
+	private Context context;
+	private SharedPreferences shared;
+	private Editor editor;
+	
 	private Map<String, Integer> settingsMap;
 	private Map<String, Boolean> checklistsMap;
 	private String settings;
@@ -36,6 +43,11 @@ public class ExpandData {
 	private double percentPower = 0, percentEngin = 0, percentExterior = 0;
 	private double percentInterior = 0, percentDocument = 0, percentRatio = 0;
 
+	public ExpandData(Context context){
+		this.context = context;
+		shared = this.context.getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		editor = shared.edit();
+	}
 	public int[] getPercentAllList() {
 		double percentPower = 0, percentEngine = 0, percentExterior = 0;
 		double percentInterior = 0, percentDocument = 0, percentRatio = 0;
@@ -75,26 +87,40 @@ public class ExpandData {
 				}
 			}
 		}
+		
 		percentPower = numPower * 100 / POWER;
 		percentEngine = numEngine * 100 / ENGINE;
 		percentExterior = numExterior * 100 / EXTERIOR;
 		percentInterior = numInterior * 100 / INTERIOR;
 		percentDocument = numDocument * 100 / DOCUMENT;
-
+		
 		println("percentPower : " + numPower);
 		println("percentEngine : " + numEngine);
 		println("percentExterior : " + numExterior);
 		println("percentInterior : " + numInterior);
 		println("percentDocument : " + numDocument);
 
+		editor.putInt("PercenPower", (int) percentPower);
+		editor.putInt("PercenEngine", (int) percentEngine);
+		editor.putInt("PercenExterior", (int) percentExterior);
+		editor.putInt("PercenIntrior", (int) percentInterior);
+		editor.putInt("PercenDocument", (int) percentDocument);
+		
+		editor.putInt("CheckPowerTotal", numPower);
+		editor.putInt("CheckEngineTotal", numEngine);
+		editor.putInt("CheckExteriorTotal", numExterior);
+		editor.putInt("CheckInteriorTotal", numInterior);
+		editor.putInt("CheckDocumentTotal", numDocument);
+		
+		editor.commit();
 		
 		int percents[] = new int[] { (int) percentPower, (int) percentEngine,
 				(int) percentExterior, (int) percentInterior,
 				(int) percentDocument, (int) percentRatio };
 
-		for (int n : percents) {
+		/*for (int n : percents) {
 			println("allpercent : " + n);
-		}
+		}*/
 
 		return percents;
 	}
@@ -185,13 +211,13 @@ public class ExpandData {
 	public void displayMap(Map<String, Boolean> mapList,
 			Map<String, Integer> mapSetting) {
 
-		for (Map.Entry<String, Boolean> entry : mapList.entrySet()) {
+		/*for (Map.Entry<String, Boolean> entry : mapList.entrySet()) {
 			println(entry.getKey() + " : " + entry.getValue());
-		}
+		}*/
 		println("------------------------");
-		for (Map.Entry<String, Integer> entry : mapSetting.entrySet()) {
+		/*for (Map.Entry<String, Integer> entry : mapSetting.entrySet()) {
 			println(entry.getKey() + " : " + entry.getValue());
-		}
+		}*/
 
 	}
 

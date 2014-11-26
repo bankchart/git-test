@@ -19,7 +19,7 @@ public class DBCarCheckList extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-    	Log.d("onCreate", "onCreate");
+    	//Log.d("onCreate", "onCreate");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_USERNAME + " VARCHAR(25), " + COL_CHECKLIST + " TEXT);");
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" + COL_USERNAME + ", " + COL_CHECKLIST +

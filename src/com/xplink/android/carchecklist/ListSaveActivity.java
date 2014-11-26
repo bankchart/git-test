@@ -6,6 +6,7 @@ import com.google.android.gms.ads.AdView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -75,11 +76,11 @@ public class ListSaveActivity extends Activity {
 				edit.putInt("CheckDocumentTotal", checkNumDocumentTotal);
 				edit.commit();
 
-				Log.i("stateGetList",
-						"stateGetList >>> "
-								+ shared.getBoolean("stateGetList", false));
-				Log.i("indexList",
-						"indexList >>> " + shared.getInt("indexList", -1));
+				/*
+				 * Log.i("stateGetList", "stateGetList >>> " +
+				 * shared.getBoolean("stateGetList", false)); Log.i("indexList",
+				 * "indexList >>> " + shared.getInt("indexList", -1));
+				 */
 				Intent i = new Intent(getApplicationContext(),
 						CarCheckListActivity.class);
 				startActivity(i);
@@ -90,29 +91,40 @@ public class ListSaveActivity extends Activity {
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-			
-				
-				
-				AlertDialog.Builder delete = new AlertDialog.Builder(ListSaveActivity.this);
+
+				final int pos = position;
+
+				AlertDialog.Builder delete = new AlertDialog.Builder(
+						ListSaveActivity.this);
 				delete.setTitle("Delete");
 				delete.setMessage("Do you want to delete data ?");
-				delete.setPositiveButton("Cancel",new AlertDialog.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int arg1){
-						
-					}
-				});
-				delete.setNegativeButton("Ok",new AlertDialog.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int arg1){
-						
-					}
-				});
+				delete.setPositiveButton("Cancel",
+						new AlertDialog.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int arg1) {
+								// do nothing
+							}
+						});
+				delete.setNegativeButton("Ok",
+						new AlertDialog.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int arg1) {
+								int id = getId(pos);
+								if (id > -1) {
+									delete(id);
+									Intent i = new Intent(
+											getApplicationContext(),
+											ListSaveActivity.class);
+									startActivity(i);
+									finish();
+								}
+							}
+						});
 				delete.show();
 				return true;
 			}
 		});
-		
+
 		Button btnBack = (Button) findViewById(R.id.btnBack);
 		btnBack.setOnClickListener(new OnClickListener() {
 			@Override
@@ -154,10 +166,43 @@ public class ListSaveActivity extends Activity {
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 		adRequestBuilder.addTestDevice("C17E5F3A146EC7E805175C72634D8098");
-		//adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
+		// adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 
 		checkBug("last onCreate");
+	}
+
+	private void delete(int id) {
+		DBCarCheckList car = new DBCarCheckList(getApplicationContext());
+		SQLiteDatabase db = car.getWritableDatabase();
+		// String sql = "DELETE FROM " + car.TABLE_NAME + " WHERE id = ?";
+		db.delete(car.TABLE_NAME, "id = ?", new String[] { String.valueOf(id) });
+		db.close();
+		car.close();
+	}
+
+	private int getId(int pos) {
+		DBCarCheckList car = new DBCarCheckList(getApplicationContext());
+		SQLiteDatabase db = car.getReadableDatabase();
+		String sql = "SELECT * FROM " + car.TABLE_NAME;
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+		int count = 0;
+		int id = -1;
+		while (cursor != null) {
+			if (cursor.isAfterLast())
+				break;
+			if (pos == count) {
+				// Log.i("checkdelete", "pos : " + pos + ", count : " + count);
+				id = Integer.parseInt(cursor.getString(0));
+			}
+			count++;
+			cursor.moveToNext();
+		}
+		cursor.close();
+		db.close();
+		car.close();
+		return id;
 	}
 
 	private String[] getUsernames() {
@@ -181,7 +226,7 @@ public class ListSaveActivity extends Activity {
 			String data = cursor.getString(2);
 			String display = "id : " + id + ", username : " + username
 					+ ", data : " + data;
-			Log.i("result", display);
+			// Log.i("result", display);
 			list[index] = (index + 1) + ". " + username;
 			index++;
 			if (cursor.isLast())
@@ -207,15 +252,22 @@ public class ListSaveActivity extends Activity {
 		checkNumInteriorTotal = tmp4;
 		int tmp5 = shared.getInt("CheckDocumentTotal", 0);
 		checkNumDocumentTotal = tmp5;
-		println(pointerName + " - CheckPowerTotal : " + tmp1);
-		println("CheckEngineTotal : " + tmp2);
-		println("CheckExteriorTotal : " + tmp3);
-		println("CheckInteriorTotal : " + tmp4);
-		println("CheckDocumentTotal : " + tmp5);
+		/*
+		 * println(pointerName + " - CheckPowerTotal : " + tmp1);
+		 * println("CheckEngineTotal : " + tmp2);
+		 * println("CheckExteriorTotal : " + tmp3);
+		 * println("CheckInteriorTotal : " + tmp4);
+		 * println("CheckDocumentTotal : " + tmp5);
+		 */
 	}
 
 	private void println(String str) {
 		Log.i("CheckNumTotal", str);
 	}
-
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplicationContext(), CarCheckListActivity.class);
+		startActivity(i);
+		finish();
+	}
 }

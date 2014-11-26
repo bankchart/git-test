@@ -96,9 +96,9 @@ public class RecordActivity extends Activity {
 						+ documentWeight + "|";
 				Bundle intent = getIntent().getExtras();
 
-				Log.i("checkList",
-						"power >>>>>>>>>>> "
-								+ shared.getString("power", "empty"));
+			//	Log.i("checkList",
+			//			"power >>>>>>>>>>> "
+			//					+ shared.getString("power", "empty"));
 
 				String powerChecklist = "null";
 				String engineChecklist = "null";
@@ -140,20 +140,20 @@ public class RecordActivity extends Activity {
 						+ "|" + documentChecklist;
 
 				String all = allChecklist + "&" + allWeight;
-				Log.i("display_inserted", "inserted : " + all);
+			//	Log.i("display_inserted", "inserted : " + all);
 
 				String insertSql = "insert into " + db.TABLE_NAME + "("
 						+ db.COL_USERNAME + ", " + db.COL_CHECKLIST
 						+ ") VALUES ( '" + username + "', '" + all + "')";
 				sqliteDB.execSQL(insertSql);
-				Log.i("writable", "completed.");
+			//	Log.i("writable", "completed.");
 				sqliteDB.close();
 				db.close();
 				sqliteDB = db.getReadableDatabase();
 				String querySql = "select * from " + db.TABLE_NAME;
 				Cursor x = sqliteDB.rawQuery(querySql, null);
 				x.moveToFirst();
-				Log.i("cnt_table", "count of table : " + x.getCount());
+			//	Log.i("cnt_table", "count of table : " + x.getCount());
 
 				while (x != null) {
 					String id = x.getString(0);
@@ -161,7 +161,7 @@ public class RecordActivity extends Activity {
 					String data = x.getString(2);
 					String display = "id : " + id + ", username : " + username2
 							+ ", data : " + data;
-					Log.i("result", display);
+				//	Log.i("result", display);
 					if (x.isLast())
 						break;
 					x.moveToNext();
@@ -290,7 +290,10 @@ public class RecordActivity extends Activity {
 		Editor editor = shared.edit();
 		editor.clear();
 		editor.commit();*/
+		Intent i = new Intent(getApplicationContext(),
+				CarCheckListActivity.class);
 		finish();
+		startActivity(i);
 	}
 
 }

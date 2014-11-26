@@ -111,6 +111,12 @@ import com.google.ads.*;
 		"DrawAllocation" })
 public class CarCheckListActivity extends Activity implements AnimationListener {
 
+	private final int ENGINE = 11;
+	private final int POWER = 28;
+	private final int EXTERIOR = 9;
+	private final int INTERIOR = 15;
+	private final int DOCUMENT = 9;
+	
 	private int powerWeight, engineWeight, exteriorWeight, interiorWeight,
 			documentWeight;
 	private static final int Integer = 0;
@@ -197,9 +203,9 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		// Toast.LENGTH_LONG);
 		SharedPreferences shared = getSharedPreferences("mysettings",
 				Context.MODE_PRIVATE);
-		Log.i("isSaveCheckBox",
-				"isSaveCheckBox : "
-						+ shared.getBoolean("power_headLight", false));
+		// Log.i("isSaveCheckBox",
+		// / "isSaveCheckBox : "
+		// + shared.getBoolean("power_headLight", false));
 	}
 
 	/** Called when the activity is first created. */
@@ -218,33 +224,81 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			Map<String, Boolean> mapList = listValue.get(0);
 			Map<String, Integer> mapSetting = listValue.get(1);
 			int countChecknum = 0;
+			int numPowerChecked = 0;
+			int numEngineChecked = 0;
+			int numExteriorChecked = 0;
+			int numInteriorChecked = 0;
+			int numDocumentChecked = 0;
+
 			for (Map.Entry<String, Boolean> entry : mapList.entrySet()) {
-				
+
 				String[] tmp = entry.getKey().split("\\_");
-				
+				Log.i("checkkeyvalue", tmp[0] + " : " + tmp[1]);
 				String key = tmp[0];
-				
-				if ("interior".equals(key)) {
-					if (entry.getValue())
+
+				if ("inside".equals(key)) {
+					if (entry.getValue()) {
 						getTotalInterior(true);
+						numInteriorChecked++;
+						Log.i("checkbox", "numInteriorChecked : " + numInteriorChecked);
+					}
 				} else if ("power".equals(key)) {
-					if (entry.getValue())
+					if (entry.getValue()) {
 						getTotalPower(true);
+						numPowerChecked++;
+						Log.i("checkbox", "numPowerChecked : " + numPowerChecked);
+					}
 				} else if ("engine".equals(key)) {
-					if (entry.getValue())
+					if (entry.getValue()) {
 						getTotalEngine(true);
-				} else if ("exterior".equals(key)) {
-					if (entry.getValue())
+						numEngineChecked++;
+						Log.i("checkbox", "numEngineChecked : " + numEngineChecked);
+					}
+				} else if ("outside".equals(key)) {
+					if (entry.getValue()) {
 						getTotalExterior(true);
-				} else {
-					if (entry.getValue())
-						getTotalExterior(true);
+						numExteriorChecked++;
+						Log.i("checkbox", "numExteriorChecked : " + numExteriorChecked);
+					}
+				} else if("doc".equals(key)){
+					if (entry.getValue()) {
+						getTotalDocument(true);
+						numDocumentChecked++;
+						Log.i("checkbox", "numDocumentChecked : " + numDocumentChecked);
+					}
 				}
 				edit.putBoolean(entry.getKey(), entry.getValue());
 				// println(entry.getKey() + " : " + entry.getValue());
 			}
 			Checknum = countChecknum;
+			
+			edit.putInt("CheckPowerTotal", numPowerChecked);
+			edit.putInt("CheckEngineTotal", numEngineChecked);
+			edit.putInt("CheckExteriorTotal", numExteriorChecked);
+			edit.putInt("CheckInteriorTotal", numInteriorChecked);
+			edit.putInt("CheckDocumentTotal", numDocumentChecked);
+			
 			edit.commit();
+			
+			CheckPowerTotal = restoreShared.getInt("CheckPowerTotal", 0);
+			CheckEngineTotal = restoreShared.getInt("CheckEngineTotal", 0);
+			CheckExteriorTotal = restoreShared.getInt("CheckExteriorTotal", 0);
+			CheckInteriorTotal = restoreShared.getInt("CheckInteriorTotal", 0);
+			CheckDocumentTotal = restoreShared.getInt("CheckDocumentTotal", 0);
+			
+			Log.i("checklist", "in listValue - numPowerChecked : " + numPowerChecked);
+			Log.i("checklist", "numEngineChecked : " + numEngineChecked);
+			Log.i("checklist", "numExteriorChecked : " + numExteriorChecked);
+			Log.i("checklist", "numInteriorChecked : " + numInteriorChecked);
+			Log.i("checklist", "numDocumentChecked : " + numDocumentChecked);
+			
+			Log.i("checklist", "CheckPowerTotal : " + CheckPowerTotal);
+			Log.i("checklist", "CheckEngineTotal : " + CheckEngineTotal);
+			Log.i("checklist", "CheckExteriorTotal : " + CheckExteriorTotal);
+			Log.i("checklist", "CheckInteriorTotal : " + CheckInteriorTotal);
+			Log.i("checklist", "CheckDocumentTotal : " + CheckDocumentTotal);
+			
+			//edit.commit();
 			for (Map.Entry<String, Integer> entry : mapSetting.entrySet()) {
 
 				if ("interior".equals(entry.getKey())) {
@@ -271,7 +325,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			 */
 		}
 		// ************************************************************************************
-		//isSaveCheckBox();
+		// isSaveCheckBox();
 		store = new Bundle();
 		db = new DBCarCheckList(this);
 
@@ -279,7 +333,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 		// getSettingShared();
 
-		Log.i("dbcarchecklist", "create object DBCarCheckList");
+		// Log.i("dbcarchecklist", "create object DBCarCheckList");
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -325,20 +379,22 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		int top595 = (int) ((height / 100) * 75);
 		int top610 = (int) ((height / 100) * 76);
 
-		Intent intent = getIntent();		
+		Intent intent = getIntent();
 		PercenPower = intent.getIntExtra("power", PercenPower);
 		PercenEngine = intent.getIntExtra("engine", PercenEngine);
 		PercenExterior = intent.getIntExtra("exterior", PercenExterior);
 		PercenInterior = intent.getIntExtra("interior", PercenInterior);
 		PercenDocument = intent.getIntExtra("document", PercenDocument);
-		
-		// follow : get data from shared preferences 
-		/*SharedPreferences memo = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-		PercenPower =  memo.getInt("PercenPower", 0);
-		PercenEngine =  memo.getInt("PercenEngine", 0);
-		PercenExterior =  memo.getInt("PercenExterior", 0);
-		PercenInterior =  memo.getInt("PercenInterior", 0);
-		PercenDocument =  memo.getInt("PercenDocument", 0);*/
+
+		// follow : get data from shared preferences
+		/*
+		 * SharedPreferences memo = getSharedPreferences("mysettings",
+		 * Context.MODE_PRIVATE); PercenPower = memo.getInt("PercenPower", 0);
+		 * PercenEngine = memo.getInt("PercenEngine", 0); PercenExterior =
+		 * memo.getInt("PercenExterior", 0); PercenInterior =
+		 * memo.getInt("PercenInterior", 0); PercenDocument =
+		 * memo.getInt("PercenDocument", 0);
+		 */
 
 		CheckPowerTotal = intent.getIntExtra("numpower", CheckPowerTotal);
 		CheckEngineTotal = intent.getIntExtra("numengine", CheckEngineTotal);
@@ -349,7 +405,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		CheckDocumentTotal = intent.getIntExtra("numdocument",
 				CheckDocumentTotal);
 
-		Log.d("percen", "" + PercenPower);
+		// Log.d("percen", "" + PercenPower);
 
 		type = Typeface.createFromAsset(getAssets(), "Circular.ttf");
 
@@ -575,24 +631,25 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		LinearLayout layout = (LinearLayout) findViewById(R.id.admob);
 		adView = new AdView(getApplicationContext());
 		adView.setAdSize(AdSize.LEADERBOARD);
-		//adView.setAdUnitId(admonId);
-		adView.setAdUnitId("C17E5F3A146EC7E805175C72634D8098");
+		 adView.setAdUnitId(admonId);
+		//adView.setAdUnitId("C17E5F3A146EC7E805175C72634D8098");
 		// Add the adView to it
 		layout.addView(adView);
 		// Initiate a generic request to load it with an ad
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 		adRequestBuilder.addTestDevice("C17E5F3A146EC7E805175C72634D8098");
-		//adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
+		// adRequestBuilder.addTestDevice("9F5DF3C9768A51CB506B68902F766B40");
 		adView.loadAd(adRequestBuilder.build());
 		// adView.loadAd(new AdRequest.Builder().build());
 		SharedPreferences shared = getSharedPreferences("mysettings",
 				Context.MODE_PRIVATE);
-		Log.i("checksum",
-				"before call CheckRatio : " + shared.getInt("checknum", 0));
+		// Log.i("checksum",
+		// "before call CheckRatio : " + shared.getInt("checknum", 0));
 		CheckRatio();
-		//Log.i("checklist", "checking percenpower : " + shared.getInt("PercenPower", -1));
-		
-		//restoreProgressCheckList();
+		// Log.i("checklist", "checking percenpower : " +
+		// shared.getInt("PercenPower", -1));
+
+		// restoreProgressCheckList();
 	}
 
 	private List<Map> restoreCheckList() {
@@ -606,7 +663,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		int indexList = shared.getInt("indexList", -1);
 
 		if (stateGetList) {
-			Log.i("inCheck_satetGetList", "inCheck_stateGetList");
+			// Log.i("inCheck_satetGetList", "inCheck_stateGetList");
 			DBCarCheckList dbList = new DBCarCheckList(this);
 			SQLiteDatabase sqliteList = dbList.getReadableDatabase();
 			String sqlList = "SELECT * FROM " + dbList.TABLE_NAME;
@@ -634,7 +691,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 			Cursor cursor2 = sqliteList.rawQuery(sqlList, null);
 			cursor2.moveToFirst();
-			ExpandData ex = new ExpandData();
+			ExpandData ex = new ExpandData(getApplicationContext());
 			tmpList = ex.filterData(cursor2.getString(2));
 			ex.displayMap(tmpList.get(0), tmpList.get(1));
 			check = " , data : " + cursor2.getString(2);
@@ -650,14 +707,23 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			PercenEngine = expand[1];
 			PercenExterior = expand[2];
 			PercenInterior = expand[3];
-			PercenDocument = expand[4];
+			PercenDocument = expand[4];	
+			
+			/*CheckPowerTotal = shared.getInt("CheckPowerTotal", 0);
+			CheckEngineTotal = shared.getInt("CheckEngineTotal", 0);
+			CheckExteriorTotal = shared.getInt("CheckExteriorTotal", 0);
+			CheckInteriorTotal = shared.getInt("CheckInteriorTotal", 0);
+			CheckDocumentTotal = shared.getInt("CheckDocumentTotal", 0);*/
+			
+			
+			
 			// IT'S WORK FOR TEST
 			// ****************************************************************
 		} else {
 			Log.i("inCheck_satetGetList", "out stateGetList");
 		}
-		Log.i("stateGetList2", "stateGetList >--->>" + stateGetList + check);
-		Log.i("indexList", "getIndexList >>>>>>> " + indexList);
+		// Log.i("stateGetList2", "stateGetList >--->>" + stateGetList + check);
+		// Log.i("indexList", "getIndexList >>>>>>> " + indexList);
 		if (stateGetList) {
 			Editor edit = shared.edit();
 			edit.clear();
@@ -3230,48 +3296,94 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 												Context.MODE_PRIVATE);
 										sharedPreferences.edit().clear()
 												.commit();
-										
-										/*int CheckDocumentTotal, CheckPowerTotal, CheckEngineTotal,
-										CheckExteriorTotal, CheckInteriorTotal, PercenDocument,
-										PercenPower, PercenEngine, PercenExterior, PercenInterior,
-										PercenRatio, Checknum, powerseekbarValue, engineseekbarValue,
-										exteriorseekbarValue, interiorseekbarValue, documentseekbarValue,
-										sumPriority, PowerPriority, EnginePriority, ExteriorPriority,
-										InteriorPriority, DocumentPriority, documentprogressValue;*/
-										
-										/*Log.i("checkreset", "BEFORE CLEAR -> CheckDocumentTotal : " + CheckDocumentTotal);
-										Log.i("checkreset", "CheckPowerTotal : " + CheckPowerTotal);
-										Log.i("checkreset", "CheckEngineTotal : " + CheckEngineTotal);
-										Log.i("checkreset", "CheckExteriorTotal : " + CheckExteriorTotal);
-										Log.i("checkreset", "CheckInteriorTotal : " + CheckInteriorTotal);
-										Log.i("checkreset", "PercenDocument : " + PercenDocument);
-										Log.i("checkreset", "PercenPower : " + PercenPower);
-										Log.i("checkreset", "PercenEngine : " + PercenEngine);
-										Log.i("checkreset", "PercenExterior : " + PercenExterior);
-										Log.i("checkreset", "PercenInterior : " + PercenInterior);
-										Log.i("checkreset", "PercenRatio : " + PercenRatio);
-										Log.i("checkreset", "Checknum : " + Checknum);
-										Log.i("checkreset", "powerseekbarValue : " + powerseekbarValue);
-										Log.i("checkreset", "engineseekbarValue : " + engineseekbarValue);
-										Log.i("checkreset", "interiorseekbarValue : " + interiorseekbarValue);
-										Log.i("checkreset", "exteriorseekbarValue : " + exteriorseekbarValue);
-										Log.i("checkreset", "documentseekbarValue : " + documentseekbarValue);
-										Log.i("checkreset", "sumPriority : " + sumPriority);
-										Log.i("checkreset", "PowerPriority : " + PowerPriority);
-										Log.i("checkreset", "EnginePriority : " + EnginePriority);
-										Log.i("checkreset", "ExteriorPriority : " + ExteriorPriority);
-										Log.i("checkreset", "InteriorPriority : " + InteriorPriority);
-										Log.i("checkreset", "DocumentPriority : " + DocumentPriority);*/
-										
-										
+
+										/*
+										 * int CheckDocumentTotal,
+										 * CheckPowerTotal, CheckEngineTotal,
+										 * CheckExteriorTotal,
+										 * CheckInteriorTotal, PercenDocument,
+										 * PercenPower, PercenEngine,
+										 * PercenExterior, PercenInterior,
+										 * PercenRatio, Checknum,
+										 * powerseekbarValue,
+										 * engineseekbarValue,
+										 * exteriorseekbarValue,
+										 * interiorseekbarValue,
+										 * documentseekbarValue, sumPriority,
+										 * PowerPriority, EnginePriority,
+										 * ExteriorPriority, InteriorPriority,
+										 * DocumentPriority,
+										 * documentprogressValue;
+										 */
+
+										/*
+										 * Log.i("checkreset",
+										 * "BEFORE CLEAR -> CheckDocumentTotal : "
+										 * + CheckDocumentTotal);
+										 * Log.i("checkreset",
+										 * "CheckPowerTotal : " +
+										 * CheckPowerTotal); Log.i("checkreset",
+										 * "CheckEngineTotal : " +
+										 * CheckEngineTotal);
+										 * Log.i("checkreset",
+										 * "CheckExteriorTotal : " +
+										 * CheckExteriorTotal);
+										 * Log.i("checkreset",
+										 * "CheckInteriorTotal : " +
+										 * CheckInteriorTotal);
+										 * Log.i("checkreset",
+										 * "PercenDocument : " +
+										 * PercenDocument); Log.i("checkreset",
+										 * "PercenPower : " + PercenPower);
+										 * Log.i("checkreset", "PercenEngine : "
+										 * + PercenEngine); Log.i("checkreset",
+										 * "PercenExterior : " +
+										 * PercenExterior); Log.i("checkreset",
+										 * "PercenInterior : " +
+										 * PercenInterior); Log.i("checkreset",
+										 * "PercenRatio : " + PercenRatio);
+										 * Log.i("checkreset", "Checknum : " +
+										 * Checknum); Log.i("checkreset",
+										 * "powerseekbarValue : " +
+										 * powerseekbarValue);
+										 * Log.i("checkreset",
+										 * "engineseekbarValue : " +
+										 * engineseekbarValue);
+										 * Log.i("checkreset",
+										 * "interiorseekbarValue : " +
+										 * interiorseekbarValue);
+										 * Log.i("checkreset",
+										 * "exteriorseekbarValue : " +
+										 * exteriorseekbarValue);
+										 * Log.i("checkreset",
+										 * "documentseekbarValue : " +
+										 * documentseekbarValue);
+										 * Log.i("checkreset", "sumPriority : "
+										 * + sumPriority); Log.i("checkreset",
+										 * "PowerPriority : " + PowerPriority);
+										 * Log.i("checkreset",
+										 * "EnginePriority : " +
+										 * EnginePriority); Log.i("checkreset",
+										 * "ExteriorPriority : " +
+										 * ExteriorPriority);
+										 * Log.i("checkreset",
+										 * "InteriorPriority : " +
+										 * InteriorPriority);
+										 * Log.i("checkreset",
+										 * "DocumentPriority : " +
+										 * DocumentPriority);
+										 */
+
 										getIntent().removeExtra("power");
 										getIntent().removeExtra("engine");
 										getIntent().removeExtra("exterior");
 										getIntent().removeExtra("interior");
 										getIntent().removeExtra("document");
-										startActivity(intent);
+										//startActivity(intent);
+										Intent ii = new Intent(getApplicationContext(), CarCheckListActivity.class);
+										startActivity(ii);
 										finish();
-										
+
 									}
 								}).show();
 			}
@@ -3349,18 +3461,18 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 						+ "|" + engineWeight + "|" + exteriorWeight + "|"
 						+ interiorWeight + "|" + documentWeight;
 				Log.i("display", display);
-				
+
 				Log.i("checklist", "" + PercenPower);
 				Log.i("checklist", "" + PercenEngine);
 				Log.i("checklist", "" + PercenExterior);
 				Log.i("checklist", "" + PercenInterior);
 				Log.i("checklist", "" + PercenDocument);
-				
+
 				// checking scope
 				isSaveCheckBox();
-				//progressCheckListLog();
+				// progressCheckListLog();
 				// checking scope
-				
+
 				CarCheckListActivity.this.startActivity(intent);
 				finish();
 			}
@@ -3500,7 +3612,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		else
 			CheckExteriorTotal = CheckExteriorTotal - 1;
 
-		Log.d("check total = ", "" + CheckExteriorTotal);
+		// Log.d("check total = ", "" + CheckExteriorTotal);
 
 		PercenExterior();
 		Checknumcheckbox();
@@ -3509,7 +3621,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 	public void PercenExterior() {
 		PercenExterior = (CheckExteriorTotal * 100) / 9;
-		Log.d("check persen = ", "" + PercenExterior);
+		// Log.d("check persen = ", "" + PercenExterior);
 		Priority();
 	}
 
@@ -3521,7 +3633,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		else
 			CheckEngineTotal = CheckEngineTotal - 1;
 
-		Log.d("check total = ", "" + CheckEngineTotal);
+		// Log.d("check total = ", "" + CheckEngineTotal);
 
 		PercenEngine();
 		Checknumcheckbox();
@@ -3530,7 +3642,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 	public void PercenEngine() {
 		PercenEngine = (CheckEngineTotal * 100) / 11;
-		Log.d("check persen = ", "" + PercenEngine);
+		// Log.d("check persen = ", "" + PercenEngine);
 		Priority();
 	}
 
@@ -3571,8 +3683,9 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		int sumexterior = exteriorseekbarValue + 1;
 		int suminterior = interiorseekbarValue + 1;
 		int sumdocument = documentseekbarValue + 1;
-// bank's code
-		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+		// bank's code
+		SharedPreferences shared = getSharedPreferences("mysettings",
+				Context.MODE_PRIVATE);
 		Editor editor = shared.edit();
 		editor.putInt("PercenPower", PercenPower);
 		editor.putInt("PercenEngine", PercenEngine);
@@ -3580,7 +3693,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		editor.putInt("PercenInterior", PercenInterior);
 		editor.putInt("PercenDocument", PercenDocument);
 		editor.commit();
-// bank's code
+		// bank's code
 		sumPriority = sumpower + sumengine + sumexterior + suminterior
 				+ sumdocument;
 
@@ -3604,7 +3717,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		Editor editor = shared.edit();
 		editor.putInt("percenRatio", PercenRatio);
 		editor.commit();
-		Log.d("persenRatio", "" + PercenRatio);
+		// Log.d("persenRatio", "" + PercenRatio);
 
 		// bank's code
 		editor.putInt("CheckExteriorTotal", CheckExteriorTotal);
@@ -3614,30 +3727,30 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		editor.putInt("CheckDocumentTotal", CheckDocumentTotal);
 		editor.commit();
 		// bank's code
-		
+
 	}
 
 	public void CheckRatio() {
-		Log.i("checknum", "in checknum : " + Checknum);
+		// Log.i("checknum", "in checknum : " + Checknum);
 		SharedPreferences shared = getSharedPreferences("mysettings",
 				Context.MODE_PRIVATE);
 		Checknum = shared.getInt("checknum", 0);
 		PercenRatio = shared.getInt("percenRatio", PercenRatio);
-		
+
 		PercenPower = shared.getInt("PercenPower", PercenPower);
 		PercenEngine = shared.getInt("PercenEngine", PercenEngine);
 		PercenExterior = shared.getInt("PercenExterior", PercenExterior);
 		PercenInterior = shared.getInt("PercenInterior", PercenInterior);
 		PercenDocument = shared.getInt("PercenDocument", PercenDocument);
-		
+
 		CheckExteriorTotal = shared.getInt("CheckExteriorTotal", 0);
 		CheckInteriorTotal = shared.getInt("CheckInteriorTotal", 0);
 		CheckPowerTotal = shared.getInt("CheckPowerTotal", 0);
 		CheckEngineTotal = shared.getInt("CheckEngineTotal", 0);
 		CheckDocumentTotal = shared.getInt("CheckDocumentTotal", 0);
-		
+
 		Checknum = shared.getInt("checknum", 0);
-		
+
 		// check value
 		Log.i("checklist", "PercenPower : " + PercenPower);
 		Log.i("checklist", "PercenEngine : " + PercenEngine);
@@ -3647,21 +3760,21 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 		Log.i("checklist", "PercenRatio : " + PercenRatio);
 		Log.i("checklist", "Checknum : " + Checknum);
 		// check value
-		
+
 		PowerProgress.setProgress(PercenPower);
 		EngineProgress.setProgress(PercenEngine);
 		ExteriorProgress.setProgress(PercenExterior);
 		InteriorProgress.setProgress(PercenInterior);
 		DocumentProgress.setProgress(PercenDocument);
-		
+
 		percenpower.setText("" + PercenPower + "%");
 		percenengine.setText("" + PercenEngine + "%");
 		percenexterior.setText("" + PercenExterior + "%");
 		perceninterior.setText("" + PercenInterior + "%");
 		percendocument.setText("" + PercenDocument + "%");
-		
-		Log.i("Checknum", "Checknum in CHECKRATIO : " + Checknum);
-		Log.i("PercenRatio", "PercenRatio >>>> " + PercenRatio);
+
+		// Log.i("Checknum", "Checknum in CHECKRATIO : " + Checknum);
+		// Log.i("PercenRatio", "PercenRatio >>>> " + PercenRatio);
 		if (Checknum > 0) {
 			Ratiotext
 					.setText("Rating of the Vehicle.   " + PercenRatio + "  %");
@@ -3672,9 +3785,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 			Ratiotext.setVisibility(TextView.INVISIBLE);
 			RatioProgress.setVisibility(ProgressBar.INVISIBLE);
 		}
-		
-		
-		
+
 	}
 
 	public void getprogressValue() {
@@ -3856,49 +3967,53 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 
 		}
 	}
-	
-	/*private void progressCheckListLog(){
-		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-		Log.i("progressCheckListLog", "percent power : " + shared.getInt("PercenPower", 0));
-		Log.i("progressCheckListLog", "percent engine : " + shared.getInt("PercenEngine", 0));
-		Log.i("progressCheckListLog", "percent exterior : " + shared.getInt("PercenExterior", 0));
-		Log.i("progressCheckListLog", "percent interior : " + shared.getInt("PercenInterior", 0));
-		Log.i("progressCheckListLog", "percent document : " + shared.getInt("PercenDocument", 0));
-	}*/
 
-	/*private void restoreProgressCheckList(){
-		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-		PercenPower = shared.getInt("PercenPower", 0);
-		PercenEngine = shared.getInt("PercenEngine", 0);
-		PercenExterior = shared.getInt("PercenExterior", 0);
-		PercenInterior = shared.getInt("PercenInterior", 0);
-		PercenDocument = shared.getInt("PercenDocument", 0);
-		
-		PowerProgress.setProgress(PercenPower);
-		EngineProgress.setProgress(PercenEngine);
-		ExteriorProgress.setProgress(PercenExterior);
-		InteriorProgress.setProgress(PercenInterior);
-		DocumentProgress.setProgress(PercenDocument);
-	}*/
-	
-	/*private void progressCheckListMemo(){
-		SharedPreferences shared = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-		Editor editor = shared.edit();
-		editor.putInt("PowerProgressbar", PercenPower);
-		editor.putInt("EngineProgressbar", PercenEngine);
-		editor.putInt("ExteriorProgressbar", PercenExterior);
-		editor.putInt("InteriorProgressbar", PercenInterior);
-		editor.putInt("DocumentProgressbar", PercenDocument);
-		editor.commit();
-	}*/
+	/*
+	 * private void progressCheckListLog(){ SharedPreferences shared =
+	 * getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+	 * Log.i("progressCheckListLog", "percent power : " +
+	 * shared.getInt("PercenPower", 0)); Log.i("progressCheckListLog",
+	 * "percent engine : " + shared.getInt("PercenEngine", 0));
+	 * Log.i("progressCheckListLog", "percent exterior : " +
+	 * shared.getInt("PercenExterior", 0)); Log.i("progressCheckListLog",
+	 * "percent interior : " + shared.getInt("PercenInterior", 0));
+	 * Log.i("progressCheckListLog", "percent document : " +
+	 * shared.getInt("PercenDocument", 0)); }
+	 */
+
+	/*
+	 * private void restoreProgressCheckList(){ SharedPreferences shared =
+	 * getSharedPreferences("mysettings", Context.MODE_PRIVATE); PercenPower =
+	 * shared.getInt("PercenPower", 0); PercenEngine =
+	 * shared.getInt("PercenEngine", 0); PercenExterior =
+	 * shared.getInt("PercenExterior", 0); PercenInterior =
+	 * shared.getInt("PercenInterior", 0); PercenDocument =
+	 * shared.getInt("PercenDocument", 0);
+	 * 
+	 * PowerProgress.setProgress(PercenPower);
+	 * EngineProgress.setProgress(PercenEngine);
+	 * ExteriorProgress.setProgress(PercenExterior);
+	 * InteriorProgress.setProgress(PercenInterior);
+	 * DocumentProgress.setProgress(PercenDocument); }
+	 */
+
+	/*
+	 * private void progressCheckListMemo(){ SharedPreferences shared =
+	 * getSharedPreferences("mysettings", Context.MODE_PRIVATE); Editor editor =
+	 * shared.edit(); editor.putInt("PowerProgressbar", PercenPower);
+	 * editor.putInt("EngineProgressbar", PercenEngine);
+	 * editor.putInt("ExteriorProgressbar", PercenExterior);
+	 * editor.putInt("InteriorProgressbar", PercenInterior);
+	 * editor.putInt("DocumentProgressbar", PercenDocument); editor.commit(); }
+	 */
 
 	public void filterStore(String menuName, Map<String, Boolean> mp) {
-		//progressCheckListMemo();
+		// progressCheckListMemo();
 		SharedPreferences sharedPreferences = getSharedPreferences(
 				"mysettings", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		String tmp = "";
-		Log.i("filter", "infileter : " + menuName);
+		// Log.i("filter", "infileter : " + menuName);
 		for (Map.Entry<String, Boolean> entry : mp.entrySet()) {
 			editor.putBoolean(entry.getKey(), entry.getValue());
 
@@ -3987,7 +4102,7 @@ public class CarCheckListActivity extends Activity implements AnimationListener 
 				.findViewById(R.id.Documentbar);
 		// seekbar.putInt("Powerbar", powerseekbarValue).commit();
 		// powerseekbar.setProgress(4);
-		Log.i("seek", "setProgress(4)");
+		// Log.i("seek", "setProgress(4)");
 		engineseekbar.setProgress(mSharedPrefs.getInt("Enginebar", 0));
 		exteriorseekbar.setProgress(mSharedPrefs.getInt("Exteriorbar", 0));
 		interiorseekbar.setProgress(mSharedPrefs.getInt("Interiorbar", 0));
