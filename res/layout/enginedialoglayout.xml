@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="490dp" >
+
+    <Button
+        android:id="@+id/Engineback"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button"
+        android:text="@string/back"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Engine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="60dp"
+        android:shadowColor="#00aaff"
+        android:shadowDx="-0.5"
+        android:shadowDy="0.5"
+        android:shadowRadius="2"
+        android:text="@string/engine"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <TableLayout
+        android:id="@+id/tabledocument"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp" >
+
+        <TableRow
+            android:id="@+id/tableRowEngine1"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/engine_hood"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_hood"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/engine_backHood"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_backHood"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowEngine2"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/engine_underEngine"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_underEngine"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/engine_brakeOil"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_brakeOil"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowEngine3"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/engine_engineOil"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_engineOil"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/engine_waterCoolant"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_waterCoolant"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowEngine4"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/engine_belt"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_belt"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/engine_gear"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_gear"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowEngine5"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/engine_liquidLevel"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_liquidLevel"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/engine_soundOut"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_soundOut"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowEngine6"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/engine_soundIn"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/engine_soundIn"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

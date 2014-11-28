@@ -1,0 +1,103 @@
+/*
+ CHANGE ONLY LINK URL IN FUNCTION
+ selectTouch IN event Tap event & click event
+ */
+
+var step = 3;
+
+window.onload = function() {
+	var widthDialog = (((parseInt(step) + 1) * 100))
+			+ ((256 * (parseInt(step) + 1)));
+
+	var widthSetting = widthDialog + "px";
+
+	document.getElementById('handleDialog').style.width = widthSetting;
+	document.getElementById('slideSelectLanguage').style.width = widthSetting;
+
+	var slideshow = new Dragdealer('slideshow', {
+		steps : parseInt(step),
+		loose : true
+	});
+};
+
+document.addEventListener("DOMContentLoaded", init, false);
+
+function init() {
+	// set variable
+	var startTime, endTime;
+	var gbMove = false;
+	var th = document.getElementById("th");
+	var ch = document.getElementById("ch");
+	var jp = document.getElementById("jp");
+	var us = document.getElementById("us");
+	var de = document.getElementById("de");
+	selectTouch(th, "th");
+	selectTouch(ch, "ch");
+//	selectTouch(jp, "jp");
+	selectTouch(us, "en-US");
+//	selectTouch(de, "de");
+	// console.log(document.getElementById("th").value);
+}
+
+function selectTouch(lng, id) {
+	
+	// touch start event
+	lng.addEventListener('touchstart', function(event) {
+		startTime = new Date().getTime();
+		gbMove = false;
+	}, false);
+
+	// move event
+	lng.addEventListener('touchmove', function(event) {
+		gbMove = true;
+	}, false);
+
+	// tab event
+	lng.addEventListener('touchend', function(event) {
+		endTime = new Date().getTime();
+		if (!gbMove && (endTime - startTime) < 150)
+			// go to link with Language
+			// Can change URL [index.html] to your URL
+
+	document.cookie = "setLng=" + id;
+			window.location = "index.html";
+	}, false);
+
+	// click start event
+	lng.addEventListener('mousedown', function(event) {
+		startTime = new Date().getTime();
+		gbMove = false;
+	}, false);
+
+	// move event
+	lng.addEventListener('mousemove', function(event) {
+		gbMove = true;
+	}, false);
+
+	// click event
+	lng.addEventListener('mouseup', function(event) {
+		endTime = new Date().getTime();
+		if (!gbMove && (endTime - startTime) < 150)
+			// go to link with Language
+			// Can change URL [index.html] to your URL
+//		localStorage.setItem("setLng",id);
+	document.cookie = "setLng=" + id;
+
+			window.location = "index.html";
+	}, false);
+}
+
+function language(lng) {
+	if (lng == 'thai') {
+		alert(lng);
+	} else if (lng == 'engUS') {
+		alert(lng);
+	} else if (lng == 'china') {
+		alert(lng);
+	} else if (lng == 'japan') {
+		alert(lng);
+	} else if (lng == 'germany') {
+		alert(lng);
+	} else
+		alert("Wrong!");
+}

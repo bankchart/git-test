@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="420dp"
+    android:layout_height="380dp" >
+
+    <Button
+        android:id="@+id/Documentback"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button"
+        android:text="@string/back"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/Document"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="60dp"
+        android:shadowColor="#00aaff"
+        android:shadowDx="-0.5"
+        android:shadowDy="0.5"
+        android:shadowRadius="2"
+        android:text="@string/document"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <TableLayout
+        android:id="@+id/tabledocument"
+        android:layout_width="420dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp" >
+
+        <TableRow
+            android:id="@+id/tableRowDocument1"
+            android:layout_width="170dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/doc_insurance"
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_insurance"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/doc_actTaxLabel"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_actTaxLabel"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDocument2"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/doc_bill"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_bill"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/doc_licensePlate"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_licensePlate"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDocument3"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/doc_licenseManual"
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_licenseManual"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/doc_carPartPaper"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_carPartPaper"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDocument4"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/doc_carManual"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_carManual"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/doc_licenseRegister"
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_licenseRegister"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDocument5"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/doc_gift"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/doc_gift"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

@@ -1,0 +1,410 @@
+var scoreCheckbox = new Array();
+var rateAllResult = 0;
+var rate = 0;
+scoreCheckbox["one"] = 1;
+scoreCheckbox["zero"] = 0;
+scoreCheckbox["three"] = 3;
+scoreCheckbox["two"] = 2;
+scoreCheckbox["four"] = 4;
+
+var defaultRatioOutside = 3;
+var defaultRatioInside = 3;
+var defaultRatioPower = 3;
+var defaultRatioEngine = 3;
+var defaultRatioDocument = 3;
+
+function calculateListRatio(valueCheck) {
+
+	var ratioValue;
+	for ( var i = 0; i < valueCheck.length; i++) {
+
+		if (valueCheck[i].checked == true) {
+			ratioValue = parseInt(valueCheck[i].value);
+		}
+	}
+	return ratioValue;
+}
+
+function saveValue() {
+
+	// using with slide
+	var valueExterior = document.getElementById("slideExterior").value;
+	var valueInterior = document.getElementById("slideInterior").value;
+	var valuePower = document.getElementById("slidePower").value;
+	var valueEngine = document.getElementById("slideEngine").value;
+	var valueDocument = document.getElementById("slideDocument").value;
+
+	defaultRatioOutside = parseInt(valueExterior);
+	defaultRatioInside = parseInt(valueInterior);
+	defaultRatioPower = parseInt(valuePower);
+	defaultRatioEngine = parseInt(valueEngine);
+	defaultRatioDocument = parseInt(valueDocument);
+
+	getTotalOutside();
+	getTotalEngine();
+	getTotalInside();
+	getTotalDocument();
+	getTotalPower();
+
+	rating();
+}
+
+// checkbox
+function checkboxOutside() {
+	var checkboxOutsideForm = 0;
+	var checkboxTrueOutside = document.getElementsByName('checkboxOutsideForm');
+	console.log(checkboxTrueOutside[1].checked);
+	console.log(checkboxTrueOutside.length);
+	for ( var i = 0; i < checkboxTrueOutside.length; i++) {
+
+		if (checkboxTrueOutside[i].checked == true) {
+			checkboxOutsideForm += scoreCheckbox[checkboxTrueOutside[i].value];
+		}
+	}
+	return checkboxOutsideForm;
+}
+// show result
+function getTotalOutside(ratioValue) {
+	// alert("in");
+	var checkboxValue = checkboxOutside();
+	console.log(checkboxValue);
+	var checkboxIntValue = parseInt((checkboxValue * 100) / 18);
+	console.log(checkboxIntValue);
+	if (checkboxIntValue > 50) {
+		document.getElementById('percenScoreOutside').style.textShadow = "0 0 0.2em #0c0, 0 0 0.2em #0c0, 0 0 0.2em #0c0";
+		document.getElementById('slideScoreOutside').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	} else {
+		document.getElementById('percenScoreOutside').style.textShadow = "0 0 0.2em #f30, 0 0 0.3em #f30, 0 0 0.3em #f30";
+		document.getElementById('slideScoreOutside').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	}
+	document.getElementById('percenScoreOutside').innerHTML = checkboxIntValue
+			+ " %";
+	var valueRatio = 0;
+	if (ratioValue == undefined) {
+		defaultRatioOutside;
+	} else {
+		if (ratioValue != 'undefined' || ratioValue != null) {
+			defaultRatioOutside = ratioValue;
+		}
+	}
+	valueRatio = checkboxIntValue * defaultRatioOutside;
+	document.getElementById('scoreOutsideHide').innerHTML = valueRatio;
+	rating();
+}
+
+// page two
+// checkbox
+function checkboxInside() {
+	var c1 = 0;
+	var theForm = document.forms["form-inside"];
+	var row = theForm.elements["checkInsideForm"];
+
+	for ( var i = 0; i < row.length; i++) {
+		if (row[i].checked == true) {
+			c1 += scoreCheckbox[row[i].value];
+		}
+	}
+	return c1;
+}
+
+// show result
+function getTotalInside(ratioValue) {
+	var checkboxValue = checkboxInside();
+	var checkboxIntValue = parseInt((checkboxValue * 100) / 25);
+	if (checkboxIntValue > 50) {
+		document.getElementById('percenScoreInside').style.textShadow = "0 0 0.2em #0c0, 0 0 0.2em #0c0, 0 0 0.2em #0c0";
+		document.getElementById('slideScoreInside').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	} else {
+		document.getElementById('percenScoreInside').style.textShadow = "0 0 0.2em #f30, 0 0 0.3em #f30, 0 0 0.3em #f30";
+		document.getElementById('slideScoreInside').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	}
+	document.getElementById('percenScoreInside').innerHTML = checkboxIntValue
+			+ " %";
+	var valueRatio = 0;
+	if (ratioValue == undefined) {
+		defaultRatioInside;
+	} else {
+		if (ratioValue != 'undefined' || ratioValue != null) {
+			defaultRatioInside = ratioValue;
+		}
+	}
+	valueRatio = checkboxIntValue * defaultRatioInside;
+	document.getElementById('scoreInsideHide').innerHTML = valueRatio;
+	rating();
+}
+
+// page three
+// checkbox
+function checkboxPower() {
+	var c1 = 0;
+	var theForm = document.forms["form-power"];
+	var row = theForm.elements["checkPowerForm"];
+	console.log(row[1].checked);
+	console.log(row.length);
+	for ( var i = 0; i < row.length; i++) {
+		if (row[i].checked == true) {
+			c1 += scoreCheckbox[row[i].value];
+		}
+	}
+	return c1;
+}
+function getTotalPower(ratioValue) {
+	var checkboxValue = checkboxPower();
+	console.log(checkboxValue);
+	var checkboxIntValue = parseInt((checkboxValue * 100) / 38);
+	if (checkboxIntValue > 50) {
+		document.getElementById('percenScorePower').style.textShadow = "0 0 0.2em #0c0, 0 0 0.2em #0c0, 0 0 0.2em #0c0";
+		document.getElementById('slideScorePower').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	} else {
+		document.getElementById('percenScorePower').style.textShadow = "0 0 0.2em #f30, 0 0 0.3em #f30, 0 0 0.3em #f30";
+		document.getElementById('slideScorePower').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	}
+	document.getElementById('percenScorePower').innerHTML = checkboxIntValue
+			+ " %";
+	var valueRatio = 0;
+	if (ratioValue == undefined) {
+		defaultRatioPower;
+	} else {
+		if (ratioValue != 'undefined' || ratioValue != null) {
+			defaultRatioPower = ratioValue;
+		}
+	}
+	valueRatio = checkboxIntValue * defaultRatioPower;
+	document.getElementById('scorePowerHide').innerHTML = valueRatio;
+	rating();
+}
+
+// page four
+// checkbox
+function checkboxEngine() {
+	var c1 = 0;
+	var theForm = document.forms["form-engine"];
+	var row = theForm.elements["checkEngineForm"];
+	console.log(row[1].checked);
+	console.log(row.length);
+	for ( var i = 0; i < row.length; i++) {
+		if (row[i].checked == true) {
+			c1 += scoreCheckbox[row[i].value];
+		}
+	}
+	return c1;
+}
+// show result
+function getTotalEngine(ratioValue) {
+	var checkboxValue = checkboxEngine();
+	console.log(checkboxValue);
+	var checkboxIntValue = parseInt((checkboxValue * 100) / 28);
+
+	if (checkboxIntValue > 50) {
+		document.getElementById('percenScoreEngine').style.textShadow = "0 0 0.2em #0c0, 0 0 0.2em #0c0, 0 0 0.2em #0c0";
+		document.getElementById('slideScoreEngine').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	} else {
+		document.getElementById('percenScoreEngine').style.textShadow = "0 0 0.2em #f30, 0 0 0.3em #f30, 0 0 0.3em #f30";
+		document.getElementById('slideScoreEngine').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	}
+	document.getElementById('percenScoreEngine').innerHTML = checkboxIntValue
+			+ " %";
+	var valueRatio = 0;
+	if (ratioValue == undefined) {
+		defaultRatioEngine;
+	} else {
+		if (ratioValue != 'undefined' || ratioValue != null) {
+			defaultRatioEngine = ratioValue;
+		}
+	}
+	valueRatio = checkboxIntValue * defaultRatioEngine;
+	document.getElementById('scoreEngineHide').innerHTML = valueRatio;
+	rating();
+}
+
+// page five
+// checkbox
+function checkboxDocument() {
+	var c1 = 0;
+	var theForm = document.forms["form-document"];
+	var row = theForm.elements["checkDocumentForm"];
+	console.log(row[1].checked);
+	console.log(row.length);
+	for ( var i = 0; i < row.length; i++) {
+		if (row[i].checked == true) {
+			c1 += scoreCheckbox[row[i].value];
+		}
+	}
+	return c1;
+}
+function getTotalDocument(ratioValue) {
+	var checkboxValue = checkboxDocument();
+	console.log(checkboxValue);
+
+	var checkboxIntValue = parseInt((checkboxValue * 100) / 15);
+	if (checkboxIntValue > 50) {
+		document.getElementById('percenScoreDocument').style.textShadow = "0 0 0.2em #0c0, 0 0 0.2em #0c0, 0 0 0.2em #0c0";
+		document.getElementById('slideScoreDocument').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	} else {
+		document.getElementById('percenScoreDocument').style.textShadow = "0 0 0.2em #f30, 0 0 0.3em #f30, 0 0 0.3em #f30";
+		document.getElementById('slideScoreDocument').innerHTML = "<span class='value' style='width: "
+				+ checkboxIntValue + "%'></span>";
+	}
+	var valueRatio = 0;
+	if (ratioValue == undefined) {
+		defaultRatioDocument;
+	} else {
+		if (ratioValue != 'undefined' || ratioValue != null) {
+			defaultRatioDocument = ratioValue;
+		}
+	}
+	valueRatio = checkboxIntValue * defaultRatioDocument;
+	document.getElementById('scoreDocumentHide').innerHTML = valueRatio;
+	document.getElementById('percenScoreDocument').innerHTML = checkboxIntValue
+			+ " %";
+	rating();
+}
+
+function confirmReset(object) {
+	if (confirm("ต้องการลบข้อมูลทั้งหมดนี้หรือไม่?") == true) {
+		window.location.reload();
+		return true;
+	}
+	return false;
+}
+
+function rating() {
+	var scoreOutsideHide = $('#scoreOutsideHide').text();
+	var scoreInsideHide = $('#scoreInsideHide').text();
+	var scorePowerHide = $('#scorePowerHide').text();
+	var scoreEngineHide = $('#scoreEngineHide').text();
+	var scoreDocumentHide = $('#scoreDocumentHide').text();
+
+	var scoreIntOutside = parseInt(scoreOutsideHide);
+	var scoreIntInside = parseInt(scoreInsideHide);
+	var scoreIntPower = parseInt(scorePowerHide);
+	var scoreIntEngine = parseInt(scoreEngineHide);
+	var scoreIntDocument = parseInt(scoreDocumentHide);
+
+	var summationOfCheckbox = scoreIntOutside + scoreIntInside + scoreIntPower
+			+ scoreIntEngine + scoreIntDocument;
+	var rating = 0;
+	if (rate != 0) {
+
+		document.getElementById("rating").innerHTML = "sssss " + rate;
+	} else {
+
+		document.getElementById("rating").innerHTML = " ";
+	}
+	var summationRatio = defaultRatioOutside + defaultRatioInside
+			+ defaultRatioPower + defaultRatioEngine + defaultRatioDocument;
+
+	var rate = parseInt(summationOfCheckbox) / parseInt(summationRatio);
+	var rate2 = rate - 10;
+	var rate3 = rate2 - 5;
+	var rate4 = rate - 15;
+	if (rate > 0 && rate <= 0.5){
+		result = 0;
+	}else if (rate < 10) {
+		result = rate.toPrecision(1);
+	} else {
+		result = rate.toPrecision(2);
+	}
+	if (rate <= 100 && rate > 0) {
+
+		document.getElementById('ratingDialog').style.display = 'block';
+		document.getElementById('ratingBar').style.display = 'block';
+		document.getElementById('headRating').style.display = 'block';
+		document.getElementById('valueRatingBar').style.width = result + '%';
+		document.getElementById('valueOfRating').innerHTML = result + ' %';
+
+	} else {
+		document.getElementById('ratingDialog').style.display = 'none';
+		document.getElementById('ratingBar').style.display = 'none';
+		document.getElementById('headRating').style.display = 'none';
+	}
+	document.getElementById("rateShow").value = result;
+	result = 0;
+}
+
+function checkRating() {
+	var rangeA = document.getElementById("sliderOutside").value;
+	var ratioOutside = parseInt(rangeA);
+	var rangeB = document.getElementById("sliderInside").value;
+	var ratioInside = parseInt(rangeB);
+	var rangeC = document.getElementById("sliderPower").value;
+	var ratioPower = parseInt(rangeC);
+	var rangeD = document.getElementById("sliderEngine").value;
+	var ratioEngine = parseInt(rangeD);
+	var rangeE = document.getElementById("sliderDocument").value;
+	var ratioDocument = parseInt(rangeE);
+
+	document.getElementById('rateOutside').innerHTML = ratioOutside;
+	document.getElementById('rateInside').innerHTML = ratioInside;
+	document.getElementById('ratePower').innerHTML = ratioPower;
+	document.getElementById('rateEngine').innerHTML = ratioEngine;
+	document.getElementById('rateDocument').innerHTML = ratioDocument;
+
+	rateAllResult += ratioOutside + ratioInside + ratioPower + ratioEngine
+			+ ratioDocument;
+	document.getElementById('AllScoreRatio').innerHTML = rateAllResult + "/100";
+	rateAllResult = 0;
+}
+
+function tabGrid(num) {
+	var click = 0;
+	if (click % 2 == 0) {
+		click++;
+		document.getElementById("grid").style.display = "block";
+	} else {
+		click++;
+		document.getElementById("grid").style.display = "none";
+	}
+}
+
+// light
+var boardLine = document.getElementById("lineOutside");
+var ctx = boardLine.getContext("2d");
+// ( x : y )
+ctx.moveTo(5, 40);
+ctx.lineTo(70, 40);
+ctx.lineTo(180, 150);
+ctx.strokeStyle = "#FF9900";
+ctx.font = '30px san-serif';
+ctx.textBaseline = 'bottom';
+ctx.stroke();
+
+// outside
+var boardLine = document.getElementById("lineInside");
+var ctx = boardLine.getContext("2d");
+ctx.moveTo(30, 190);
+ctx.lineTo(290, 190);
+ctx.lineTo(350, 130);
+ctx.strokeStyle = "#0097ff";
+ctx.font = '30px san-serif';
+ctx.stroke();
+// engine
+var boardLine = document.getElementById("linePower");
+var ctx = boardLine.getContext("2d");
+ctx.moveTo(0, 130);
+ctx.lineTo(100, 130);
+ctx.lineTo(180, 250);
+ctx.strokeStyle = "#A8A8A8";
+ctx.font = '30px san-serif';
+ctx.textBaseline = 'bottom';
+ctx.shadowBlur = 10;
+ctx.stroke();
+// inside
+var boardLine = document.getElementById("lineEngine");
+var ctx = boardLine.getContext("2d");
+ctx.moveTo(105, 225);
+ctx.lineTo(220, 225);
+ctx.lineTo(350, 30);
+ctx.strokeStyle = "red";
+ctx.font = '30px san-serif';
+ctx.textBaseline = 'bottom';
+ctx.stroke();

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, CarCheckListActivity!</string>
+    <string name="app_name">CarCheckList</string>
+    <string name="main_screen">MainScreen</string>
+    <string name="splash_screen">SplashScreen</string>
+    
+	 <string name="back">回</string>
+    
+    <string name="power">电力系统</string>
+    <string name="power_headLight">前灯</string>
+    <string name="power_dim">调光灯</string>
+    <string name="power_highBeam">远光灯</string>
+    <string name="power_dashBoardLight">仪表灯</string>
+    <string name="power_cabinSeatLight">礼轻</string>
+    <string name="power_sideDoorLight">侧门光</string>
+    <string name="power_turnSignal">转向灯</string>
+    <string name="power_air">冷气机</string>
+    <string name="power_thermometer">温度计</string>
+    <string name="power_horn">喇叭</string>
+    <string name="power_wipe">擦拭</string>
+    <string name="power_rainSensor">雨量传感器</string>
+    <string name="power_thirdBrakeLight">第三刹车灯</string>
+    <string name="power_antiFoggyBack">反蒙蒙</string>
+	<string name="power_antiFoggySide">反濛濛方</string>
+	<string name="power_steeringWheelTest">测试方向盘</string>
+	<string name="power_steeringWheelSet">设置方向盘</string>
+	<string name="power_carStereo">收音机</string>
+	<string name="power_electronicWindow">电动车窗</string>
+	<string name="power_sideMirror">侧视镜</string>
+	<string name="power_warnDoor">门警告</string>
+	<string name="power_warnSeatBelt">安全带警告</string>
+	<string name="power_warnHandBrake">手制动警告</string>
+	<string name="power_clock">数字时钟</string>
+	<string name="power_remoteKey">遥控钥匙</string>
+	<string name="power_centralLock">中央门锁</string>
+	<string name="power_transmissionPosition">档位</string>
+
+	<string name="engine">引擎</string>
+	<string name="engine_hood">引擎盖</string>
+	<string name="engine_backHood">后车厢</string>
+	<string name="engine_underEngine">根据发动机</string>
+	<string name="engine_brakeOil">油压闸</string>
+	<string name="engine_engineOil">机油</string>
+	<string name="engine_waterCoolant">冷却水</string>
+	<string name="engine_belt">带</string>
+	<string name="engine_gear">"齿轮油</string>
+	<string name="engine_liquidLevel">擦拭液位</string>
+	<string name="engine_soundOut">声音引擎</string>
+	<string name="engine_soundIn">声音在卡宾枪</string>
+	
+	<string name="exterior">外面</string>
+	<string name="outside_color">颜色</string>
+	<string name="outside_window">车镜</string>
+	<string name="outside_doorHood">车的车门及引擎盖</string>
+	<string name="outside_jack">手唧</string>
+	<string name="outside_wrench">扳钳</string>
+	<string name="outside_tires">轮胎</string>
+	<string name="outside_light">车灯</string>
+	<string name="outside_seal">密封</string>
+	<string name="outside_tirePart">备用轮胎</string>
+	
+	<string name="interior">里面</string>
+	<string name="inside_seat">座位</string>
+	<string name="inside_console">木控制台</string>
+	<string name="inside_steeringWheel">人造革转向轮</string>
+	<string name="inside_transmission">挡</string>
+	<string name="inside_sideDoors">侧门</string>
+	<string name="inside_dashBoard">仪表</string>
+	<string name="inside_carpet">地毯</string>
+	<string name="inside_curtain">窗帘</string>
+	<string name="inside_seatBelt">安全带</string>
+	<string name="inside_backDoor">返回罩开门红</string>
+	<string name="inside_lidOil">盖石油开门红</string>
+	<string name="inside_setSeat">座位的设置</string>
+	<string name="inside_brakePedal">刹车踏板</string>
+	<string name="inside_accelerator">油门</string>
+	<string name="inside_handBrake">手剎</string>
+										
+	<string name="document">文件</string>
+	<string name="doc_insurance">保险纸</string>
+	<string name="doc_actTaxLabel">采取行动和税标签</string>
+	<string name="doc_bill">法案</string>
+	<string name="doc_licensePlate">车牌</string>
+	<string name="doc_licenseManual">许可手册</string>
+	<string name="doc_carPartPaper">汽车零件纸</string>
+	<string name="doc_carManual">汽车手册</string>
+	<string name="doc_licenseRegister">许可登记册</string>
+	<string name="doc_gift">奖金</string>
+	
+	<string name="setting">设置比例</string>
+	<string name="priority">優先</string>
+	<string name="low">低優先級</string>
+	<string name="high">高優先級</string>
+	<string name="textexterior">外面</string>
+	<string name="textinterior">里面</string>
+	<string name="textpower">电力系统</string>
+	<string name="textengine">发动机</string>
+	<string name="textdocument">文件</string>
+	<string name="save">保存</string>
+	<string name="reset">重置</string>
+	<string name="change_language">更改語言</string>
+	
+</resources>
+
+

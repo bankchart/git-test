@@ -1,0 +1,1350 @@
+$(document).ready(function() {
+
+	getTotalOutside();
+	getTotalInside();
+	getTotalPower();
+	getTotalEngine();
+	getTotalDocument();
+
+	$('#buttonBackgroundInsideBack').css('display', 'none');
+	$('#buttonBackgroundPowerBack').css('display', 'none');
+	$('#buttonBackgroundDocumentBack').css('display', 'none');
+	$('#buttonBackgroundSettingBack').css('display', 'none');
+	$('#buttonBackgroundOutsideBack').css('display', 'none');
+	$('#buttonBackgroundEngineBack').css('display', 'none');
+
+	$.i18n.init( {
+		useLocalStorage : false
+	}, function(t) {
+		$('#main-main-main').i18n();
+	});
+
+
+});
+
+$("#reset").click(function() {
+	var okToRefresh = confirm("Do you really want to clear data?");
+	if (okToRefresh) {
+		setTimeout("location.reload(true);", 1500);
+	}
+});
+$("#backOutside").click(
+		function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			$(".content-bodyOutside").css("left", "-800px");
+			$('.pictureMenuOutside').css('box-shadow',
+					'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+			setTimeout("$('.headContent-bodyOutside').css('top', '-1000px')",
+					300);
+			setTimeout("$('.headContent-bodyOutside').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturn').css('left', '-4500px')", 500);
+			setTimeout("$('.bgReturn').css('display', 'none')", 10);
+			setTimeout("$('buttonBackground').css('display','block')", 500);
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+		});
+$("#backInside")
+		.click(
+				function() {
+					$('#touchClick').css('display', 'block');
+					setTimeout("$('#touchClick').css('display', 'none')", 1500);
+					$(".content-bodyInside").css("left", "-800px");
+					$('.pictureMenuInside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+					setTimeout(
+							"$('.headContent-bodyInside').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyInside').css('display', 'none')",
+							1000);
+					setTimeout("$('.bgReturn').css('left', '-4500px')", 500);
+					setTimeout("$('.bgReturn').css('display', 'none')", 10);
+					setTimeout("$('buttonBackground').css('display','block')",
+							500);
+					$('#buttonBackgroundInsideZone').css('display', 'block');
+					$('#buttonBackgroundPowerZone').css('display', 'block');
+					$('#buttonBackgroundDocumentZone').css('display', 'block');
+					$('#buttonBackgroundSettingZone').css('display', 'block');
+					$('#buttonBackgroundOutsideZone').css('display', 'block');
+					$('#buttonBackgroundEngineZone').css('display', 'block');
+
+					$('#buttonBackgroundInsideBack').css('display', 'none');
+					$('#buttonBackgroundPowerBack').css('display', 'none');
+					$('#buttonBackgroundDocumentBack').css('display', 'none');
+					$('#buttonBackgroundSettingBack').css('display', 'none');
+					$('#buttonBackgroundOutsideBack').css('display', 'none');
+					$('#buttonBackgroundEngineBack').css('display', 'none');
+				});
+$("#backPower").click(
+		function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			$(".content-bodyPower").css("left", "800px");
+			setTimeout("$('.content-bodyPower').css('display', 'none')", 500);
+			$('.pictureMenuPower').css('box-shadow',
+					'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+			setTimeout("$('.headContent-bodyPower').css('top', '1500px')", 300);
+			setTimeout("$('.headContent-bodyPower').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturn').css('left', '-4500px')", 500);
+			setTimeout("$('.bgReturn').css('display', 'none')", 10);
+			setTimeout("$('buttonBackground').css('display','block')", 500);
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+		});
+$("#backEngine").click(
+		function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+
+			$(".content-bodyEngine").css("left", "800px");
+			$('.pictureMenuEngine').css('box-shadow',
+					'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+			setTimeout("$('.headContent-bodyEngine').css('top', '-1000px')",
+					300);
+			setTimeout("$('.headContent-bodyEngine').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturn').css('left', '-4500px')", 500);
+			setTimeout("$('.bgReturn').css('display', 'none')", 10);
+			setTimeout("$('buttonBackground').css('display','block')", 500);
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+		});
+$("#backDocument").click(
+		function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+
+			$(".content-bodyDocument").css("left", "-800px");
+			$('.pictureMenuDocument').css('box-shadow',
+					'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+			setTimeout("$('.headContent-bodyDocument').css('top', '1500px')",
+					300);
+			setTimeout("$('.headContent-bodyDocument').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturn').css('left', '-4500px')", 500);
+			setTimeout("$('.bgReturn').css('display', 'none')", 10);
+			setTimeout("$('buttonBackground').css('display','block')", 500);
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+		});
+$("#save")
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+
+			$(".content-bodySetting").css("left", "-800px");
+				setTimeout(
+						"$('.headContent-bodySetting').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodySetting').css('display', 'none')",
+						1000);
+				setTimeout("$('.bgReturn').css('left', '-4500px')", 500);
+				setTimeout("$('.bgReturn').css('display', 'none')", 10);
+				setTimeout("$('buttonBackground').css('display','block')", 500);
+				$('#buttonBackgroundInsideZone').css('display', 'block');
+				$('#buttonBackgroundPowerZone').css('display', 'block');
+				$('#buttonBackgroundDocumentZone').css('display', 'block');
+				$('#buttonBackgroundSettingZone').css('display', 'block');
+				$('#buttonBackgroundOutsideZone').css('display', 'block');
+				$('#buttonBackgroundEngineZone').css('display', 'block');
+
+				$('#buttonBackgroundInsideBack').css('display', 'none');
+				$('#buttonBackgroundPowerBack').css('display', 'none');
+				$('#buttonBackgroundDocumentBack').css('display', 'none');
+				$('#buttonBackgroundSettingBack').css('display', 'none');
+				$('#buttonBackgroundOutsideBack').css('display', 'none');
+				$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+
+$(function() {
+	$(".meter > span").each(function() {
+		$(this).data("origWidth", $(this).width()).width(0).animate( {
+			width : $(this).data("origWidth")
+		}, 1200);
+	});
+});
+
+$('.bgReturn')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+				$(".content-bodyOutside").css("left", "-800px");
+				$('.pictureMenuOutside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+				setTimeout(
+						"$('.headContent-bodyOutside').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyOutside').css('display', 'none')",
+						1000);
+				// Inside
+				$(".content-bodyInside").css("left", "-800px");
+				$('.pictureMenuInside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+				setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyInside').css('display', 'none')",
+						1000);
+				// Power
+				$(".content-bodyPower").css("left", "800px");
+				$('.pictureMenuPower')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+				setTimeout("$('.headContent-bodyPower').css('top', '800px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyPower').css('display', 'none')",
+						1000);
+				// Engine
+				$(".content-bodyEngine").css("left", "800px");
+				$('.pictureMenuEngine')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+				setTimeout(
+						"$('.headContent-bodyEngine').css('top', '-1000px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodyEngine').css('display', 'none')",
+						1000);
+				// Document
+				$(".content-bodyDocument").css("left", "-800px");
+				$('.pictureMenuDocument')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+				setTimeout(
+						"$('.headContent-bodyDocument').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyDocument').css('display', 'none')",
+						1000);
+				// Setting
+				$(".content-bodySetting").css("left", "-800px");
+				setTimeout(
+						"$('.headContent-bodySetting').css('top', '-1000px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodySetting').css('display', 'none')",
+						1000);
+				setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+				setTimeout("$('.bgReturn').css('display', 'none')", 10);
+//				$('.bgReturn').css('display', 'none');
+				
+				$('#buttonBackgroundInsideZone').css('display', 'block');
+				$('#buttonBackgroundPowerZone').css('display', 'block');
+				$('#buttonBackgroundDocumentZone').css('display', 'block');
+				$('#buttonBackgroundSettingZone').css('display', 'block');
+				$('#buttonBackgroundOutsideZone').css('display', 'block');
+				$('#buttonBackgroundEngineZone').css('display', 'block');
+
+				$('#buttonBackgroundInsideBack').css('display', 'none');
+				$('#buttonBackgroundPowerBack').css('display', 'none');
+				$('#buttonBackgroundDocumentBack').css('display', 'none');
+				$('#buttonBackgroundSettingBack').css('display', 'none');
+				$('#buttonBackgroundOutsideBack').css('display', 'none');
+				$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+
+$('#buttonBackgroundOutside')
+		.click(
+				function() {
+					/* show tab */
+					$('#touchClick').css('display', 'block');
+					setTimeout("$('#touchClick').css('display', 'none')", 1500);
+					$('.headContent-bodyOutside').css('display', 'block');
+					$('.pictureMenuOutside')
+							.css('box-shadow',
+									'0 0 10px #009fff, 0 0 20px #0097ff, 0 0 30px #0097ff');
+					setTimeout(
+							"$('.headContent-bodyOutside').css('top', '0px');",300);
+					$('.content-bodyOutside').css('display', 'block');
+					setTimeout("$('.content-bodyOutside').css('left', '0px')",
+							1000);
+					$('.bgReturn').css('display', 'block');
+					setTimeout("$('.bgReturn').css('left', '0px');", 2000);				
+					
+					/* menu */
+					$('#buttonBackgroundInsideZone').css('display', 'block');
+					$('#buttonBackgroundPowerZone').css('display', 'block');
+					$('#buttonBackgroundDocumentZone').css('display', 'block');
+					$('#buttonBackgroundSettingZone').css('display', 'block');
+					$('#buttonBackgroundOutsideZone').css('display', 'none');
+					$('#buttonBackgroundEngineZone').css('display', 'none');
+					/* menu back */
+					$('#buttonBackgroundInsideBack').css('display', 'none');
+					$('#buttonBackgroundPowerBack').css('display', 'none');
+					$('#buttonBackgroundDocumentBack').css('display', 'none');
+					$('#buttonBackgroundSettingBack').css('display', 'none');
+					$('#buttonBackgroundOutsideBack').css('display', 'block');
+					$('#buttonBackgroundEngineBack').css('display', 'none');
+					/* close tab */
+					/* AA */
+					/* BB */
+					$(".content-bodyInside").css("left", "-800px");
+					$('.pictureMenuInside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+					setTimeout(
+							"$('.headContent-bodyInside').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyInside').css('display', 'none')",
+							1000);
+					/* CC */
+					$(".content-bodyPower").css("left", "800px");
+					setTimeout(
+							"$('.content-bodyPower').css('display', 'none')",
+							500);
+					$('.pictureMenuPower')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+					setTimeout(
+							"$('.headContent-bodyPower').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyPower').css('display', 'none')",
+							1000);
+					/* DD */
+					$(".content-bodyEngine").css("left", "800px");
+					$('.pictureMenuEngine')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+					setTimeout(
+							"$('.headContent-bodyEngine').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyEngine').css('display', 'none')",
+							1000);
+					/* EE */
+					$(".content-bodyDocument").css("left", "-800px");
+					$('.pictureMenuDocument')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #009fff, 0 0 0.3em #009fff');
+					setTimeout(
+							"$('.headContent-bodyDocument').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyDocument').css('display', 'none')",
+							1000);
+					/* FF */
+					$(".content-bodySetting").css("left", "-800px");
+					setTimeout(
+							"$('.headContent-bodySetting').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodySetting').css('display', 'none')",
+							1000);
+
+				});
+
+$('#buttonBackgroundInside')
+		.click(
+				function() {
+					$('#touchClick').css('display', 'block');
+					setTimeout("$('#touchClick').css('display', 'none')", 1500);
+					/* show tab */
+					$('.headContent-bodyInside').css('display', 'block');
+					$('.pictureMenuInside')
+							.css('box-shadow',
+									'0 0 10px #009fff, 0 0 20px #0097ff, 0 0 30px #0097ff');
+					setTimeout(
+							"$('.headContent-bodyInside').css('top', '200px');",
+							300);
+					$('.content-bodyInside').css('display', 'block');
+					setTimeout("$('.content-bodyInside').css('left', '50px')",
+							1000);
+					$('.bgReturn').css('display', 'block');
+					setTimeout("$('.bgReturn').css('left', '0px');", 2000);
+
+					/* menu */
+					$('#buttonBackgroundInsideZone').css('display', 'none');
+					$('#buttonBackgroundPowerZone').css('display', 'block');
+					$('#buttonBackgroundDocumentZone').css('display', 'block');
+					$('#buttonBackgroundSettingZone').css('display', 'block');
+					$('#buttonBackgroundOutsideZone').css('display', 'none');
+					$('#buttonBackgroundEngineZone').css('display', 'none');
+					/* menu back */
+					$('#buttonBackgroundInsideBack').css('display', 'block');
+					$('#buttonBackgroundPowerBack').css('display', 'none');
+					$('#buttonBackgroundDocumentBack').css('display', 'none');
+					$('#buttonBackgroundSettingBack').css('display', 'none');
+					$('#buttonBackgroundOutsideBack').css('display', 'none');
+					$('#buttonBackgroundEngineBack').css('display', 'none');
+
+					/* close tab */
+					/* AA */
+					$(".content-bodyOutside").css("left", "-800px");
+					$('.pictureMenuOutside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyOutside').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyOutside').css('display', 'none')",
+							1000);
+					/* BB */
+					/* CC */
+					$(".content-bodyPower").css("left", "800px");
+					setTimeout(
+							"$('.content-bodyPower').css('display', 'none')",
+							500);
+					$('.pictureMenuPower')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyPower').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyPower').css('display', 'none')",
+							1000);
+					/* DD */
+					$(".content-bodyEngine").css("left", "800px");
+					$('.pictureMenuEngine')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyEngine').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyEngine').css('display', 'none')",
+							1000);
+					/* EE */
+					$(".content-bodyDocument").css("left", "-800px");
+					$('.pictureMenuDocument')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyDocument').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyDocument').css('display', 'none')",
+							1000);
+					/* FF */
+					$(".content-bodySetting").css("left", "-800px");
+					setTimeout(
+							"$('.headContent-bodySetting').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodySetting').css('display', 'none')",
+							1000);
+				});
+$('#buttonBackgroundPower')
+		.click(
+				function() {
+					$('#touchClick').css('display', 'block');
+					setTimeout("$('#touchClick').css('display', 'none')", 1500);
+					/* show tab */
+					$('.headContent-bodyPower').css('display', 'block');
+					$('.pictureMenuPower')
+							.css('box-shadow',
+									'0 0 10px #009fff, 0 0 20px #0097ff, 0 0 30px #0097ff');
+					setTimeout(
+							"$('.headContent-bodyPower').css('top', '225px');",
+							300);
+							$('.content-bodyPower').css('display', 'block');
+					/* $('.content-bodyPower').css('display', 'block'); */
+					setTimeout("$('.content-bodyPower').css('left', '-700px')",
+							1000);
+					$('.bgReturn').css('display', 'block');
+					setTimeout("$('.bgReturn').css('left', '0px');", 2000);
+
+					/* menu */
+					$('#buttonBackgroundInsideZone').css('display', 'none');
+					$('#buttonBackgroundPowerZone').css('display', 'none');
+					$('#buttonBackgroundDocumentZone').css('display', 'none');
+					$('#buttonBackgroundSettingZone').css('display', 'block');
+					$('#buttonBackgroundOutsideZone').css('display', 'block');
+					$('#buttonBackgroundEngineZone').css('display', 'block');
+					/* menu back */
+					$('#buttonBackgroundInsideBack').css('display', 'none');
+					$('#buttonBackgroundPowerBack').css('display', 'block');
+					$('#buttonBackgroundDocumentBack').css('display', 'none');
+					$('#buttonBackgroundSettingBack').css('display', 'none');
+					$('#buttonBackgroundOutsideBack').css('display', 'none');
+					$('#buttonBackgroundEngineBack').css('display', 'none');
+
+					/* close tab */
+					/* AA */
+					$(".content-bodyOutside").css("left", "-800px");
+					$('.pictureMenuOutside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyOutside').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyOutside').css('display', 'none')",
+							1000);
+					/* BB */
+					$(".content-bodyInside").css("left", "-800px");
+					$('.pictureMenuInside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyInside').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyInside').css('display', 'none')",
+							1000);
+					/* CC */
+					/* DD */
+					$(".content-bodyEngine").css("left", "800px");
+					$('.pictureMenuEngine')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyEngine').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyEngine').css('display', 'none')",
+							1000);
+					/* EE */
+					$(".content-bodyDocument").css("left", "-800px");
+					$('.pictureMenuDocument')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyDocument').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyDocument').css('display', 'none')",
+							1000);
+					/* FF */
+					$(".content-bodySetting").css("left", "-800px");
+					setTimeout(
+							"$('.headContent-bodySetting').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodySetting').css('display', 'none')",
+							1000);
+
+				});
+$('#buttonBackgroundEngine')
+		.click(
+				function() {
+					$('#touchClick').css('display', 'block');
+					setTimeout("$('#touchClick').css('display', 'none')", 1500);
+					/* show tab */
+					$('.headContent-bodyEngine').css('display', 'block');
+					$('.pictureMenuEngine')
+							.css('box-shadow',
+									'0 0 10px #009fff, 0 0 20px #0097ff, 0 0 30px #0097ff');
+					setTimeout(
+							"$('.headContent-bodyEngine').css('top', '0px');",
+							300);
+					$('.content-bodyEngine').css('display', 'block');
+					setTimeout(
+							"$('.content-bodyEngine').css('left', '-430px')",
+							1000);
+					$('.bgReturn').css('display', 'block');
+					setTimeout("$('.bgReturn').css('left', '0px');", 2000);
+
+					/* menu */
+					$('#buttonBackgroundInsideZone').css('display', 'block');
+					$('#buttonBackgroundPowerZone').css('display', 'block');
+					$('#buttonBackgroundDocumentZone').css('display', 'block');
+					$('#buttonBackgroundSettingZone').css('display', 'none');
+					$('#buttonBackgroundOutsideZone').css('display', 'block');
+					$('#buttonBackgroundEngineZone').css('display', 'none');
+					/* menu back */
+					$('#buttonBackgroundInsideBack').css('display', 'none');
+					$('#buttonBackgroundPowerBack').css('display', 'none');
+					$('#buttonBackgroundDocumentBack').css('display', 'none');
+					$('#buttonBackgroundSettingBack').css('display', 'none');
+					$('#buttonBackgroundOutsideBack').css('display', 'none');
+					$('#buttonBackgroundEngineBack').css('display', 'block');
+
+					/* close tab */
+					/* AA */
+					$(".content-bodyOutside").css("left", "-800px");
+					$('.pictureMenuOutside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyOutside').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyOutside').css('display', 'none')",
+							1000);
+					/* BB */
+					$(".content-bodyInside").css("left", "-800px");
+					$('.pictureMenuInside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyInside').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyInside').css('display', 'none')",
+							1000);
+					/* CC */
+					$(".content-bodyPower").css("left", "800px");
+					setTimeout(
+							"$('.content-bodyPower').css('display', 'none')",
+							500);
+					$('.pictureMenuPower')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyPower').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyPower').css('display', 'none')",
+							1000);
+					/* DD */
+					/* EE */
+					$(".content-bodyDocument").css("left", "-800px");
+					$('.pictureMenuDocument')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyDocument').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyDocument').css('display', 'none')",
+							1000);
+					/* FF */
+					$(".content-bodySetting").css("left", "-800px");
+					setTimeout(
+							"$('.headContent-bodySetting').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodySetting').css('display', 'none')",
+							1000);
+				});
+$('#buttonBackgroundDocument')
+		.click(
+				function() {
+					$('#touchClick').css('display', 'block');
+					setTimeout("$('#touchClick').css('display', 'none')", 1500);
+					/* show tab */
+					$('.headContent-bodyDocument').css('display', 'block');
+					$('.pictureMenuDocument')
+							.css('box-shadow',
+									'0 0 10px #009fff, 0 0 20px #0097ff, 0 0 30px #0097ff');
+					setTimeout(
+							"$('.headContent-bodyDocument').css('top', '340px');",
+							300);
+					$('.content-bodyDocument').css('display', 'block');
+					setTimeout(
+							"$('.content-bodyDocument').css('left', '50px')",
+							1000);
+					$('.bgReturn').css('display', 'block');
+					setTimeout("$('.bgReturn').css('left', '0px');", 2000);
+
+					/* menu */
+					$('#buttonBackgroundInsideZone').css('display', 'block');
+					$('#buttonBackgroundPowerZone').css('display', 'block');
+					$('#buttonBackgroundDocumentZone').css('display', 'none');
+					$('#buttonBackgroundSettingZone').css('display', 'block');
+					$('#buttonBackgroundOutsideZone').css('display', 'none');
+					$('#buttonBackgroundEngineZone').css('display', 'block');
+					/* menu back */
+					$('#buttonBackgroundInsideBack').css('display', 'none');
+					$('#buttonBackgroundPowerBack').css('display', 'none');
+					$('#buttonBackgroundDocumentBack').css('display', 'block');
+					$('#buttonBackgroundSettingBack').css('display', 'none');
+					$('#buttonBackgroundOutsideBack').css('display', 'none');
+					$('#buttonBackgroundEngineBack').css('display', 'none');
+
+					/* close tab */
+					/* AA */
+					$(".content-bodyOutside").css("left", "-800px");
+					$('.pictureMenuOutside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyOutside').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyOutside').css('display', 'none')",
+							1000);
+					/* BB */
+					$(".content-bodyInside").css("left", "-800px");
+					$('.pictureMenuInside')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyInside').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyInside').css('display', 'none')",
+							1000);
+					/* CC */
+					$(".content-bodyPower").css("left", "800px");
+					setTimeout(
+							"$('.content-bodyPower').css('display', 'none')",
+							500);
+					$('.pictureMenuPower')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyPower').css('top', '1500px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyPower').css('display', 'none')",
+							1000);
+					/* DD */
+					$(".content-bodyEngine").css("left", "800px");
+					$('.pictureMenuEngine')
+							.css('box-shadow',
+									'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+					setTimeout(
+							"$('.headContent-bodyEngine').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodyEngine').css('display', 'none')",
+							1000);
+					/* EE */
+					/* FF */
+					$(".content-bodySetting").css("left", "-800px");
+					setTimeout(
+							"$('.headContent-bodySetting').css('top', '-1000px')",
+							300);
+					setTimeout(
+							"$('.headContent-bodySetting').css('display', 'none')",
+							1000);
+				});
+$('#buttonBackgroundSetting')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			/* show tab */
+			$('.headContent-bodySetting').css('display', 'block');
+			// $('.pictureMenuSetting').css('box-shadow',
+				// '0 0 10px #009fff, 0 0 20px #0097ff, 0 0 30px #0097ff');
+				setTimeout("$('.headContent-bodySetting').css('top', '0px');",
+						300);
+				$('.content-bodySetting').css('display', 'block');
+				setTimeout("$('.content-bodySetting').css('left', '50px')",
+						1000);
+				$('.bgReturn').css('display', 'block');
+				setTimeout("$('.bgReturn').css('left', '0px');", 2000);
+
+				/* menu */
+				$('#buttonBackgroundInsideZone').css('display', 'block');
+				$('#buttonBackgroundPowerZone').css('display', 'none');
+				$('#buttonBackgroundDocumentZone').css('display', 'block');
+				$('#buttonBackgroundSettingZone').css('display', 'none');
+				$('#buttonBackgroundOutsideZone').css('display', 'none');
+				$('#buttonBackgroundEngineZone').css('display', 'none');
+				/* menu back */
+				$('#buttonBackgroundInsideBack').css('display', 'none');
+				$('#buttonBackgroundPowerBack').css('display', 'none');
+				$('#buttonBackgroundDocumentBack').css('display', 'none');
+				$('#buttonBackgroundSettingBack').css('display', 'block');
+				$('#buttonBackgroundOutsideBack').css('display', 'none');
+				$('#buttonBackgroundEngineBack').css('display', 'none');
+
+				/* close tab */
+				/* AA */
+				$(".content-bodyOutside").css("left", "-800px");
+				$('.pictureMenuOutside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyOutside').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyOutside').css('display', 'none')",
+						1000);
+				/* BB */
+				$(".content-bodyInside").css("left", "-800px");
+				$('.pictureMenuInside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyInside').css('display', 'none')",
+						1000);
+				/* CC */
+				$(".content-bodyPower").css("left", "800px");
+				setTimeout("$('.content-bodyPower').css('display', 'none')",
+						500);
+				$('.pictureMenuPower')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout("$('.headContent-bodyPower').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyPower').css('display', 'none')",
+						1000);
+				/* DD */
+				$(".content-bodyEngine").css("left", "800px");
+				$('.pictureMenuEngine')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyEngine').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyEngine').css('display', 'none')",
+						1000);
+				/* EE */
+				$(".content-bodyDocument").css("left", "-800px");
+				$('.pictureMenuDocument')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyDocument').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyDocument').css('display', 'none')",
+						1000);
+				/* FF */
+			});
+$('#buttonBackgroundOutsideBack')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+				$(".content-bodyOutside").css("left", "-800px");
+				$('.pictureMenuOutside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyOutside').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyOutside').css('display', 'none')",
+						1000);
+				// Inside
+				$(".content-bodyInside").css("left", "-800px");
+				$('.pictureMenuInside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyInside').css('display', 'none')",
+						1000);
+				// Power
+				$(".content-bodyPower").css("left", "800px");
+				$('.pictureMenuPower')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout("$('.headContent-bodyPower').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyPower').css('display', 'none')",
+						1000);
+				// Engine
+				$(".content-bodyEngine").css("left", "800px");
+				$('.pictureMenuEngine')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyEngine').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyEngine').css('display', 'none')",
+						1000);
+				// Document
+				$(".content-bodyDocument").css("left", "-800px");
+				$('.pictureMenuDocument')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyDocument').css('top', '1500px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodyDocument').css('display', 'none')",
+						1000);
+				// Setting
+				$(".content-bodySetting").css("left", "-800px");
+				setTimeout(
+						"$('.headContent-bodySetting').css('top', '-1000px')",
+						300);
+				setTimeout(
+						"$('.headContent-bodySetting').css('display', 'none')",
+						1000);
+				setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+				setTimeout("$('.bgReturn').css('display', 'none')", 2000);
+
+				$('#buttonBackgroundInsideZone').css('display', 'block');
+				$('#buttonBackgroundPowerZone').css('display', 'block');
+				$('#buttonBackgroundDocumentZone').css('display', 'block');
+				$('#buttonBackgroundSettingZone').css('display', 'block');
+				$('#buttonBackgroundOutsideZone').css('display', 'block');
+				$('#buttonBackgroundEngineZone').css('display', 'block');
+
+				$('#buttonBackgroundInsideBack').css('display', 'none');
+				$('#buttonBackgroundPowerBack').css('display', 'none');
+				$('#buttonBackgroundDocumentBack').css('display', 'none');
+				$('#buttonBackgroundSettingBack').css('display', 'none');
+				$('#buttonBackgroundOutsideBack').css('display', 'none');
+				$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+$('#buttonBackgroundInsideBack')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+				$(".content-bodyOutside").css("left", "-800px");
+				$('.pictureMenuOutside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyOutside').css('top', '-400px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodyOutside').css('display', 'none')",
+						1000);
+				// Inside
+				$(".content-bodyInside").css("left", "-800px");
+				$('.pictureMenuInside')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout("$('.headContent-bodyInside').css('top', '800px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodyInside').css('display', 'none')",
+						1000);
+				// Power
+				$(".content-bodyPower").css("left", "800px");
+				$('.pictureMenuPower')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout("$('.headContent-bodyPower').css('top', '800px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodyPower').css('display', 'none')",
+						1000);
+				// Engine
+				$(".content-bodyEngine").css("left", "800px");
+				$('.pictureMenuEngine')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyEngine').css('top', '-1000px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodyEngine').css('display', 'none')",
+						1000);
+				// Document
+				$(".content-bodyDocument").css("left", "-800px");
+				$('.pictureMenuDocument')
+						.css('box-shadow',
+								'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+				setTimeout(
+						"$('.headContent-bodyDocument').css('top', '1000px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodyDocument').css('display', 'none')",
+						1000);
+				// Setting
+				$(".content-bodySetting").css("left", "-800px");
+				setTimeout(
+						"$('.headContent-bodySetting').css('top', '-400px')",
+						500);
+				setTimeout(
+						"$('.headContent-bodySetting').css('display', 'none')",
+						1000);
+				setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+				setTimeout("$('.bgReturn').css('display', 'none')", 2000);
+
+				$('#buttonBackgroundInsideZone').css('display', 'block');
+				$('#buttonBackgroundPowerZone').css('display', 'block');
+				$('#buttonBackgroundDocumentZone').css('display', 'block');
+				$('#buttonBackgroundSettingZone').css('display', 'block');
+				$('#buttonBackgroundOutsideZone').css('display', 'block');
+				$('#buttonBackgroundEngineZone').css('display', 'block');
+
+				$('#buttonBackgroundInsideBack').css('display', 'none');
+				$('#buttonBackgroundPowerBack').css('display', 'none');
+				$('#buttonBackgroundDocumentBack').css('display', 'none');
+				$('#buttonBackgroundSettingBack').css('display', 'none');
+				$('#buttonBackgroundOutsideBack').css('display', 'none');
+				$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+$('#buttonBackgroundPowerBack')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+			$(".content-bodyOutside").css("left", "-800px");
+			$('.pictureMenuOutside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyOutside').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyOutside').css('display', 'none')",
+					1000);
+			// Inside
+			$(".content-bodyInside").css("left", "-800px");
+			$('.pictureMenuInside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyInside').css('display', 'none')",
+					1000);
+			// Power
+			$(".content-bodyPower").css("left", "800px");
+			$('.pictureMenuPower')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyPower').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyPower').css('display', 'none')",
+					1000);
+			// Engine
+			$(".content-bodyEngine").css("left", "800px");
+			$('.pictureMenuEngine')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyEngine').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyEngine').css('display', 'none')",
+					1000);
+			// Document
+			$(".content-bodyDocument").css("left", "-800px");
+			$('.pictureMenuDocument')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyDocument').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyDocument').css('display', 'none')",
+					1000);
+			// Setting
+			$(".content-bodySetting").css("left", "-800px");
+			setTimeout(
+					"$('.headContent-bodySetting').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodySetting').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+			setTimeout("$('.bgReturn').css('display', 'none')", 2000);
+
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+$('#buttonBackgroundEngineBack')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+			$(".content-bodyOutside").css("left", "-800px");
+			$('.pictureMenuOutside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyOutside').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyOutside').css('display', 'none')",
+					1000);
+			// Inside
+			$(".content-bodyInside").css("left", "-800px");
+			$('.pictureMenuInside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyInside').css('display', 'none')",
+					1000);
+			// Power
+			$(".content-bodyPower").css("left", "800px");
+			$('.pictureMenuPower')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyPower').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyPower').css('display', 'none')",
+					1000);
+			// Engine
+			$(".content-bodyEngine").css("left", "800px");
+			$('.pictureMenuEngine')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyEngine').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyEngine').css('display', 'none')",
+					1000);
+			// Document
+			$(".content-bodyDocument").css("left", "-800px");
+			$('.pictureMenuDocument')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyDocument').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyDocument').css('display', 'none')",
+					1000);
+			// Setting
+			$(".content-bodySetting").css("left", "-800px");
+			setTimeout(
+					"$('.headContent-bodySetting').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodySetting').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+			setTimeout("$('.bgReturn').css('display', 'none')", 2000);
+
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+$('#buttonBackgroundDocumentBack')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+			$(".content-bodyOutside").css("left", "-800px");
+			$('.pictureMenuOutside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyOutside').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyOutside').css('display', 'none')",
+					1000);
+			// Inside
+			$(".content-bodyInside").css("left", "-800px");
+			$('.pictureMenuInside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyInside').css('display', 'none')",
+					1000);
+			// Power
+			$(".content-bodyPower").css("left", "800px");
+			$('.pictureMenuPower')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyPower').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyPower').css('display', 'none')",
+					1000);
+			// Engine
+			$(".content-bodyEngine").css("left", "800px");
+			$('.pictureMenuEngine')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyEngine').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyEngine').css('display', 'none')",
+					1000);
+			// Document
+			$(".content-bodyDocument").css("left", "-800px");
+			$('.pictureMenuDocument')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyDocument').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyDocument').css('display', 'none')",
+					1000);
+			// Setting
+			$(".content-bodySetting").css("left", "-800px");
+			setTimeout(
+					"$('.headContent-bodySetting').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodySetting').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+			setTimeout("$('.bgReturn').css('display', 'none')", 2000);
+
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+			});
+$('#buttonBackgroundSettingBack')
+		.click(function() {
+			$('#touchClick').css('display', 'block');
+			setTimeout("$('#touchClick').css('display', 'none')", 1500);
+			// Outside
+			$(".content-bodyOutside").css("left", "-800px");
+			$('.pictureMenuOutside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyOutside').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyOutside').css('display', 'none')",
+					1000);
+			// Inside
+			$(".content-bodyInside").css("left", "-800px");
+			$('.pictureMenuInside')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyInside').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyInside').css('display', 'none')",
+					1000);
+			// Power
+			$(".content-bodyPower").css("left", "800px");
+			$('.pictureMenuPower')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout("$('.headContent-bodyPower').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyPower').css('display', 'none')",
+					1000);
+			// Engine
+			$(".content-bodyEngine").css("left", "800px");
+			$('.pictureMenuEngine')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyEngine').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyEngine').css('display', 'none')",
+					1000);
+			// Document
+			$(".content-bodyDocument").css("left", "-800px");
+			$('.pictureMenuDocument')
+					.css('box-shadow',
+							'0 0 0.2em #0097ff, 0 0 0.2em #0097ff, 0 0 0.2em #0097ff');
+			setTimeout(
+					"$('.headContent-bodyDocument').css('top', '1500px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodyDocument').css('display', 'none')",
+					1000);
+			// Setting
+			$(".content-bodySetting").css("left", "-800px");
+			setTimeout(
+					"$('.headContent-bodySetting').css('top', '-1000px')",
+					300);
+			setTimeout(
+					"$('.headContent-bodySetting').css('display', 'none')",
+					1000);
+			setTimeout("$('.bgReturnSetting').css('display', 'none')", 500);
+
+			setTimeout("$('.bgReturn').css('display', 'none')", 2000);
+
+			$('#buttonBackgroundInsideZone').css('display', 'block');
+			$('#buttonBackgroundPowerZone').css('display', 'block');
+			$('#buttonBackgroundDocumentZone').css('display', 'block');
+			$('#buttonBackgroundSettingZone').css('display', 'block');
+			$('#buttonBackgroundOutsideZone').css('display', 'block');
+			$('#buttonBackgroundEngineZone').css('display', 'block');
+
+			$('#buttonBackgroundInsideBack').css('display', 'none');
+			$('#buttonBackgroundPowerBack').css('display', 'none');
+			$('#buttonBackgroundDocumentBack').css('display', 'none');
+			$('#buttonBackgroundSettingBack').css('display', 'none');
+			$('#buttonBackgroundOutsideBack').css('display', 'none');
+			$('#buttonBackgroundEngineBack').css('display', 'none');
+			
+			
+		});

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, CarCheckListActivity!</string>
+    <string name="app_name">CarCheckList</string>
+    <string name="main_screen">MainScreen</string>
+    <string name="splash_screen">SplashScreen</string>
+    
+    <string name="back">Back</string>
+    
+    <string name="power">Power</string>
+    <string name="power_headLight">Head light</string>
+    <string name="power_dim">Dimmer light</string>
+    <string name="power_highBeam">High beam</string>
+    <string name="power_dashBoardLight">DashBoard light</string>
+    <string name="power_cabinSeatLight">Dome light</string>
+    <string name="power_sideDoorLight">Side doors light</string>
+    <string name="power_turnSignal">Turn signal</string>
+    <string name="power_air">Air condition</string>
+    <string name="power_thermometer">Thermometer</string>
+    <string name="power_horn">Horn</string>
+    <string name="power_wipe">Windshield</string>
+    <string name="power_rainSensor">Rain sensor</string>
+    <string name="power_thirdBrakeLight">Center brake lights</string>
+    <string name="power_antiFoggyBack">Defogger back</string>
+	<string name="power_antiFoggySide">Defogger side</string>
+	<string name="power_steeringWheelTest">Turn steering wheel to each end</string>
+	<string name="power_steeringWheelSet">Set steering wheel</string>
+	<string name="power_carStereo">Car stereo CD</string>
+	<string name="power_electronicWindow">Power window</string>
+	<string name="power_sideMirror">Side mirror</string>
+	<string name="power_warnDoor">Doors warning</string>
+	<string name="power_warnSeatBelt">Seat belt warning</string>
+	<string name="power_warnHandBrake">Hand brake warning</string>
+	<string name="power_clock">Digital clock</string>
+	<string name="power_remoteKey">Remote Key</string>
+	<string name="power_centralLock">Central lock</string>
+	<string name="power_transmissionPosition">Transmission position</string>
+
+	<string name="engine">Engine</string>
+	<string name="engine_hood">Hood</string>
+	<string name="engine_backHood">trunk</string>
+	<string name="engine_underEngine">The engine</string>
+	<string name="engine_brakeOil">Brake fluid</string>
+	<string name="engine_engineOil">Engine oil</string>
+	<string name="engine_waterCoolant">Water coolant</string>
+	<string name="engine_belt">Belt</string>
+	<string name="engine_gear">Gear oil</string>
+	<string name="engine_liquidLevel">Wipe liquid level</string>
+	<string name="engine_soundOut">Engine sound</string>
+	<string name="engine_soundIn">Sound in carbine</string>
+	
+	<string name="exterior">Exterior</string>
+	<string name="outside_color">Color</string>
+	<string name="outside_window">Window</string>
+	<string name="outside_doorHood">Doors &amp; hood</string>
+	<string name="outside_jack">Hand jack</string>
+	<string name="outside_wrench">Wrench</string>
+	<string name="outside_tires">Tires</string>
+	<string name="outside_light">Light</string>
+	<string name="outside_seal">Seal</string>
+	<string name="outside_tirePart">Tire part</string>
+	
+	<string name="interior">Interior</string>
+	<string name="inside_seat">Seat</string>
+	<string name="inside_console">Wood console</string>
+	<string name="inside_steeringWheel">Leatherette steering wheel</string>
+	<string name="inside_transmission">Transmission</string>
+	<string name="inside_sideDoors">Side doors</string>
+	<string name="inside_dashBoard">DashBoard</string>
+	<string name="inside_carpet">Carpet</string>
+	<string name="inside_curtain">Curtain</string>
+	<string name="inside_seatBelt">Seat belt</string>
+	<string name="inside_backDoor">trunk release</string>
+	<string name="inside_lidOil">Lid oil opener</string>
+	<string name="inside_setSeat">Seat setting</string>
+	<string name="inside_brakePedal">Brake pedal</string>
+	<string name="inside_accelerator">Accelerator</string>
+	<string name="inside_handBrake">Hand brake</string>
+										
+	<string name="document">Document</string>
+	<string name="doc_insurance">Insurance paper</string>
+	<string name="doc_actTaxLabel">Act &amp; Tax label</string>
+	<string name="doc_bill">Bill</string>
+	<string name="doc_licensePlate">License Plate</string>
+	<string name="doc_licenseManual">License manual</string>
+	<string name="doc_carPartPaper">Car part paper</string>
+	<string name="doc_carManual">Car manual</string>
+	<string name="doc_licenseRegister">License register</string>
+	<string name="doc_gift">Gift</string>
+	
+	<string name="setting">Setting Ratio</string>
+	<string name="priority">Priority</string>
+	<string name="low">Low</string>
+	<string name="high">High</string>
+	<string name="textexterior">Exterior</string>
+	<string name="textinterior">Interior</string>
+	<string name="textpower">Power</string>
+	<string name="textengine">Engine</string>
+	<string name="textdocument">Document</string>
+	<string name="save">Save</string>
+	<string name="reset">Reset</string>
+	<string name="change_language">change Language</string>
+	
+</resources>
+
+

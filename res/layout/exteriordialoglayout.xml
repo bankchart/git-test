@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="380dp" >
+
+    <Button
+        android:id="@+id/Exteriorback"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button"
+        android:text="@string/back"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/Exterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="60dp"
+        android:shadowColor="#00aaff"
+        android:shadowDx="-0.5"
+        android:shadowDy="0.5"
+        android:shadowRadius="2"
+        android:text="@string/exterior"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <TableLayout
+        android:id="@+id/tableexterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp" >
+
+        <TableRow
+            android:id="@+id/tableRowExterior1"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/outside_color"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_color"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/outside_window"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_window"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowExterior2"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/outside_doorHood"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_doorHood"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/outside_jack"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_jack"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowExterior3"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/outside_wrench"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_wrench"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/outside_tires"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_tires"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowExterior4"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/outside_light"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_light"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <CheckBox
+                android:id="@+id/outside_seal"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_seal"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowExterior5"
+            android:layout_width="150dp"
+            android:layout_height="60dp" >
+
+            <CheckBox
+                android:id="@+id/outside_tirePart"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:paddingLeft="40dp"
+                android:shadowColor="#00aaff"
+                android:shadowDx="-0.5"
+                android:shadowDy="0.5"
+                android:shadowRadius="2"
+                android:text="@string/outside_tirePart"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

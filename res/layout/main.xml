@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="-80dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imagecar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/backgroundimage2" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/setting_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gear_button" />
+
+    <ImageButton
+        android:id="@+id/engine_button"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/engine_button" />
+
+    <ImageButton
+        android:id="@+id/battery_button"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/battery_button" />
+
+    <ImageButton
+        android:id="@+id/outside_button"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/body_button" />
+
+    <ImageButton
+        android:id="@+id/inside_button"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/inside_button" />
+
+    <ImageButton
+        android:id="@+id/document_button"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/document_button" />
+
+    <ProgressBar
+        android:id="@+id/PowerProgressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="480dp"
+        android:layout_marginTop="150dp"
+        android:progressDrawable="@drawable/progressbar"
+        android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/EngineProgressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="240dp"
+        android:progressDrawable="@drawable/progressbar"
+        android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/ExteriorProgressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="520dp"
+        android:progressDrawable="@drawable/progressbar"
+        android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/InteriorProgressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="500dp"
+        android:layout_marginTop="610dp"
+        android:progressDrawable="@drawable/progressbar"
+        android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/DocumentProgressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="870dp"
+        android:layout_marginTop="610dp"
+        android:progressDrawable="@drawable/progressbar"
+        android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/ratio"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:indeterminateDuration="100"
+        android:progressDrawable="@drawable/ratioprogressbar"
+        android:visibility="gone"
+        android:rotation="180" />
+
+    <TextView
+        android:id="@+id/ratiotext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/headdocument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-350dp"
+        android:layout_marginLeft="10dp"
+        android:scrollHorizontally="true"
+        android:src="@drawable/headdocument"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/headinterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-350dp"
+        android:layout_marginLeft="10dp"
+        android:scrollHorizontally="true"
+        android:src="@drawable/headinterior"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/headexterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="350dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-380dp"
+        android:scrollHorizontally="true"
+        android:src="@drawable/headexterior"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/headengine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="450dp"
+        android:layout_marginLeft="1220dp"
+        android:layout_marginTop="-490dp"
+        android:scrollHorizontally="true"
+        android:src="@drawable/headengine"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/headpower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-200dp"
+        android:layout_marginLeft="1220dp"
+        android:scrollHorizontally="true"
+        android:src="@drawable/headpower"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/headsetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:scrollHorizontally="true"
+        android:src="@drawable/headsetting"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/percenpower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/percenengine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/percenexterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/perceninterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/percendocument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/powerborder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shape" />
+
+    <ImageView
+        android:id="@+id/engineborder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shape" />
+
+    <ImageView
+        android:id="@+id/exteriorborder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shape" />
+
+    <ImageView
+        android:id="@+id/interiorborder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shape" />
+
+    <ImageView
+        android:id="@+id/documentborder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shape" />
+
+    <LinearLayout
+        android:id="@+id/admob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="660dp"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+
+</RelativeLayout>

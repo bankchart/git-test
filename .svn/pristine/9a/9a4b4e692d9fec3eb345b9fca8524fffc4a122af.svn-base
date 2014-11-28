@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="style/selectLanguage.css">
+<link rel="stylesheet" type="text/css" href="style/dragdealer.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<div id="main-slide" class="dragdealer">
+<div id="slideshow" class="dragdealer">
+<div id="handleDialog"class="handle" style="left: 0px;">
+<div id="slideSelectLanguage" class="slide">
+<div class="img1 side"></div>
+<div class="img side"><a href='#' id='th'><img src="image/th-icon.png"></a></div>	
+<div class="img side"><a href='#' id='us'><img src="image/usa-icon.png"></a></div>
+<div class="img side"><a href='#' id='ch'><img src="image/ch-icon.png"></a></div>
+<div class="img side"></div>
+<!--<div class="img side"><a href='#' id='jp'><img src="image/jp-icon.png"></a></div>-->
+<!--<div class="img side"><a href='#' id='de'><img src="image/de-icon.png"></a></div>-->
+</div>
+</div>
+</div>
+</div>
+<div class="blur_layer left_blur"></div>
+<div class="blur_layer right_blur"></div>
+
+<script type="text/javascript" src="js/selectLanguage.js"></script>
+<script type="text/javascript" src="js/dragdealer.js"></script>
+</body>
+</html>
